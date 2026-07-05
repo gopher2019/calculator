@@ -1,0 +1,24 @@
+<!--index.wxml-->
+<navigation-bar title="计算器" back="{{false}}" color="black" background="#FFF"></navigation-bar>
+<scroll-view class="scrollarea" scroll-y type="list">
+  <view class="container">
+    <view class="tool-list">
+      <view class="tool-card" bindtap="goToBeastCalc">
+        <view class="tool-icon">🦁</view>
+        <view class="tool-info">
+          <text class="tool-name">珍兽资质计算器</text>
+          <text class="tool-desc">根据悟性、灵性等级计算珍兽资质</text>
+        </view>
+        <text class="tool-arrow">›</text>
+      </view>
+      <view class="tool-card" bindtap="goToGrowthCalc">
+        <view class="tool-icon">📈</view>
+        <view class="tool-info">
+          <text class="tool-name">成长率计算器</text>
+          <text class="tool-desc">通过血量反推珍兽成长率与类别</text>
+        </view>
+        <text class="tool-arrow">›</text>
+      </view>
+    </view>
+  </view>
+</scroll-view>

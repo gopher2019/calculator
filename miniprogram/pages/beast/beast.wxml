@@ -1,0 +1,213 @@
+<!--beast.wxml-->
+<navigation-bar title="珍兽资质计算器" back="{{true}}" color="black" background="#FFF"></navigation-bar>
+<scroll-view class="scrollarea" scroll-y type="list">
+  <view class="page-container">
+
+    <!-- 输入区域 -->
+    <view class="section">
+      <view class="section-title">当前资质信息</view>
+
+      <!-- 当前资质 -->
+      <view class="input-group">
+        <view class="input-label">当前资质</view>
+        <input
+          class="input-field"
+          type="digit"
+          placeholder="请输入珍兽当前资质"
+          value="{{currentAptitude}}"
+          bindinput="onAptitudeInput"
+        />
+      </view>
+
+      <!-- 当前悟性 -->
+      <view class="input-group">
+        <view class="input-label">当前悟性</view>
+        <picker
+          mode="selector"
+          range="{{wuXingOptions}}"
+          range-key="label"
+          value="{{currentWuXing - 1}}"
+          bindchange="onCurrentWuXingChange"
+        >
+          <view class="picker-field">
+            <text>{{currentWuXing}}级</text>
+            <text class="picker-arrow">›</text>
+          </view>
+        </picker>
+      </view>
+
+      <!-- 当前灵性 -->
+      <view class="input-group">
+        <view class="input-label">当前灵性</view>
+        <picker
+          mode="selector"
+          range="{{lingXingOptions}}"
+          range-key="label"
+          value="{{currentLingXing - 1}}"
+          bindchange="onCurrentLingXingChange"
+        >
+          <view class="picker-field">
+            <text>{{currentLingXing}}级</text>
+            <text class="picker-arrow">›</text>
+          </view>
+        </picker>
+      </view>
+
+      <!-- 当前是否超灵 -->
+      <view class="input-group">
+        <view class="switch-row" bindtap="onToggleCurrentSuperLing">
+          <view class="switch-label">
+            <text>是否超灵</text>
+            <text class="switch-hint">（灵性10级时，超灵加成34%，普通31%）</text>
+          </view>
+          <view class="switch-track {{currentIsSuperLing ? 'active' : ''}}">
+            <view class="switch-thumb {{currentIsSuperLing ? 'active' : ''}}"></view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 目标区域 -->
+    <view class="section">
+      <view class="section-title">目标资质信息</view>
+
+      <!-- 目标悟性（默认10） -->
+      <view class="input-group">
+        <view class="input-label">目标悟性</view>
+        <picker
+          mode="selector"
+          range="{{wuXingOptions}}"
+          range-key="label"
+          value="{{targetWuXing - 1}}"
+          bindchange="onTargetWuXingChange"
+        >
+          <view class="picker-field">
+            <text>{{targetWuXing}}级</text>
+            <text class="picker-arrow">›</text>
+          </view>
+        </picker>
+      </view>
+
+      <!-- 目标灵性（默认10） -->
+      <view class="input-group">
+        <view class="input-label">目标灵性</view>
+        <picker
+          mode="selector"
+          range="{{lingXingOptions}}"
+          range-key="label"
+          value="{{targetLingXing - 1}}"
+          bindchange="onTargetLingXingChange"
+        >
+          <view class="picker-field">
+            <text>{{targetLingXing}}级</text>
+            <text class="picker-arrow">›</text>
+          </view>
+        </picker>
+      </view>
+
+      <!-- 目标是否超灵 -->
+      <view class="input-group">
+        <view class="switch-row" bindtap="onToggleTargetSuperLing">
+          <view class="switch-label">
+            <text>是否超灵</text>
+            <text class="switch-hint">（灵性10级时，超灵加成34%，普通31%）</text>
+          </view>
+          <view class="switch-track {{targetIsSuperLing ? 'active' : ''}}">
+            <view class="switch-thumb {{targetIsSuperLing ? 'active' : ''}}"></view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 操作按钮 -->
+    <view class="btn-group">
+      <button class="btn btn-primary" bindtap="onCalculate">计算资质</button>
+      <button class="btn btn-secondary" bindtap="onReset">重置</button>
+    </view>
+
+    <!-- 计算结果 -->
+    <view class="section result-section" wx:if="{{showResult && result}}">
+      <view class="section-title">计算结果</view>
+
+      <view class="result-card">
+        <view class="result-row highlight">
+          <text class="result-label">目标资质</text>
+          <text class="result-value primary">{{result.targetAptitude}}</text>
+        </view>
+        <view class="result-divider"></view>
+        <view class="result-row">
+          <text class="result-label">当前总倍率</text>
+          <text class="result-value">{{result.totalCurrentRateStr}}</text>
+        </view>
+        <view class="result-row">
+          <text class="result-label">悟性加成</text>
+          <text class="result-value">{{result.wuXingRateChangeStr}}</text>
+        </view>
+        <view class="result-row">
+          <text class="result-label">灵性加成</text>
+          <text class="result-value">{{result.lingXingRateChangeStr}}</text>
+        </view>
+        <view class="result-divider"></view>
+        <view class="result-row">
+          <text class="result-label">基础资质</text>
+          <text class="result-value">{{result.baseAptitude}}</text>
+        </view>
+        <view class="result-row highlight-gain">
+          <text class="result-label">资质提升</text>
+          <text class="result-value gain">{{result.aptitudeGainStr}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 倍率表 -->
+    <view class="section rate-table-section">
+      <view class="section-title rate-table-header" bindtap="onToggleRateTable">
+        <text>等级倍率参考表</text>
+        <text class="toggle-icon">{{showRateTable ? '▼' : '▶'}}</text>
+      </view>
+
+      <view class="rate-table-content" wx:if="{{showRateTable}}">
+        <view class="rate-tabs">
+          <view
+            class="rate-tab {{activeRateTab === 'wuxing' ? 'active' : ''}}"
+            data-tab="wuxing"
+            bindtap="onSwitchRateTab"
+          >悟性倍率</view>
+          <view
+            class="rate-tab {{activeRateTab === 'lingxing' ? 'active' : ''}}"
+            data-tab="lingxing"
+            bindtap="onSwitchRateTab"
+          >灵性倍率</view>
+        </view>
+
+        <!-- 悟性倍率表 -->
+        <view class="rate-table" wx:if="{{activeRateTab === 'wuxing'}}">
+          <view class="rate-table-row rate-table-header-row">
+            <text class="rate-cell">等级</text>
+            <text class="rate-cell">倍率</text>
+          </view>
+          <view class="rate-table-row" wx:for="{{wuXingRateTable}}" wx:key="level">
+            <text class="rate-cell">{{item.level}}级</text>
+            <text class="rate-cell">{{item.rateStr}}</text>
+          </view>
+        </view>
+
+        <!-- 灵性倍率表 -->
+        <view class="rate-table" wx:if="{{activeRateTab === 'lingxing'}}">
+          <view class="rate-table-row rate-table-header-row">
+            <text class="rate-cell">等级</text>
+            <text class="rate-cell">倍率</text>
+          </view>
+          <view class="rate-table-row" wx:for="{{lingXingRateTable}}" wx:key="level">
+            <text class="rate-cell">{{item.level}}级</text>
+            <text class="rate-cell">{{item.rateStr}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 底部留白 -->
+    <view class="bottom-spacer"></view>
+
+  </view>
+</scroll-view>

@@ -1,0 +1,64 @@
+/**index.scss**/
+page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f6fa;
+}
+.scrollarea {
+  flex: 1;
+  overflow-y: hidden;
+}
+
+.container {
+  padding: 32rpx;
+}
+
+.tool-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.tool-card {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 32rpx 28rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+  transition: transform 0.15s;
+}
+
+.tool-card:active {
+  transform: scale(0.98);
+}
+
+.tool-icon {
+  font-size: 52rpx;
+  margin-right: 24rpx;
+}
+
+.tool-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.tool-name {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 8rpx;
+}
+
+.tool-desc {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.tool-arrow {
+  font-size: 40rpx;
+  color: #ccc;
+  font-weight: 300;
+}
