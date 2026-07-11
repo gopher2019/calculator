@@ -3,11 +3,12 @@
     "pages/index/index",
     "pages/beast/beast",
     "pages/growth/growth",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/gameRecord/gameRecord"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",
-    "navigationBarTitleText": "计算器",
+    "navigationBarTitleText": "墨狐小算器",
     "navigationBarTextStyle": "black",
     "backgroundColor": "#f5f6fa"
   },

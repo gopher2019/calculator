@@ -1,0 +1,42 @@
+.expire-tip {
+  margin-left: 16rpx;
+  display: inline-flex;
+  align-items: center;
+  font-size: 22rpx;
+  color: #9d8ad6;
+  padding: 4rpx 12rpx;
+  flex-shrink: 0;
+  white-space: nowrap;
+  /* 用颜色深浅呼吸，不创建合成层，避免列表闪烁 */
+  animation: expire-breath 1.8s ease-in-out infinite;
+}
+
+.expire-tip::before {
+  content: '';
+  width: 10rpx;
+  height: 10rpx;
+  border-radius: 50%;
+  background: #9d8ad6;
+  margin-right: 8rpx;
+  animation: expire-breath-dot 1.8s ease-in-out infinite;
+}
+
+@keyframes expire-breath {
+  0%,
+  100% {
+    color: #9d8ad6;
+  }
+  50% {
+    color: #c4b6e6;
+  }
+}
+
+@keyframes expire-breath-dot {
+  0%,
+  100% {
+    background: #9d8ad6;
+  }
+  50% {
+    background: #c4b6e6;
+  }
+}

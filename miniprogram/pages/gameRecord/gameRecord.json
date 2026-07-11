@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "expire-tip": "/components/ExpireTip/ExpireTip"
+  },
+  "navigationBarTitleText": "回归与挂机设置"
+}

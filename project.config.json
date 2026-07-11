@@ -15,7 +15,7 @@
     "coverView": false,
     "postcss": false,
     "compileHotReLoad": false,
-    "ignoreUploadUnusedFiles": true,
+    "ignoreUploadUnusedFiles": false,
     "uploadWithSourceMap": true,
     "minifyWXSS": true,
     "minifyWXML": true

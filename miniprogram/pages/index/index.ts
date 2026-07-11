@@ -27,4 +27,8 @@ Page({
   goToGrowthCalc() {
     wx.navigateTo({ url: '../growth/growth' });
   },
+
+  goToGameRecord() {
+    wx.navigateTo({ url: '../gameRecord/gameRecord' });
+  },
 });

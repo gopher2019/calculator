@@ -1,0 +1,169 @@
+<!-- 回归与挂机设置 · 账号列表（折叠） -->
+<view class="page">
+  <view class="header">
+    <view class="title">回归与挂机设置</view>
+        <text class="reset-btn" bindtap="resetTodayIdle">一键重置今日挂机状态</text>
+      </view>
+
+  <!-- 汇总展示 -->
+  <view class="summary">
+    <view class="summary-item">
+      <view class="summary-num">{{summary.accountCount}}</view>
+      <view class="summary-label">总账号</view>
+    </view>
+    <view class="summary-item">
+      <view class="summary-num">{{summary.charCount}}</view>
+      <view class="summary-label">总角色</view>
+    </view>
+    <view class="summary-item">
+      <view class="summary-num">{{summary.returningCount}}</view>
+      <view class="summary-label">卡回归中</view>
+    </view>
+    <view class="summary-item">
+      <view class="summary-num">{{summary.dueTodayCount}}</view>
+      <view class="summary-label">今日回归到期</view>
+    </view>
+  </view>
+
+  <scroll-view class="scrollarea" scroll-y wx:if="{{accounts.length > 0}}">
+    <view class="account-list">
+      <view class="account-card" wx:for="{{accounts}}" wx:key="_id">
+        <!-- 账号头部：点击展开/收起 -->
+        <view
+          class="account-head"
+          data-id="{{item._id}}"
+          data-masked="{{item.masked}}"
+          bindtap="toggleAccount"
+          bindlongpress="onDeleteAccount"
+        >
+          <view class="account-main">
+            <view class="account-mask">{{item.masked}}</view>
+            <view class="account-meta">角色 {{item.charCount}}/3</view>
+          </view>
+          <expire-tip wx:if="{{item.hasExpired}}" />
+          <text class="account-arrow {{item.expanded ? 'up' : ''}}">›</text>
+        </view>
+
+        <!-- 折叠区：该账号下的角色 -->
+        <view class="char-wrap" wx:if="{{item.expanded}}">
+          <view class="char-list" wx:if="{{item.characters.length > 0}}">
+            <view class="char-card" wx:for="{{item.characters}}" wx:for-item="ch" wx:key="_id">
+              <view class="char-head">
+                <view class="char-name">{{ch.nickname}}</view>
+                <text class="char-del" data-id="{{ch._id}}" bindtap="onDeleteChar">删除</text>
+              </view>
+
+              <!-- 回归状态 -->
+              <view class="state-row">
+                <text class="state-label">回归状态</text>
+                <picker
+                  class="state-picker"
+                  mode="selector"
+                  range="{{returnRange}}"
+                  value="{{ch.returnState}}"
+                  data-id="{{ch._id}}"
+                  bindchange="onReturnChange"
+                >
+                  <view class="picker-box">{{ch.returnText}}</view>
+                </picker>
+                <view wx:if="{{ch.returnState === 1}}" class="return-info">
+                  <text class="remain {{ch.returnExpired ? 'expired' : ''}} {{ch.returnSoon ? 'soon' : ''}}">{{ch.returnRemain}}</text>
+                  <text class="edit-start" data-id="{{ch._id}}" bindtap="onEditReturnStart">开始时间</text>
+                </view>
+              </view>
+
+              <!-- 挂机状态 -->
+              <view class="state-row">
+                <text class="state-label">挂机状态</text>
+                <picker
+                  class="state-picker"
+                  mode="selector"
+                  range="{{idleRange}}"
+                  value="{{ch.idleState}}"
+                  disabled="{{ch.returnState === 1}}"
+                  data-id="{{ch._id}}"
+                  bindchange="onIdleChange"
+                >
+                  <view class="picker-box {{ch.returnState === 1 ? 'disabled' : ''}}">{{ch.idleText}}</view>
+                </picker>
+              </view>
+              <view wx:if="{{ch.returnState === 1}}" class="idle-hint">卡回归中不可挂机，挂机状态不可修改</view>
+            </view>
+          </view>
+
+          <view class="empty-char" wx:else>该账号下还没有角色</view>
+
+          <button
+            class="add-char-btn"
+            data-id="{{item._id}}"
+            bindtap="openAddChar"
+            disabled="{{item.addDisabled}}"
+          >{{item.addDisabled ? '已达角色上限(3)' : '+ 添加角色'}}</button>
+        </view>
+      </view>
+    </view>
+    <view class="tip">点击账号展开角色 · 长按账号卡片可删除</view>
+  </scroll-view>
+
+  <view class="empty" wx:else>
+    <view class="empty-icon">🏕️</view>
+    <view class="empty-text">还没有账号，点击下方按钮添加</view>
+  </view>
+
+  <view class="footer">
+    <button class="add-btn" bindtap="openAdd">+ 添加账号</button>
+  </view>
+</view>
+
+<!-- 添加账号弹窗 -->
+<view class="modal-mask" wx:if="{{showAdd}}" bindtap="closeAdd">
+  <view class="modal" catchtap="noop">
+    <view class="modal-title">添加账号</view>
+    <input
+      class="modal-input"
+      placeholder="请输入游戏账号"
+      value="{{newAccount}}"
+      bindinput="onAccountInput"
+      maxlength="30"
+    />
+    <view class="modal-actions">
+      <button class="modal-btn cancel" bindtap="closeAdd">取消</button>
+      <button class="modal-btn confirm" bindtap="confirmAdd">确定</button>
+    </view>
+  </view>
+</view>
+
+<!-- 添加角色弹窗 -->
+<view class="modal-mask" wx:if="{{showAddChar}}" bindtap="closeAddChar">
+  <view class="modal" catchtap="noop">
+    <view class="modal-title">添加角色</view>
+    <input
+      class="modal-input"
+      placeholder="角色昵称（最长 6 个汉字）"
+      value="{{newChar}}"
+      bindinput="onCharInput"
+      maxlength="6"
+    />
+    <view class="modal-actions">
+      <button class="modal-btn cancel" bindtap="closeAddChar">取消</button>
+      <button class="modal-btn confirm" bindtap="confirmAddChar">确定</button>
+    </view>
+  </view>
+</view>
+
+<!-- 修改回归开始时间弹窗 -->
+<view class="modal-mask" wx:if="{{showDatePicker}}" bindtap="closeDatePicker">
+  <view class="modal" catchtap="noop">
+    <view class="modal-title">修改回归开始时间</view>
+    <picker mode="date" value="{{pickerDate}}" bindchange="onDatePickerChange">
+      <view class="picker-trigger">{{pickerDate || '选择日期'}}</view>
+    </picker>
+    <picker class="time-picker" mode="multiSelector" range="{{timeColumns}}" value="{{timeIndex}}" bindchange="onTimePickerChange">
+      <view class="picker-trigger">{{timeColumns[0][timeIndex[0]]}}:{{timeColumns[1][timeIndex[1]]}}</view>
+    </picker>
+    <view class="modal-actions">
+      <button class="modal-btn cancel" bindtap="closeDatePicker">取消</button>
+      <button class="modal-btn confirm" bindtap="confirmDate">确定</button>
+    </view>
+  </view>
+</view>
