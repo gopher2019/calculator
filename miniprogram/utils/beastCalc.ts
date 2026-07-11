@@ -1,5 +1,5 @@
 /**
- * 珍兽资质计算器核心逻辑
+ * 资质计算器核心逻辑
  *
  * 悟性等级对应倍率表（第一列）
  * 灵性等级对应倍率表（第二列/第三列）
@@ -60,11 +60,11 @@ const SUPER_LING_RATE = 1.3400;
 
 export interface BeastCalcInput {
   currentAptitude: number;    // 当前资质
-  currentWuXing: number;      // 当前悟性等级 (1-10)
-  currentLingXing: number;    // 当前灵性等级 (1-10)
+  currentWuXing: number;      // 当前悟性等级 (0-10)
+  currentLingXing: number;    // 当前灵性等级 (0-10)
   currentIsSuperLing: boolean;// 当前是否超灵
-  targetWuXing: number;       // 目标悟性等级 (1-10)
-  targetLingXing: number;     // 目标灵性等级 (1-10)
+  targetWuXing: number;       // 目标悟性等级 (0-10)
+  targetLingXing: number;     // 目标灵性等级 (0-10)
   targetIsSuperLing: boolean; // 目标是否超灵
 }
 
@@ -93,7 +93,7 @@ export function getWuXingRate(level: number): number {
 
 /**
  * 获取灵性倍率
- * @param level 灵性等级 (1-10)
+ * @param level 灵性等级 (0-10)
  * @param isSuperLing 是否超灵（仅 level=10 时生效，超灵为134%，普通为131%）
  */
 export function getLingXingRate(level: number, isSuperLing: boolean = false): number {
@@ -103,7 +103,7 @@ export function getLingXingRate(level: number, isSuperLing: boolean = false): nu
 }
 
 /**
- * 计算珍兽资质
+ * 计算资质
  *
  * 计算公式：
  * 1. 基础资质 = 当前资质 / (当前悟性倍率 * 当前灵性倍率)

@@ -1,17 +1,84 @@
 /**index.scss**/
 page {
   height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background-color: #f5f6fa;
+  position: relative;
+  overflow: hidden;
+  background-color: #141a2e;
 }
+
+/* ── 全屏图片背景 ── */
+.page-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+}
+
+.hero-inner {
+  position: absolute;
+  top: 22rpx;
+  left: 40rpx;
+  z-index: 2;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+
+.hero-greet {
+  font-size: 24rpx;
+  font-family: "STKaiti", "KaiTi", "Kaiti SC", "楷体", serif;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 4rpx;
+  margin-right: 16rpx;
+  text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.5);
+}
+
+.hero-name {
+  font-size: 32rpx;
+  font-weight: 700;
+  font-family: "STKaiti", "KaiTi", "Kaiti SC", "楷体", serif;
+  color: rgba(255, 255, 255, 0.42);
+  letter-spacing: 2rpx;
+  text-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.55);
+}
+
+.hero-id {
+  margin-left: 14rpx;
+  font-size: 20rpx;
+  font-family: "STKaiti", "KaiTi", "Kaiti SC", "楷体", serif;
+  color: rgba(255, 255, 255, 0.28);
+  letter-spacing: 1rpx;
+  text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.5);
+}
+
+.hero-seal {
+  position: absolute;
+  right: 40rpx;
+  top: 22rpx;
+  z-index: 2;
+  padding: 8rpx 16rpx;
+  font-size: 22rpx;
+  letter-spacing: 4rpx;
+  color: rgba(232, 198, 106, 0.55);
+  border: 2rpx solid rgba(201, 162, 39, 0.4);
+  border-radius: 10rpx;
+  transform: rotate(6deg);
+  text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.5);
+}
+
+/* ── 内容层（浮于背景之上） ── */
 .scrollarea {
-  flex: 1;
-  overflow-y: hidden;
+  position: relative;
+  z-index: 1;
+  height: 100vh;
+  box-sizing: border-box;
 }
 
 .container {
   padding: 32rpx;
+  padding-top: 120rpx;
 }
 
 .tool-list {
@@ -26,7 +93,7 @@ page {
   background: #fff;
   border-radius: 16rpx;
   padding: 32rpx 28rpx;
-  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.18);
   transition: transform 0.15s;
 }
 

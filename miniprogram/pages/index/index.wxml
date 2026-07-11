@@ -1,13 +1,21 @@
 <!--index.wxml-->
-<navigation-bar title="计算器" back="{{false}}" color="black" background="#FFF"></navigation-bar>
-<scroll-view class="scrollarea" scroll-y type="list">
+<image class="page-bg" src="/images/home-bg.png" mode="aspectFill"></image>
+
+<view class="hero-inner">
+  <view class="hero-greet">少侠</view>
+  <view class="hero-name">{{nickname || '初来乍到'}}</view>
+  <text class="hero-id" wx:if="{{userId}}">#{{userId}}</text>
+</view>
+<view class="hero-seal">墨狐</view>
+
+<scroll-view class="scrollarea" scroll-y>
   <view class="container">
     <view class="tool-list">
       <view class="tool-card" bindtap="goToBeastCalc">
         <view class="tool-icon">🦁</view>
         <view class="tool-info">
-          <text class="tool-name">珍兽资质计算器</text>
-          <text class="tool-desc">根据悟性、灵性等级计算珍兽资质</text>
+          <text class="tool-name">资质计算器</text>
+          <text class="tool-desc">根据悟性、灵性等级计算资质</text>
         </view>
         <text class="tool-arrow">›</text>
       </view>
@@ -15,7 +23,7 @@
         <view class="tool-icon">📈</view>
         <view class="tool-info">
           <text class="tool-name">成长率计算器</text>
-          <text class="tool-desc">通过血量反推珍兽成长率与类别</text>
+          <text class="tool-desc">通过血量反推成长率与类别</text>
         </view>
         <text class="tool-arrow">›</text>
       </view>

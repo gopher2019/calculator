@@ -1,5 +1,5 @@
 /**
- * 珍兽成长率计算器核心逻辑
+ * 成长率计算器核心逻辑
  *
  * 游戏内血量公式（两段分别向下取整）：
  *   血量 = 44 + floor(growth × level × 0.06) + floor(staminaPoint × staminaZizhi × 0.018)

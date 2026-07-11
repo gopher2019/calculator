@@ -1,28 +1,18 @@
 <!--growth.wxml-->
-<navigation-bar title="成长率计算器" back="{{true}}" color="black" background="#FFF"></navigation-bar>
-<scroll-view class="scrollarea" scroll-y type="list">
+<scroll-view class="scrollarea" scroll-y>
   <view class="page-container">
 
-    <!-- 温馨提示 -->
     <view class="notice-bar">
       <text class="notice-icon">!</text>
-      <text class="notice-text">珍兽各项数值须在未出战、无套装状态下查看，计算结果略有误差仅供参考。成长率类别较准确，具体数值可能有波动，5级可携带珍兽计算偏差较大。</text>
+      <text class="notice-text">各项数值须在未出战、无套装状态下查看，计算结果略有误差仅供参考。成长率类别较准确，具体数值可能有波动，5级可携带计算偏差较大。</text>
     </view>
 
-    <!-- 输入区域 -->
     <view class="section">
-      <view class="section-title">输入珍兽信息</view>
+      <view class="section-title">输入信息</view>
 
-      <!-- 携带等级 -->
       <view class="input-group">
         <view class="input-label">携带等级</view>
-        <picker
-          mode="selector"
-          range="{{carryLevelOptions}}"
-          range-key="label"
-          value="{{carryLevelOptions.length > 0 ? 0 : 0}}"
-          bindchange="onCarryLevelChange"
-        >
+        <picker mode="selector" range="{{carryLevelOptions}}" range-key="label" value="{{0}}" bindchange="onCarryLevelChange">
           <view class="picker-field">
             <text>{{carryLevel}}级可携带</text>
             <text class="picker-arrow">›</text>
@@ -30,95 +20,53 @@
         </picker>
       </view>
 
-      <!-- 体力资质 -->
       <view class="input-group">
         <view class="input-label">体力资质</view>
-        <input
-          class="input-field"
-          type="digit"
-          placeholder="请输入体力资质"
-          value="{{vitAptitude}}"
-          bindinput="onVitAptitudeInput"
-        />
+        <input class="input-field" type="digit" placeholder="请输入体力资质" value="{{vitAptitude}}" bindinput="onVitAptitudeInput" />
       </view>
 
-      <!-- 当前等级 -->
       <view class="input-group">
         <view class="input-label">当前等级</view>
-        <input
-          class="input-field"
-          type="digit"
-          placeholder="请输入珍兽当前等级"
-          value="{{currentLevel}}"
-          bindinput="onCurrentLevelInput"
-        />
+        <input class="input-field" type="digit" placeholder="请输入当前等级" value="{{currentLevel}}" bindinput="onCurrentLevelInput" />
       </view>
 
-      <!-- 当前血量 -->
       <view class="input-group">
         <view class="input-label">当前血量</view>
-        <input
-          class="input-field"
-          type="digit"
-          placeholder="请输入珍兽当前血量"
-          value="{{currentHp}}"
-          bindinput="onCurrentHpInput"
-        />
+        <input class="input-field" type="digit" placeholder="请输入当前血量" value="{{currentHp}}" bindinput="onCurrentHpInput" />
       </view>
 
-      <!-- 体力点数 -->
       <view class="input-group">
         <view class="input-label">体力点数</view>
-        <input
-          class="input-field"
-          type="digit"
-          placeholder="请输入体力点数"
-          value="{{vitPoints}}"
-          bindinput="onVitPointsInput"
-        />
+        <input class="input-field" type="digit" placeholder="请输入体力点数" value="{{vitPoints}}" bindinput="onVitPointsInput" />
       </view>
     </view>
 
-    <!-- 操作按钮 -->
     <view class="btn-group">
       <button class="btn btn-primary" bindtap="onCalculate">计算成长率</button>
       <button class="btn btn-secondary" bindtap="onReset">重置</button>
     </view>
 
-    <!-- 计算结果 -->
     <view class="section result-section" wx:if="{{showResult && result}}">
       <view class="section-title">计算结果</view>
-
       <view class="result-card">
-        <!-- 成长率 -->
         <view class="result-row highlight">
           <text class="result-label">成长率</text>
           <text class="result-value primary">{{result.growthRateStr}}</text>
         </view>
-
-        <!-- 四舍五入 -->
         <view class="result-row">
           <text class="result-label">取整成长率</text>
           <text class="result-value">{{result.growthRateRounded}}</text>
         </view>
-
         <view class="result-divider"></view>
-
-        <!-- 成长率类别 -->
         <view class="result-row">
           <text class="result-label">成长类别</text>
           <text class="result-value type-badge {{result.growthTypeStr}}">{{result.growthTypeStr}}</text>
         </view>
-
-        <!-- 所属区间 -->
         <view class="result-row">
           <text class="result-label">所属区间</text>
           <text class="result-value">{{result.rangeLabel}}</text>
         </view>
-
         <view class="result-divider"></view>
-
-        <!-- 进度条 -->
         <view class="progress-section">
           <view class="progress-header">
             <text class="result-label">区间进度</text>
@@ -131,13 +79,11 @@
       </view>
     </view>
 
-    <!-- 成长率参考表 -->
     <view class="section ref-table-section">
       <view class="section-title ref-table-header" bindtap="onToggleRefTable">
         <text>成长率参考表</text>
         <text class="toggle-icon">{{showRefTable ? '▼' : '▶'}}</text>
       </view>
-
       <view class="ref-table-content" wx:if="{{showRefTable}}">
         <scroll-view scroll-x class="ref-table-scroll">
           <view class="ref-table">
@@ -163,6 +109,5 @@
     </view>
 
     <view class="bottom-spacer"></view>
-
   </view>
 </scroll-view>

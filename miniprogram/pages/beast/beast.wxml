@@ -1,34 +1,18 @@
 <!--beast.wxml-->
-<navigation-bar title="珍兽资质计算器" back="{{true}}" color="black" background="#FFF"></navigation-bar>
-<scroll-view class="scrollarea" scroll-y type="list">
+<scroll-view class="scrollarea" scroll-y>
   <view class="page-container">
 
-    <!-- 输入区域 -->
     <view class="section">
       <view class="section-title">当前资质信息</view>
 
-      <!-- 当前资质 -->
       <view class="input-group">
         <view class="input-label">当前资质</view>
-        <input
-          class="input-field"
-          type="digit"
-          placeholder="请输入珍兽当前资质"
-          value="{{currentAptitude}}"
-          bindinput="onAptitudeInput"
-        />
+        <input class="input-field" type="digit" placeholder="请输入当前资质" value="{{currentAptitude}}" bindinput="onAptitudeInput" />
       </view>
 
-      <!-- 当前悟性 -->
       <view class="input-group">
         <view class="input-label">当前悟性</view>
-        <picker
-          mode="selector"
-          range="{{wuXingOptions}}"
-          range-key="label"
-          value="{{currentWuXing - 1}}"
-          bindchange="onCurrentWuXingChange"
-        >
+        <picker mode="selector" range="{{wuXingOptions}}" range-key="label" value="{{currentWuXing}}" bindchange="onCurrentWuXingChange">
           <view class="picker-field">
             <text>{{currentWuXing}}级</text>
             <text class="picker-arrow">›</text>
@@ -36,16 +20,9 @@
         </picker>
       </view>
 
-      <!-- 当前灵性 -->
       <view class="input-group">
         <view class="input-label">当前灵性</view>
-        <picker
-          mode="selector"
-          range="{{lingXingOptions}}"
-          range-key="label"
-          value="{{currentLingXing - 1}}"
-          bindchange="onCurrentLingXingChange"
-        >
+        <picker mode="selector" range="{{lingXingOptions}}" range-key="label" value="{{currentLingXing}}" bindchange="onCurrentLingXingChange">
           <view class="picker-field">
             <text>{{currentLingXing}}级</text>
             <text class="picker-arrow">›</text>
@@ -53,7 +30,6 @@
         </picker>
       </view>
 
-      <!-- 当前是否超灵 -->
       <view class="input-group">
         <view class="switch-row" bindtap="onToggleCurrentSuperLing">
           <view class="switch-label">
@@ -67,20 +43,12 @@
       </view>
     </view>
 
-    <!-- 目标区域 -->
     <view class="section">
       <view class="section-title">目标资质信息</view>
 
-      <!-- 目标悟性（默认10） -->
       <view class="input-group">
         <view class="input-label">目标悟性</view>
-        <picker
-          mode="selector"
-          range="{{wuXingOptions}}"
-          range-key="label"
-          value="{{targetWuXing - 1}}"
-          bindchange="onTargetWuXingChange"
-        >
+        <picker mode="selector" range="{{wuXingOptions}}" range-key="label" value="{{targetWuXing}}" bindchange="onTargetWuXingChange">
           <view class="picker-field">
             <text>{{targetWuXing}}级</text>
             <text class="picker-arrow">›</text>
@@ -88,16 +56,9 @@
         </picker>
       </view>
 
-      <!-- 目标灵性（默认10） -->
       <view class="input-group">
         <view class="input-label">目标灵性</view>
-        <picker
-          mode="selector"
-          range="{{lingXingOptions}}"
-          range-key="label"
-          value="{{targetLingXing - 1}}"
-          bindchange="onTargetLingXingChange"
-        >
+        <picker mode="selector" range="{{lingXingOptions}}" range-key="label" value="{{targetLingXing}}" bindchange="onTargetLingXingChange">
           <view class="picker-field">
             <text>{{targetLingXing}}级</text>
             <text class="picker-arrow">›</text>
@@ -105,7 +66,6 @@
         </picker>
       </view>
 
-      <!-- 目标是否超灵 -->
       <view class="input-group">
         <view class="switch-row" bindtap="onToggleTargetSuperLing">
           <view class="switch-label">
@@ -119,16 +79,13 @@
       </view>
     </view>
 
-    <!-- 操作按钮 -->
     <view class="btn-group">
       <button class="btn btn-primary" bindtap="onCalculate">计算资质</button>
       <button class="btn btn-secondary" bindtap="onReset">重置</button>
     </view>
 
-    <!-- 计算结果 -->
     <view class="section result-section" wx:if="{{showResult && result}}">
       <view class="section-title">计算结果</view>
-
       <view class="result-card">
         <view class="result-row highlight">
           <text class="result-label">目标资质</text>
@@ -159,28 +116,16 @@
       </view>
     </view>
 
-    <!-- 倍率表 -->
     <view class="section rate-table-section">
       <view class="section-title rate-table-header" bindtap="onToggleRateTable">
         <text>等级倍率参考表</text>
         <text class="toggle-icon">{{showRateTable ? '▼' : '▶'}}</text>
       </view>
-
       <view class="rate-table-content" wx:if="{{showRateTable}}">
         <view class="rate-tabs">
-          <view
-            class="rate-tab {{activeRateTab === 'wuxing' ? 'active' : ''}}"
-            data-tab="wuxing"
-            bindtap="onSwitchRateTab"
-          >悟性倍率</view>
-          <view
-            class="rate-tab {{activeRateTab === 'lingxing' ? 'active' : ''}}"
-            data-tab="lingxing"
-            bindtap="onSwitchRateTab"
-          >灵性倍率</view>
+          <view class="rate-tab {{activeRateTab === 'wuxing' ? 'active' : ''}}" data-tab="wuxing" bindtap="onSwitchRateTab">悟性倍率</view>
+          <view class="rate-tab {{activeRateTab === 'lingxing' ? 'active' : ''}}" data-tab="lingxing" bindtap="onSwitchRateTab">灵性倍率</view>
         </view>
-
-        <!-- 悟性倍率表 -->
         <view class="rate-table" wx:if="{{activeRateTab === 'wuxing'}}">
           <view class="rate-table-row rate-table-header-row">
             <text class="rate-cell">等级</text>
@@ -191,8 +136,6 @@
             <text class="rate-cell">{{item.rateStr}}</text>
           </view>
         </view>
-
-        <!-- 灵性倍率表 -->
         <view class="rate-table" wx:if="{{activeRateTab === 'lingxing'}}">
           <view class="rate-table-row rate-table-header-row">
             <text class="rate-cell">等级</text>
@@ -206,8 +149,6 @@
       </view>
     </view>
 
-    <!-- 底部留白 -->
     <view class="bottom-spacer"></view>
-
   </view>
 </scroll-view>
