@@ -102,7 +102,7 @@ Page({
       const merged = { ...acc.characters[idx], ...patch };
       const characters = acc.characters.slice();
       characters[idx] = this.decorate(merged);
-      return { ...acc, characters };
+      return { ...acc, characters, hasExpired: characters.some((c) => c.returnExpired) };
     });
     this.setData({ accounts });
     this.refreshSummary();
