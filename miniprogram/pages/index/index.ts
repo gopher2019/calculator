@@ -1,8 +1,16 @@
 // index.ts
+import { shareConfig, enableShareMenu } from '../../utils/share';
+
 Page({
+  ...shareConfig,
+
   data: {
     nickname: '',
     userId: '',
+  },
+
+  onLoad() {
+    enableShareMenu();
   },
 
   onShow() {

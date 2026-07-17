@@ -4,10 +4,13 @@ import {
   getLingXingRateTable,
   type BeastCalcResult,
 } from '../../utils/beastCalc';
+import { shareConfig, enableShareMenu } from '../../utils/share';
 
 const LEVEL_OPTIONS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 Page({
+  ...shareConfig,
+
   data: {
     currentAptitude: '',
     currentWuXing: 0,
@@ -27,6 +30,7 @@ Page({
   },
 
   onLoad() {
+    enableShareMenu();
     this.setData({
       wuXingRateTable: getWuXingRateTable(),
       lingXingRateTable: getLingXingRateTable(),

@@ -8,6 +8,7 @@ import {
   MAX_CHARS,
   RETURN_DURATION,
 } from '../../utils/gameRecord';
+import { shareConfig, enableShareMenu } from '../../utils/share';
 
 interface CharItem {
   _id: string;
@@ -43,6 +44,8 @@ function buildTimeColumns(): string[][] {
 }
 
 Page({
+  ...shareConfig,
+
   data: {
     accounts: [] as AccountItem[],
     summary: { accountCount: 0, charCount: 0, returningCount: 0, dueTodayCount: 0 },
@@ -62,6 +65,10 @@ Page({
     // 下拉选项
     returnRange: ['正常游戏', '卡回归中'],
     idleRange: ['未挂机', '挂机中', '已完成', '未完成'],
+  },
+
+  onLoad() {
+    enableShareMenu();
   },
 
   onShow() {

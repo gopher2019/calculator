@@ -4,6 +4,7 @@ import {
   getGrowthReferenceTable,
   type GrowthCalcResult,
 } from '../../utils/growthCalc';
+import { shareConfig, enableShareMenu } from '../../utils/share';
 
 interface GrowthRefRow {
   carryLevel: number; label: string; normal: string;
@@ -11,6 +12,8 @@ interface GrowthRefRow {
 }
 
 Page({
+  ...shareConfig,
+
   data: {
     carryLevel: 5,
     vitAptitude: '',
@@ -25,6 +28,7 @@ Page({
   },
 
   onLoad() {
+    enableShareMenu();
     this.setData({
       carryLevelOptions: getCarryLevelOptions(),
       refTable: getGrowthReferenceTable(),
