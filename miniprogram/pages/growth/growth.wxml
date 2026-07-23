@@ -4,7 +4,7 @@
 
     <view class="notice-bar">
       <text class="notice-icon">!</text>
-      <text class="notice-text">各项数值须在未出战、无套装状态下查看，计算结果略有误差仅供参考。成长率类别较准确，具体数值可能有波动，5级可携带计算偏差较大。</text>
+      <text class="notice-text">各项数值须在未出战、无套装、无兽灵状态下查看，计算结果略有误差仅供参考。成长率类别较准确，具体数值可能有波动，5级可携带计算偏差较大。</text>
     </view>
 
     <view class="section">

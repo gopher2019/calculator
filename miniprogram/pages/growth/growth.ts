@@ -15,7 +15,7 @@ Page({
   ...shareConfig,
 
   data: {
-    carryLevel: 5,
+    carryLevel: 95,
     vitAptitude: '',
     currentLevel: '',
     currentHp: '',

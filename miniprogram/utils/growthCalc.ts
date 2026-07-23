@@ -1,8 +1,8 @@
 /**
  * 成长率计算器核心逻辑
  *
- * 游戏内血量公式（两段分别向下取整）：
- *   血量 = 44 + floor(growth × level × 0.06) + floor(staminaPoint × staminaZizhi × 0.018)
+ * 游戏内血量公式（先求和，再对最终血量向下取整）：
+ *   血量 = floor(44 + growth × level × 0.06 + staminaPoint × staminaZizhi × 0.018)
  *
  * 使用二分逼近法反推成长率，彻底消除取整误差。
  */
@@ -85,9 +85,9 @@ export function calcGameHp(
   staminaPoint: number,
   staminaZizhi: number,
 ): number {
-  const partA = Math.floor(growth * level * 0.06);
-  const partB = Math.floor(staminaPoint * staminaZizhi * 0.018);
-  return 44 + partA + partB;
+  // 先按游戏公式求完整和，再对最终血量向下取整，
+  // 与游戏内显示一致（避免分别对两项取整造成的 1 点偏差）
+  return Math.floor(44 + growth * level * 0.06 + staminaPoint * staminaZizhi * 0.018);
 }
 
 // ── 二分逼近算法：反推真实成长率 ──────────────────────────────
