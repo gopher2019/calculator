@@ -10,7 +10,7 @@
     "es6": true,
     "es6ToEs5": true,
     "enhance": true,
-    "minified": false,
+    "minified": true,
     "urlCheck": true,
     "coverView": false,
     "postcss": false,
