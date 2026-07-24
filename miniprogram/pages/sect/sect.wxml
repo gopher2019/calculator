@@ -1,0 +1,39 @@
+<!--sect.wxml-->
+<scroll-view class="scrollarea" scroll-y>
+  <view class="page-container">
+
+    <view class="notice-bar">
+      <text class="notice-icon">!</text>
+      <text class="notice-text">选择门派查看冰火玄毒属性系数，系数越高该门派对应属性伤害加成越大。</text>
+    </view>
+
+    <view class="section">
+      <view class="section-title">选择门派</view>
+      <picker mode="selector" range="{{sectNames}}" value="{{selectedIndex}}" bindchange="onSectChange">
+        <view class="picker-field">
+          <text>{{selectedName}}</text>
+          <text class="picker-arrow">▾</text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="section">
+      <view class="section-title">{{selectedName}} · 属性系数</view>
+      <view class="coeff-list">
+        <view
+          class="coeff-item {{item.isMax ? 'max' : ''}}"
+          wx:for="{{attrs}}"
+          wx:key="key"
+        >
+          <view class="coeff-meta">
+            <text class="coeff-name">{{item.name}}属性</text>
+            <text class="coeff-tag" wx:if="{{item.isMax}}">主属性</text>
+          </view>
+          <text class="coeff-value">{{item.valueStr}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="bottom-spacer"></view>
+  </view>
+</scroll-view>

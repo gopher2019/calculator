@@ -50,6 +50,7 @@ Page({
     accounts: [] as AccountItem[],
     summary: { accountCount: 0, charCount: 0, returningCount: 0, dueTodayCount: 0 },
     loading: false,
+    showHelp: false,
     showAdd: false,
     newAccount: '',
     // 添加角色弹窗
@@ -85,6 +86,15 @@ Page({
   },
 
   noop() {},
+
+  // ── 使用说明文档 ──
+  openHelp() {
+    this.setData({ showHelp: true });
+  },
+
+  closeHelp() {
+    this.setData({ showHelp: false });
+  },
 
   // 给角色对象补充展示字段
   decorate(raw: any) {

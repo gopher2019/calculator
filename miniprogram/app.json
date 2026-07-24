@@ -4,7 +4,8 @@
     "pages/beast/beast",
     "pages/growth/growth",
     "pages/logs/logs",
-    "pages/gameRecord/gameRecord"
+    "pages/gameRecord/gameRecord",
+    "pages/sect/sect"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",

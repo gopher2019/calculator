@@ -35,6 +35,14 @@
         </view>
         <text class="tool-arrow">›</text>
       </view>
+      <view class="tool-card" bindtap="goToSect">
+        <view class="tool-icon">🛡️</view>
+        <view class="tool-info">
+          <text class="tool-name">门派属性系数</text>
+          <text class="tool-desc">查看各门派冰火玄毒属性加成</text>
+        </view>
+        <text class="tool-arrow">›</text>
+      </view>
     </view>
   </view>
 </scroll-view>

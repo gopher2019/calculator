@@ -39,4 +39,8 @@ Page({
   goToGameRecord() {
     wx.navigateTo({ url: '../gameRecord/gameRecord' });
   },
+
+  goToSect() {
+    wx.navigateTo({ url: '../sect/sect' });
+  },
 });

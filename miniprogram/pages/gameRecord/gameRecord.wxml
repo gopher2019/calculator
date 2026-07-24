@@ -1,9 +1,12 @@
 <!-- 回归与挂机设置 · 账号列表（折叠） -->
 <view class="page">
   <view class="header">
-    <view class="title">回归与挂机设置</view>
-        <text class="reset-btn" bindtap="resetTodayIdle">一键重置今日挂机状态</text>
-      </view>
+    <view class="title-wrap">
+      <view class="title">回归与挂机设置</view>
+      <text class="help-btn" bindtap="openHelp">?</text>
+    </view>
+    <text class="reset-btn" bindtap="resetTodayIdle">一键重置今日挂机状态</text>
+  </view>
 
   <!-- 汇总展示 -->
   <view class="summary">
@@ -41,6 +44,12 @@
             <view class="account-meta">角色 {{item.charCount}}/3</view>
           </view>
           <expire-tip wx:if="{{item.hasExpired}}" />
+          <text
+            class="account-del"
+            data-id="{{item._id}}"
+            data-masked="{{item.masked}}"
+            catchtap="onDeleteAccount"
+          >删除</text>
           <text class="account-arrow {{item.expanded ? 'up' : ''}}">›</text>
         </view>
 
@@ -102,7 +111,7 @@
         </view>
       </view>
     </view>
-    <view class="tip">点击账号展开角色 · 长按账号卡片可删除</view>
+    <view class="tip">点击账号展开角色 · 点「删除」可移除对应账号或角色</view>
   </scroll-view>
 
   <view class="empty" wx:else>
@@ -165,5 +174,46 @@
       <button class="modal-btn cancel" bindtap="closeDatePicker">取消</button>
       <button class="modal-btn confirm" bindtap="confirmDate">确定</button>
     </view>
+  </view>
+</view>
+
+<!-- 使用说明文档弹窗 -->
+<view class="doc-mask" wx:if="{{showHelp}}" bindtap="closeHelp">
+  <view class="doc-sheet" catchtap="noop">
+    <view class="doc-header">
+      <text class="doc-title">使用说明</text>
+      <text class="doc-close" bindtap="closeHelp">✕</text>
+    </view>
+    <scroll-view class="doc-body" scroll-y>
+      <view class="doc-doc-title">回归与挂机设置 · 使用说明</view>
+
+      <view class="doc-h2">一、功能简介</view>
+      <view class="doc-p">本页面用于记录你各游戏账号下的角色，并管理其「卡回归」与「野外挂机」状态，帮助你掌握每个角色的历练进度与回归到期时间，避免错过重要节点。</view>
+
+      <view class="doc-h2">二、添加账号</view>
+      <view class="doc-p doc-indent">点击底部「+ 添加账号」，输入你的游戏账号即可新建一个账号档案。</view>
+      <view class="doc-p doc-indent">请<text class="doc-strong">尽量如实填写</text>，以便后续识别与管理。</view>
+      <view class="doc-p doc-indent">关于安全：本功能仅在本机及你授权的云端记录中保存你填写的文字，仅作个人记录用途。<text class="doc-strong">只填写账号并不会导致账号被盗或产生任何安全风险</text>；若你仍有所顾虑，也可填写一段只有你自己能识别、并能对应到真实游戏账号的代号即可。</view>
+
+      <view class="doc-h2">三、添加角色</view>
+      <view class="doc-p doc-indent">在账号卡片展开后，点击「+ 添加角色」即可为该账号添加角色（每个账号最多 3 个角色）。</view>
+      <view class="doc-p doc-indent">角色名称同理，如实填写即可；你也可以直接填写该角色<text class="doc-strong">对应的门派名称</text>。</view>
+      <view class="doc-p doc-indent">无论账号还是角色，本质上都是为了<text class="doc-strong">区分它对应的是你游戏里的「哪个账号下的哪个角色」</text>，方便你快速定位与统一管理。</view>
+
+      <view class="doc-h2">四、状态管理</view>
+      <view class="doc-ul">
+        <view class="doc-li"><text class="doc-dot">·</text><text class="doc-li-text"><text class="doc-strong">回归状态：</text>可标记角色是否处于「卡回归中」，并支持设置开始时间，系统会自动倒计时，临近到期时给予提示。</text></view>
+        <view class="doc-li"><text class="doc-dot">·</text><text class="doc-li-text"><text class="doc-strong">挂机状态：</text>可标记角色当前的野外挂机状态（未挂机 / 挂机中 / 已完成 / 未完成）。处于卡回归中的角色不可挂机。</text></view>
+        <view class="doc-li"><text class="doc-dot">·</text><text class="doc-li-text"><text class="doc-strong">一键重置：</text>可将所有角色的挂机状态统一重置为「未挂机」。</text></view>
+      </view>
+
+      <view class="doc-h2">五、温馨提示</view>
+      <view class="doc-ul">
+        <view class="doc-li"><text class="doc-dot">·</text><text class="doc-li-text">数据仅用于个人记录，请妥善保管好你的设备与小程序的登录状态。</text></view>
+        <view class="doc-li"><text class="doc-dot">·</text><text class="doc-li-text">点击账号卡片上的「删除」可移除该账号（其下角色将一并删除）；点击角色卡片右侧的「删除」可单独移除角色。</text></view>
+      </view>
+
+      <view class="doc-foot">墨狐小算器 · 回归与挂机设置</view>
+    </scroll-view>
   </view>
 </view>

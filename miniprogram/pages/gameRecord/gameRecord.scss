@@ -83,6 +83,32 @@ page {
   animation: title-flow 4s ease-in-out infinite;
 }
 
+.title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+/* 问号帮助按钮 */
+.help-btn {
+  position: relative;
+  z-index: 1;
+  width: 44rpx;
+  height: 44rpx;
+  line-height: 44rpx;
+  text-align: center;
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.18);
+  border: 2rpx solid rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+}
+
+.help-btn:active {
+  background: rgba(255, 255, 255, 0.34);
+}
+
 @keyframes title-flow {
   0% {
     background-position: 0 0;
@@ -211,6 +237,20 @@ page {
   transition: transform 0.2s;
 }
 
+.account-del {
+  flex-shrink: 0;
+  margin-right: 20rpx;
+  font-size: 24rpx;
+  color: #e74c3c;
+  background: #fdecea;
+  border: 2rpx solid #f5c6c0;
+  border-radius: 8rpx;
+  padding: 8rpx 18rpx;
+}
+
+.account-del:active {
+  background: #f8d7d2;
+}
 
 .account-arrow.up {
   transform: rotate(-90deg);
@@ -479,4 +519,146 @@ page {
 
 .modal-btn.confirm:active {
   opacity: 0.88;
+}
+
+/* ── 使用说明文档弹窗 ── */
+.doc-mask {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 200;
+}
+
+.doc-sheet {
+  width: 100%;
+  height: 82vh;
+  background: #f7f9fc;
+  border-radius: 28rpx 28rpx 0 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: sheet-up 0.28s ease-out;
+}
+
+@keyframes sheet-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.doc-header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28rpx 32rpx;
+  background: linear-gradient(135deg, #6aa0f2, #9186ea);
+}
+
+.doc-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 2rpx;
+}
+
+.doc-close {
+  width: 48rpx;
+  height: 48rpx;
+  line-height: 48rpx;
+  text-align: center;
+  font-size: 30rpx;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+}
+
+.doc-close:active {
+  background: rgba(255, 255, 255, 0.36);
+}
+
+.doc-body {
+  flex: 1;
+  min-height: 0;
+  padding: 36rpx 36rpx 48rpx;
+  box-sizing: border-box;
+}
+
+.doc-doc-title {
+  font-size: 38rpx;
+  font-weight: 800;
+  color: #1a1a2e;
+  text-align: center;
+  padding-bottom: 24rpx;
+  margin-bottom: 28rpx;
+  border-bottom: 4rpx solid #e3e9f5;
+}
+
+.doc-h2 {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #3a4a78;
+  margin: 30rpx 0 14rpx;
+  padding-left: 18rpx;
+  border-left: 8rpx solid #6a93f0;
+}
+
+.doc-p {
+  font-size: 27rpx;
+  line-height: 1.7;
+  color: #444;
+}
+
+.doc-indent {
+  margin-top: 10rpx;
+}
+
+.doc-strong {
+  font-weight: 700;
+  color: #2f5bd0;
+}
+
+.doc-ul {
+  margin-top: 12rpx;
+}
+
+.doc-li {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 14rpx;
+}
+
+.doc-dot {
+  flex-shrink: 0;
+  width: 30rpx;
+  font-size: 30rpx;
+  line-height: 1.7;
+  color: #6a93f0;
+  font-weight: 700;
+}
+
+.doc-li-text {
+  flex: 1;
+  font-size: 27rpx;
+  line-height: 1.7;
+  color: #444;
+}
+
+.doc-foot {
+  margin-top: 48rpx;
+  padding-top: 24rpx;
+  border-top: 2rpx dashed #e0e6f2;
+  text-align: center;
+  font-size: 22rpx;
+  color: #aab;
+  letter-spacing: 1rpx;
 }
