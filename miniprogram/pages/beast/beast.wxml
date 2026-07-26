@@ -2,6 +2,8 @@
 <scroll-view class="scrollarea" scroll-y>
   <view class="page-container">
 
+    <view class="page-intro">怀旧天龙珍兽当前资质 / 裸资质一键换算，养宠更省心。</view>
+
     <view class="section">
       <view class="section-title">当前资质信息</view>
 

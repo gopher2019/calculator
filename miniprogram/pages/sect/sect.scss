@@ -37,6 +37,14 @@ page {
   letter-spacing: 2rpx;
 }
 
+.page-intro {
+  margin: 4rpx 0 22rpx;
+  font-size: 24rpx;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 1rpx;
+}
+
 /* ===== Tab 切换栏 ===== */
 .tab-bar {
   display: flex;

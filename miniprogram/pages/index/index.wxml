@@ -5,11 +5,11 @@
   <view class="hero-greet">少侠</view>
   <view class="hero-name">{{nickname || '初来乍到'}}</view>
   <text class="hero-id" wx:if="{{userId}}">#{{userId}}</text>
+  <text class="hero-tag">怀旧天龙少侠的实用小工具</text>
 </view>
 <view class="hero-seal">墨狐</view>
 
-<scroll-view class="scrollarea" scroll-y>
-  <view class="container">
+<view class="container">
     <view class="tool-list">
       <view class="tool-card" bindtap="goToGameRecord">
         <view class="tool-icon">🏕️</view>
@@ -45,4 +45,5 @@
       </view>
     </view>
   </view>
-</scroll-view>
+
+  <view class="disclaimer">本工具仅玩家自制数据计算辅助工具，与游戏厂商无关联，数据仅供参考。</view>

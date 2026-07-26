@@ -7,6 +7,8 @@
       <view class="page-title">门派属性系数</view>
     </view>
 
+    <view class="page-intro">怀旧天龙全门派冰火玄毒伤害系数与五维潜能成长查询，随时翻看。</view>
+
     <!-- Tab 切换栏 -->
     <view class="tab-bar">
       <view class="tab {{activeTab === 0 ? 'active' : ''}}" data-tab="0" bindtap="switchTab">门派属性攻击系数</view>

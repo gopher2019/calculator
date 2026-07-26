@@ -28,6 +28,8 @@
     </view>
   </view>
 
+  <view class="page-intro">怀旧天龙多账号卡回归计时与野外挂机时长管理，随时掌握角色历练进度。</view>
+
   <scroll-view class="scrollarea" scroll-y wx:if="{{accounts.length > 0}}">
     <view class="account-list">
       <view class="account-card" wx:for="{{accounts}}" wx:key="_id">

@@ -4,6 +4,13 @@ page {
   background: linear-gradient(180deg, #f2f8fe 0%, #eef8f3 100%);
 }
 
+.page-intro {
+  margin: 16rpx 24rpx 4rpx;
+  font-size: 24rpx;
+  line-height: 1.6;
+  color: #6b7280;
+}
+
 .page {
   display: flex;
   flex-direction: column;

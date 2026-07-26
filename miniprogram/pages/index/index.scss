@@ -1,9 +1,10 @@
 /**index.scss**/
 page {
-  height: 100vh;
+  min-height: 100vh;
   position: relative;
-  overflow: hidden;
   background-color: #141a2e;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ── 全屏图片背景 ── */
@@ -17,7 +18,7 @@ page {
 }
 
 .hero-inner {
-  position: absolute;
+  position: fixed;
   top: 22rpx;
   left: 40rpx;
   z-index: 2;
@@ -53,8 +54,17 @@ page {
   text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.5);
 }
 
+.hero-tag {
+  margin-left: 18rpx;
+  font-size: 22rpx;
+  font-family: "STKaiti", "KaiTi", "Kaiti SC", "楷体", serif;
+  color: rgba(232, 198, 106, 0.72);
+  letter-spacing: 1rpx;
+  text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.5);
+}
+
 .hero-seal {
-  position: absolute;
+  position: fixed;
   right: 40rpx;
   top: 22rpx;
   z-index: 2;
@@ -69,22 +79,19 @@ page {
 }
 
 /* ── 内容层（浮于背景之上） ── */
-.scrollarea {
+.container {
   position: relative;
   z-index: 1;
-  height: 100vh;
-  box-sizing: border-box;
-}
-
-.container {
-  padding: 32rpx;
-  padding-top: 120rpx;
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 28rpx;
+  padding-top: 100rpx;
 }
 
 .tool-list {
   display: flex;
   flex-direction: column;
-  gap: 20rpx;
+  gap: 16rpx;
 }
 
 .tool-card {
@@ -92,7 +99,7 @@ page {
   align-items: center;
   background: #fff;
   border-radius: 16rpx;
-  padding: 32rpx 28rpx;
+  padding: 26rpx 24rpx;
   box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.18);
   transition: transform 0.15s;
 }
@@ -128,4 +135,15 @@ page {
   font-size: 40rpx;
   color: #ccc;
   font-weight: 300;
+}
+
+.disclaimer {
+  position: relative;
+  z-index: 1;
+  padding: 32rpx 8rpx 48rpx;
+  font-size: 22rpx;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.4);
+  text-align: center;
+  letter-spacing: 1rpx;
 }
