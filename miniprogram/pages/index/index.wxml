@@ -11,27 +11,11 @@
 <scroll-view class="scrollarea" scroll-y>
   <view class="container">
     <view class="tool-list">
-      <view class="tool-card" bindtap="goToBeastCalc">
-        <view class="tool-icon">🦁</view>
-        <view class="tool-info">
-          <text class="tool-name">资质计算器</text>
-          <text class="tool-desc">根据悟性、灵性等级计算资质</text>
-        </view>
-        <text class="tool-arrow">›</text>
-      </view>
-      <view class="tool-card" bindtap="goToGrowthCalc">
-        <view class="tool-icon">📈</view>
-        <view class="tool-info">
-          <text class="tool-name">成长率计算器</text>
-          <text class="tool-desc">通过血量反推成长率与类别</text>
-        </view>
-        <text class="tool-arrow">›</text>
-      </view>
       <view class="tool-card" bindtap="goToGameRecord">
         <view class="tool-icon">🏕️</view>
         <view class="tool-info">
           <text class="tool-name">回归与挂机设置</text>
-          <text class="tool-desc">记录账号回归与野外挂机，掌握角色历练进度</text>
+          <text class="tool-desc">多账号卡回归计时、野外挂机时长管理</text>
         </view>
         <text class="tool-arrow">›</text>
       </view>
@@ -39,7 +23,23 @@
         <view class="tool-icon">🛡️</view>
         <view class="tool-info">
           <text class="tool-name">门派属性系数</text>
-          <text class="tool-desc">查看各门派冰火玄毒属性加成</text>
+          <text class="tool-desc">全门派冰火玄毒、力量灵气体力身法成长查询</text>
+        </view>
+        <text class="tool-arrow">›</text>
+      </view>
+      <view class="tool-card" bindtap="goToBeastCalc">
+        <view class="tool-icon">🦁</view>
+        <view class="tool-info">
+          <text class="tool-name">资质计算器</text>
+          <text class="tool-desc">珍兽当前资质 / 裸资质一键换算</text>
+        </view>
+        <text class="tool-arrow">›</text>
+      </view>
+      <view class="tool-card" bindtap="goToGrowthCalc">
+        <view class="tool-icon">📈</view>
+        <view class="tool-info">
+          <text class="tool-name">成长率计算器</text>
+          <text class="tool-desc">输入血量，反推珍兽成长档次</text>
         </view>
         <text class="tool-arrow">›</text>
       </view>

@@ -44,22 +44,22 @@
             <view class="account-meta">角色 {{item.charCount}}/3</view>
           </view>
           <expire-tip wx:if="{{item.hasExpired}}" />
-          <text
-            class="account-del"
-            data-id="{{item._id}}"
-            data-masked="{{item.masked}}"
-            catchtap="onDeleteAccount"
-          >删除</text>
           <text class="account-arrow {{item.expanded ? 'up' : ''}}">›</text>
         </view>
 
         <!-- 折叠区：该账号下的角色 -->
         <view class="char-wrap" wx:if="{{item.expanded}}">
           <view class="char-list" wx:if="{{item.characters.length > 0}}">
-            <view class="char-card" wx:for="{{item.characters}}" wx:for-item="ch" wx:key="_id">
+            <view
+              class="char-card"
+              wx:for="{{item.characters}}"
+              wx:for-item="ch"
+              wx:key="_id"
+              data-id="{{ch._id}}"
+              bindlongpress="onDeleteChar"
+            >
               <view class="char-head">
                 <view class="char-name">{{ch.nickname}}</view>
-                <text class="char-del" data-id="{{ch._id}}" bindtap="onDeleteChar">删除</text>
               </view>
 
               <!-- 回归状态 -->
@@ -111,7 +111,7 @@
         </view>
       </view>
     </view>
-    <view class="tip">点击账号展开角色 · 点「删除」可移除对应账号或角色</view>
+    <view class="tip">点击账号展开角色 · 长按账号或角色可删除</view>
   </scroll-view>
 
   <view class="empty" wx:else>
@@ -210,7 +210,7 @@
       <view class="doc-h2">五、温馨提示</view>
       <view class="doc-ul">
         <view class="doc-li"><text class="doc-dot">·</text><text class="doc-li-text">数据仅用于个人记录，请妥善保管好你的设备与小程序的登录状态。</text></view>
-        <view class="doc-li"><text class="doc-dot">·</text><text class="doc-li-text">点击账号卡片上的「删除」可移除该账号（其下角色将一并删除）；点击角色卡片右侧的「删除」可单独移除角色。</text></view>
+        <view class="doc-li"><text class="doc-dot">·</text><text class="doc-li-text">长按账号卡片可删除该账号（其下角色将一并删除）；长按角色卡片可单独删除角色。</text></view>
       </view>
 
       <view class="doc-foot">墨狐小算器 · 回归与挂机设置</view>

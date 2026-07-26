@@ -2,34 +2,54 @@
 <scroll-view class="scrollarea" scroll-y>
   <view class="page-container">
 
-    <view class="notice-bar">
-      <text class="notice-icon">!</text>
-      <text class="notice-text">选择门派查看冰火玄毒属性系数，系数越高该门派对应属性伤害加成越大。</text>
+    <!-- 顶部标题 -->
+    <view class="page-header">
+      <view class="page-title">门派属性系数</view>
     </view>
 
-    <view class="section">
-      <view class="section-title">选择门派</view>
-      <picker mode="selector" range="{{sectNames}}" value="{{selectedIndex}}" bindchange="onSectChange">
-        <view class="picker-field">
-          <text>{{selectedName}}</text>
-          <text class="picker-arrow">▾</text>
-        </view>
-      </picker>
+    <!-- Tab 切换栏 -->
+    <view class="tab-bar">
+      <view class="tab {{activeTab === 0 ? 'active' : ''}}" data-tab="0" bindtap="switchTab">门派属性攻击系数</view>
+      <view class="tab {{activeTab === 1 ? 'active' : ''}}" data-tab="1" bindtap="switchTab">门派潜能成长</view>
     </view>
 
-    <view class="section">
-      <view class="section-title">{{selectedName}} · 属性系数</view>
-      <view class="coeff-list">
-        <view
-          class="coeff-item {{item.isMax ? 'max' : ''}}"
-          wx:for="{{attrs}}"
-          wx:key="key"
-        >
-          <view class="coeff-meta">
-            <text class="coeff-name">{{item.name}}属性</text>
-            <text class="coeff-tag" wx:if="{{item.isMax}}">主属性</text>
+    <!-- Tab1：门派属性攻击系数（冰火玄毒） -->
+    <view class="tab-panel" wx:if="{{activeTab === 0}}">
+      <view class="elem-card" wx:for="{{elemSects}}" wx:key="name">
+        <view class="elem-head">{{item.name}}</view>
+        <view class="elem-row">
+          <view class="elem-item" wx:for="{{item.attrs}}" wx:for-item="attr" wx:key="name">
+            <text class="elem-dot dot-{{attr.key}}"></text>
+            <text class="elem-label">{{attr.name}}</text>
+            <text class="elem-val">{{attr.value}}</text>
           </view>
-          <text class="coeff-value">{{item.valueStr}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- Tab2：门派潜能成长（五维） -->
+    <view class="tab-panel" wx:if="{{activeTab === 1}}">
+      <view class="sect-card" wx:for="{{potentials}}" wx:key="name">
+        <view class="sect-card-head">{{item.name}}</view>
+        <view class="pot-row">
+          <text class="pot-name">1力量</text>
+          <text class="pot-val">{{item.str}} 外攻</text>
+        </view>
+        <view class="pot-row">
+          <text class="pot-name">1灵气</text>
+          <text class="pot-val">{{item.int}} 内功</text>
+        </view>
+        <view class="pot-row">
+          <text class="pot-name">1体力</text>
+          <text class="pot-val">{{item.con}} 血上限</text>
+        </view>
+        <view class="pot-row">
+          <text class="pot-name">1定力</text>
+          <text class="pot-val">{{item.fix}} 气上限</text>
+        </view>
+        <view class="pot-row">
+          <text class="pot-name">1身法</text>
+          <text class="pot-val">{{item.agi}} 命中、{{item.dodge}} 闪避、{{item.crit}} 会心&会防</text>
         </view>
       </view>
     </view>

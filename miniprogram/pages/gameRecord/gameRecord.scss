@@ -237,21 +237,6 @@ page {
   transition: transform 0.2s;
 }
 
-.account-del {
-  flex-shrink: 0;
-  margin-right: 20rpx;
-  font-size: 24rpx;
-  color: #e74c3c;
-  background: #fdecea;
-  border: 2rpx solid #f5c6c0;
-  border-radius: 8rpx;
-  padding: 8rpx 18rpx;
-}
-
-.account-del:active {
-  background: #f8d7d2;
-}
-
 .account-arrow.up {
   transform: rotate(-90deg);
 }
@@ -286,11 +271,6 @@ page {
   font-size: 32rpx;
   font-weight: 700;
   color: #1a1a2e;
-}
-
-.char-del {
-  font-size: 24rpx;
-  color: #e74c3c;
 }
 
 .state-row {

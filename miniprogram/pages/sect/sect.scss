@@ -3,7 +3,7 @@ page {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #f5f6fa;
+  background: linear-gradient(160deg, #141a2e, #1b2342);
 }
 
 .scrollarea {
@@ -12,136 +12,161 @@ page {
 }
 
 .page-container {
-  padding: 24rpx 32rpx;
-  padding-bottom: 60rpx;
+  padding: 28rpx 28rpx 60rpx;
 }
 
-/* ===== 提示条 ===== */
-.notice-bar {
-  display: flex;
-  align-items: flex-start;
-  background: #fff8e1;
-  border-radius: 12rpx;
-  padding: 20rpx 24rpx;
-  margin-bottom: 24rpx;
-  border-left: 6rpx solid #ff9800;
+/* ===== 顶部标题 ===== */
+.page-header {
+  margin: 8rpx 0 28rpx;
+  padding-bottom: 18rpx;
+  border-bottom: 2rpx solid rgba(232, 198, 106, 0.25);
 }
 
-.notice-icon {
-  width: 36rpx;
-  height: 36rpx;
-  line-height: 36rpx;
-  text-align: center;
-  background: #ff9800;
-  color: #fff;
-  border-radius: 50%;
-  font-size: 24rpx;
+.page-title {
+  font-size: 42rpx;
   font-weight: 700;
-  flex-shrink: 0;
-  margin-right: 16rpx;
-  margin-top: 2rpx;
+  font-family: "STKaiti", "KaiTi", "Kaiti SC", "楷体", serif;
+  color: #e8c66a;
+  letter-spacing: 4rpx;
 }
 
-.notice-text {
-  font-size: 24rpx;
-  color: #8d6e00;
-  line-height: 1.6;
+.page-sub {
+  margin-top: 8rpx;
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 2rpx;
 }
 
-/* ===== 区块 ===== */
-.section {
+/* ===== Tab 切换栏 ===== */
+.tab-bar {
+  display: flex;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 14rpx;
+  padding: 6rpx;
+  margin-bottom: 16rpx;
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.6);
+  padding: 18rpx 0;
+  border-radius: 10rpx;
+  transition: all 0.2s;
+}
+
+.tab.active {
+  background: #e8c66a;
+  color: #1a1a2e;
+  font-weight: 600;
+}
+
+/* ===== Tab1：冰火玄毒 ===== */
+.elem-card {
   background: #fff;
   border-radius: 16rpx;
-  padding: 28rpx 32rpx;
-  margin-bottom: 24rpx;
-  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+  padding: 24rpx 28rpx;
+  margin-bottom: 18rpx;
+  box-shadow: 0 4rpx 18rpx rgba(0, 0, 0, 0.25);
 }
 
-.section-title {
+.elem-head {
   font-size: 30rpx;
-  font-weight: 600;
+  font-weight: 700;
   color: #1a1a2e;
-  margin-bottom: 24rpx;
-  padding-bottom: 16rpx;
+  margin-bottom: 18rpx;
+  padding-bottom: 14rpx;
   border-bottom: 2rpx solid #f0f0f5;
 }
 
-/* ===== 门派下拉 ===== */
-.picker-field {
+.elem-row {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  height: 80rpx;
-  background: #f7f8fc;
-  border-radius: 12rpx;
-  padding: 0 24rpx;
-  font-size: 30rpx;
-  color: #1a1a2e;
 }
 
-.picker-arrow {
-  font-size: 36rpx;
-  color: #ccc;
-  font-weight: 300;
-}
-
-/* ===== 系数列表 ===== */
-.coeff-list {
-  display: flex;
-  flex-direction: column;
-  gap: 16rpx;
-}
-
-.coeff-item {
-  display: flex;
-  align-items: center;
-  background: #f7f8fc;
-  border-radius: 12rpx;
-  padding: 24rpx 28rpx;
-  border: 2rpx solid transparent;
-}
-
-.coeff-item.max {
-  background: linear-gradient(135deg, #f0f3ff, #e8ecff);
-  border-color: #4a6cf7;
-}
-
-.coeff-icon {
-  width: 64rpx;
-  height: 64rpx;
-  margin-right: 24rpx;
-  flex-shrink: 0;
-}
-
-.coeff-meta {
-  flex: 1;
+.elem-item {
   display: flex;
   align-items: center;
 }
 
-.coeff-name {
-  font-size: 30rpx;
-  color: #1a1a2e;
-  font-weight: 600;
+.elem-dot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  margin-right: 8rpx;
 }
 
-.coeff-tag {
-  margin-left: 16rpx;
-  font-size: 22rpx;
-  color: #4a6cf7;
-  background: #e3e9ff;
-  padding: 2rpx 12rpx;
-  border-radius: 8rpx;
+.dot-ice {
+  background: #4aa3ff;
 }
 
-.coeff-value {
-  font-size: 40rpx;
+.dot-fire {
+  background: #ff5630;
+}
+
+.dot-mystic {
+  background: #e8c66a;
+}
+
+.dot-poison {
+  background: #39d353;
+}
+
+.elem-label {
+  font-size: 24rpx;
+  color: #666;
+  margin-right: 8rpx;
+}
+
+.elem-val {
+  font-size: 28rpx;
   font-weight: 700;
   color: #1a1a2e;
 }
 
-.coeff-item.max .coeff-value {
-  color: #4a6cf7;
+/* ===== Tab2：五维潜能成长 ===== */
+.sect-card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx 28rpx;
+  margin-bottom: 18rpx;
+  box-shadow: 0 4rpx 18rpx rgba(0, 0, 0, 0.25);
+}
+
+.sect-card-head {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 16rpx;
+  padding-bottom: 14rpx;
+  border-bottom: 2rpx solid #f0f0f5;
+}
+
+.pot-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12rpx 0;
+  border-bottom: 2rpx dashed #f0f0f5;
+}
+
+.pot-row:last-child {
+  border-bottom: none;
+}
+
+.pot-name {
+  font-size: 26rpx;
+  color: #555;
+  flex-shrink: 0;
+}
+
+.pot-val {
+  font-size: 26rpx;
+  color: #1a1a2e;
+  font-weight: 600;
+  text-align: right;
+  margin-left: 16rpx;
 }
 
 /* ===== 底部留白 ===== */

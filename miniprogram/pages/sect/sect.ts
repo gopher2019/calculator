@@ -1,60 +1,44 @@
-import { SECTS, ATTRIBUTES, getSectNames } from '../../utils/sectData';
+import { SECTS, POTENTIALS, ATTRIBUTES } from '../../utils/sectData';
 import { shareConfig, enableShareMenu } from '../../utils/share';
 
 interface AttrView {
-  key: string;
+  key: string; // 用于配色 class: ice/fire/mystic/poison
   name: string;
-  valueStr: string;
-  isMax: boolean;
+  value: number;
 }
+
+// 属性 key -> 配色标识
+const ELEM_COLOR: Record<string, string> = {
+  bing: 'ice',
+  huo: 'fire',
+  xuan: 'mystic',
+  du: 'poison',
+};
 
 Page({
   ...shareConfig,
 
   data: {
-    sectNames: [] as string[],
-    selectedIndex: 0,
-    selectedName: '',
-    attrs: [] as AttrView[],
-    maxAttr: '' as string,
+    activeTab: 0,
+    elemSects: [] as { name: string; attrs: AttrView[] }[],
+    potentials: POTENTIALS,
   },
 
   onLoad() {
     enableShareMenu();
-    this.setData({ sectNames: getSectNames() });
-    this.updateSect(0);
-  },
-
-  onSectChange(e: any) {
-    this.updateSect(Number(e.detail.value));
-  },
-
-  // 切换门派：计算四个属性系数，并标记最大值（主属性）
-  updateSect(index: number) {
-    const sect = SECTS[index];
-    const coeff = sect.coeff;
-
-    let maxVal = -1;
-    let maxKey = '';
-    ATTRIBUTES.forEach((a) => {
-      if (coeff[a.key] > maxVal) {
-        maxVal = coeff[a.key];
-        maxKey = a.key;
-      }
-    });
-
-    const attrs: AttrView[] = ATTRIBUTES.map((a) => ({
-      key: a.key,
-      name: a.name,
-      valueStr: String(coeff[a.key]),
-      isMax: a.key === maxKey,
+    // 预处理冰火玄毒视图数据，避免 wxml 动态 key 兼容问题
+    const elemSects = SECTS.map((s) => ({
+      name: s.name,
+      attrs: ATTRIBUTES.map((a) => ({
+        key: ELEM_COLOR[a.key],
+        name: a.name,
+        value: s.coeff[a.key],
+      })),
     }));
+    this.setData({ elemSects });
+  },
 
-    this.setData({
-      selectedIndex: index,
-      selectedName: sect.name,
-      attrs,
-      maxAttr: maxKey,
-    });
+  switchTab(e: any) {
+    this.setData({ activeTab: Number(e.currentTarget.dataset.tab) });
   },
 });
