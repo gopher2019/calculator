@@ -1,11 +1,14 @@
 <!-- 回归与挂机设置 · 账号列表（折叠） -->
 <view class="page">
   <view class="header">
-    <view class="title-wrap">
-      <view class="title">回归与挂机设置</view>
-      <text class="help-btn" bindtap="openHelp">?</text>
+    <view class="header-top">
+      <view class="title-wrap">
+        <view class="title">回归与挂机设置</view>
+        <text class="help-btn" bindtap="openHelp">?</text>
+      </view>
+      <text class="reset-btn" bindtap="resetTodayIdle">一键重置今日挂机状态</text>
     </view>
-    <text class="reset-btn" bindtap="resetTodayIdle">一键重置今日挂机状态</text>
+    <view class="page-sub">怀旧天龙多账号卡回归计时与野外挂机时长管理。</view>
   </view>
 
   <!-- 汇总展示 -->
@@ -27,8 +30,6 @@
       <view class="summary-label">今日回归到期</view>
     </view>
   </view>
-
-  <view class="page-intro">怀旧天龙多账号卡回归计时与野外挂机时长管理，随时掌握角色历练进度。</view>
 
   <scroll-view class="scrollarea" scroll-y wx:if="{{accounts.length > 0}}">
     <view class="account-list">
@@ -218,4 +219,10 @@
       <view class="doc-foot">墨狐小算器 · 回归与挂机设置</view>
     </scroll-view>
   </view>
+</view>
+
+<!-- 收藏小程序轻引导（非阻塞底部浮窗） -->
+<view class="fav-hint" wx:if="{{showFavHint}}">
+  <view class="fav-hint-close" bindtap="closeFavHint">✕</view>
+  <view class="fav-hint-text">{{favHintText}}</view>
 </view>

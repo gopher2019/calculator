@@ -4,13 +4,6 @@ page {
   background: linear-gradient(180deg, #f2f8fe 0%, #eef8f3 100%);
 }
 
-.page-intro {
-  margin: 16rpx 24rpx 4rpx;
-  font-size: 24rpx;
-  line-height: 1.6;
-  color: #6b7280;
-}
-
 .page {
   display: flex;
   flex-direction: column;
@@ -23,10 +16,26 @@ page {
   position: relative;
   overflow: hidden;
   display: flex;
+  flex-direction: column;
+  padding: 32rpx 32rpx 26rpx;
+  background: linear-gradient(135deg, #6aa0f2, #9186ea);
+}
+
+.header-top {
+  display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 36rpx 32rpx;
-  background: linear-gradient(135deg, #6aa0f2, #9186ea);
+}
+
+.page-sub {
+  position: relative;
+  z-index: 1;
+  margin-top: 14rpx;
+  font-size: 22rpx;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.82);
+  letter-spacing: 1rpx;
+  text-shadow: 0 1rpx 4rpx rgba(60, 80, 140, 0.25);
 }
 
 /* 科技感斜向扫光 */
@@ -648,4 +657,47 @@ page {
   font-size: 22rpx;
   color: #aab;
   letter-spacing: 1rpx;
+}
+
+/* ── 收藏小程序轻引导（非阻塞底部浮窗） ── */
+.fav-hint {
+  position: fixed;
+  left: 24rpx;
+  right: 24rpx;
+  bottom: calc(168rpx + constant(safe-area-inset-bottom, 0rpx));
+  bottom: calc(168rpx + env(safe-area-inset-bottom, 0rpx));
+  z-index: 80;
+  display: flex;
+  align-items: flex-start;
+  padding: 24rpx 28rpx;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.97), rgba(238, 244, 255, 0.97));
+  border: 2rpx solid rgba(106, 147, 240, 0.35);
+  border-left: 8rpx solid #e8c66a;
+  border-radius: 18rpx;
+  box-shadow: 0 8rpx 28rpx rgba(106, 140, 210, 0.22);
+}
+
+.fav-hint-close {
+  flex-shrink: 0;
+  width: 40rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  font-size: 26rpx;
+  color: #8a93a8;
+  background: rgba(106, 147, 240, 0.12);
+  border-radius: 50%;
+  margin-right: 16rpx;
+  margin-top: 2rpx;
+}
+
+.fav-hint-close:active {
+  background: rgba(106, 147, 240, 0.24);
+}
+
+.fav-hint-text {
+  flex: 1;
+  font-size: 25rpx;
+  line-height: 1.6;
+  color: #3a4a78;
 }

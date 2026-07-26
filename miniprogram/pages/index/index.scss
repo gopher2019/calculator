@@ -27,12 +27,11 @@ page {
   align-items: baseline;
 }
 
-.hero-greet {
+.hero-sep {
+  margin: 0 10rpx;
   font-size: 24rpx;
   font-family: "STKaiti", "KaiTi", "Kaiti SC", "楷体", serif;
   color: rgba(255, 255, 255, 0.3);
-  letter-spacing: 4rpx;
-  margin-right: 16rpx;
   text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.5);
 }
 
@@ -55,7 +54,6 @@ page {
 }
 
 .hero-tag {
-  margin-left: 18rpx;
   font-size: 22rpx;
   font-family: "STKaiti", "KaiTi", "Kaiti SC", "楷体", serif;
   color: rgba(232, 198, 106, 0.72);
@@ -143,7 +141,8 @@ page {
   padding: 32rpx 8rpx 48rpx;
   font-size: 22rpx;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(238, 238, 238, 0.66);
   text-align: center;
   letter-spacing: 1rpx;
+  text-shadow: 0 1rpx 6rpx rgba(0, 0, 0, 0.45);
 }

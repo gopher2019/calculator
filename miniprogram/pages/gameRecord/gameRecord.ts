@@ -43,6 +43,17 @@ function buildTimeColumns(): string[][] {
   return [hours, minutes];
 }
 
+// ── 收藏小程序轻引导 ──
+const FAV_KEY_LAST = 'fav_hint_last_shown';
+const FAV_COOLDOWN = 7 * 24 * 60 * 60 * 1000;
+const FAV_HINT_TEXT =
+  '担心7天后找不到回归计时工具？点击右上角【···】→ 添加到「我的小程序」，下拉微信快速打开！';
+// 同一小程序会话内，避免连续添加多个账号时重复弹出引导
+let favHintShownThisSession = false;
+// 浮窗展示满8秒无操作自动关闭的定时器
+let favHintTimer: number | null = null;
+const FAV_AUTO_CLOSE_DELAY = 8 * 1000;
+
 Page({
   ...shareConfig,
 
@@ -66,6 +77,9 @@ Page({
     // 下拉选项
     returnRange: ['正常游戏', '卡回归中'],
     idleRange: ['未挂机', '挂机中', '已完成', '未完成'],
+    // 收藏小程序轻引导
+    showFavHint: false,
+    favHintText: FAV_HINT_TEXT,
   },
 
   onLoad() {
@@ -75,17 +89,70 @@ Page({
   onShow() {
     this.loadAccounts();
     this.startTimer();
+    // 从其他页返回时，若浮窗仍展示则续接8秒自动关闭
+    if (this.data.showFavHint && favHintTimer === null) {
+      favHintTimer = setTimeout(() => this.closeFavHint(), FAV_AUTO_CLOSE_DELAY) as any;
+    }
   },
 
   onHide() {
     this.clearTimer();
+    if (favHintTimer) {
+      clearTimeout(favHintTimer);
+      favHintTimer = null;
+    }
   },
 
   onUnload() {
     this.clearTimer();
+    if (favHintTimer) {
+      clearTimeout(favHintTimer);
+      favHintTimer = null;
+    }
   },
 
   noop() {},
+
+  // ── 收藏小程序轻引导 ──
+  favMarkShown() {
+    wx.setStorageSync(FAV_KEY_LAST, Date.now());
+  },
+
+  // 场景2：回访老用户（已有账号，距上次展示≥7天）
+  checkReturnVisitHint() {
+    const accounts = this.data.accounts || [];
+    if (accounts.length === 0) return;
+    const last = wx.getStorageSync(FAV_KEY_LAST);
+    if (last && Date.now() - last < FAV_COOLDOWN) return;
+    this.showFavHint();
+  },
+
+  // 场景1：新建账号成功（高优先级，绕过冷却；会话内不重复）
+  showFavHintForNewAccount() {
+    if (favHintShownThisSession) return;
+    this.showFavHint();
+  },
+
+  showFavHint() {
+    if (this.data.showFavHint) return;
+    this.setData({ showFavHint: true });
+    this.favMarkShown();
+    favHintShownThisSession = true;
+    // 展示满8秒且用户无操作则自动关闭
+    if (favHintTimer) clearTimeout(favHintTimer);
+    favHintTimer = setTimeout(() => {
+      this.closeFavHint();
+    }, FAV_AUTO_CLOSE_DELAY) as any;
+  },
+
+  // 用户点击关闭：仅隐藏浮窗，不重复写入存储（曝光时间戳已在展示时记录）
+  closeFavHint() {
+    if (favHintTimer) {
+      clearTimeout(favHintTimer);
+      favHintTimer = null;
+    }
+    this.setData({ showFavHint: false });
+  },
 
   // ── 使用说明文档 ──
   openHelp() {
@@ -156,6 +223,7 @@ Page({
       wx.showToast({ title: err.message || '加载失败', icon: 'none' });
     } finally {
       this.setData({ loading: false });
+      this.checkReturnVisitHint();
     }
   },
 
@@ -417,7 +485,8 @@ Page({
       await callGameRecord('addAccount', { account });
       this.setData({ showAdd: false, newAccount: '' });
       wx.showToast({ title: '已添加', icon: 'success' });
-      this.loadAccounts();
+      await this.loadAccounts();
+      this.showFavHintForNewAccount();
     } catch (err: any) {
       wx.showToast({ title: err.message || '添加失败', icon: 'none' });
     }
