@@ -88,51 +88,52 @@ page {
 
 .tool-list {
   display: flex;
-  flex-direction: column;
-  gap: 16rpx;
+  flex-wrap: wrap;
+  gap: 20rpx;
 }
 
 .tool-card {
+  width: calc((100% - 40rpx) / 3);
+  box-sizing: border-box;
   display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
   background: #fff;
   border-radius: 16rpx;
-  padding: 26rpx 24rpx;
+  padding: 28rpx 12rpx;
   box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.18);
   transition: transform 0.15s;
 }
 
 .tool-card:active {
-  transform: scale(0.98);
+  transform: scale(0.96);
 }
 
 .tool-icon {
-  font-size: 52rpx;
-  margin-right: 24rpx;
+  font-size: 48rpx;
+  margin-bottom: 14rpx;
 }
 
 .tool-info {
-  flex: 1;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .tool-name {
-  font-size: 32rpx;
+  font-size: 26rpx;
   font-weight: 600;
   color: #1a1a2e;
-  margin-bottom: 8rpx;
+  text-align: center;
 }
 
 .tool-desc {
-  font-size: 24rpx;
-  color: #999;
+  display: none;
 }
 
 .tool-arrow {
-  font-size: 40rpx;
-  color: #ccc;
-  font-weight: 300;
+  display: none;
 }
 
 .disclaimer {

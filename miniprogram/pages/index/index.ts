@@ -43,4 +43,8 @@ Page({
   goToSect() {
     wx.navigateTo({ url: '../sect/sect' });
   },
+
+  goToWeaponCalc() {
+    wx.navigateTo({ url: '../weapon/weapon' });
+  },
 });

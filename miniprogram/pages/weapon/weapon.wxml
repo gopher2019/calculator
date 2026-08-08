@@ -1,0 +1,68 @@
+<!--weapon.wxml-->
+<scroll-view class="scrollarea" scroll-y>
+  <view class="page-container">
+
+    <view class="page-intro">输入暗器五项原始属性与修炼等级，一键换算暗器星级系数。</view>
+
+    <view class="section input-section">
+      <view class="section-title">原始属性与修炼等级</view>
+
+      <view class="input-grid">
+        <view class="input-item">
+          <text class="input-label">原始力量</text>
+          <input class="input-field" type="number" maxlength="3" value="{{power}}" data-field="power" bindinput="onInput" />
+        </view>
+        <view class="input-item">
+          <text class="input-label">原始灵气</text>
+          <input class="input-field" type="number" maxlength="3" value="{{spirit}}" data-field="spirit" bindinput="onInput" />
+        </view>
+        <view class="input-item">
+          <text class="input-label">原始体力</text>
+          <input class="input-field" type="number" maxlength="3" value="{{stamina}}" data-field="stamina" bindinput="onInput" />
+        </view>
+        <view class="input-item">
+          <text class="input-label">原始定力</text>
+          <input class="input-field" type="number" maxlength="3" value="{{fixed}}" data-field="fixed" bindinput="onInput" />
+        </view>
+        <view class="input-item">
+          <text class="input-label">原始身法</text>
+          <input class="input-field" type="number" maxlength="3" value="{{agility}}" data-field="agility" bindinput="onInput" />
+        </view>
+        <view class="input-item">
+          <text class="input-label">修炼等级</text>
+          <input class="input-field" type="number" maxlength="3" value="{{level}}" data-field="level" bindinput="onInput" />
+        </view>
+      </view>
+    </view>
+
+    <view class="btn-group">
+      <button class="btn btn-primary btn-calc" bindtap="onCalculate">计算星级</button>
+    </view>
+
+    <view class="section result-section" wx:if="{{showResult && result}}">
+      <view class="section-title">计算结果</view>
+      <view class="result-card">
+        <view class="result-row highlight">
+          <text class="result-label">暗器星级</text>
+          <text class="result-value primary">{{result.starLabel}}</text>
+        </view>
+        <view class="result-divider"></view>
+        <view class="result-row">
+          <text class="result-label">原始属性总和</text>
+          <text class="result-value">{{result.total}}</text>
+        </view>
+        <view class="result-row">
+          <text class="result-label">修炼等级</text>
+          <text class="result-value">{{result.level}}</text>
+        </view>
+        <view class="result-row">
+          <text class="result-label">暗器系数</text>
+          <text class="result-value">{{result.coefficientStr}}</text>
+        </view>
+      </view>
+      <view class="result-note">暗器系数 = (原始属性总和 - 5) / (修炼等级 - 1)；系数 &lt;3 为4星，3≤系数&lt;3.5 为5星，≥3.5 为6星。</view>
+    </view>
+  </view>
+
+  <view class="ad-footer"></view>
+</scroll-view>

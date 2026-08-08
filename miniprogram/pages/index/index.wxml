@@ -43,6 +43,14 @@
         </view>
         <text class="tool-arrow">›</text>
       </view>
+      <view class="tool-card" bindtap="goToWeaponCalc">
+        <view class="tool-icon">🗡️</view>
+        <view class="tool-info">
+          <text class="tool-name">暗器星级计算</text>
+          <text class="tool-desc">五项属性与修炼等级换算暗器星级</text>
+        </view>
+        <text class="tool-arrow">›</text>
+      </view>
     </view>
   </view>
 
