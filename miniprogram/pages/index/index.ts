@@ -51,4 +51,8 @@ Page({
   goToMine() {
     wx.navigateTo({ url: '../mine/mine' });
   },
+
+  goToXiaoxiao() {
+    wx.navigateTo({ url: '../xiaoxiao/xiaoxiao' });
+  },
 });

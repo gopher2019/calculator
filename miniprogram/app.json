@@ -7,7 +7,8 @@
     "pages/gameRecord/gameRecord",
     "pages/sect/sect",
     "pages/weapon/weapon",
-    "pages/mine/mine"
+    "pages/mine/mine",
+    "pages/xiaoxiao/xiaoxiao"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",

@@ -59,6 +59,14 @@
         </view>
         <text class="tool-arrow">›</text>
       </view>
+      <view class="tool-card" bindtap="goToXiaoxiao">
+        <view class="tool-icon">⚔️</view>
+        <view class="tool-info">
+          <text class="tool-name">门派宵小坐标</text>
+          <text class="tool-desc">慕容、恶人谷等分时段点位</text>
+        </view>
+        <text class="tool-arrow">›</text>
+      </view>
     </view>
   </view>
 

@@ -1,0 +1,41 @@
+<!--xiaoxiao.wxml-->
+<view class="layout">
+  <scroll-view class="sect-sidebar" scroll-y>
+    <view
+      class="sect-item {{index === activeSect ? 'active' : ''}}"
+      wx:for="{{sects}}"
+      wx:key="name"
+      data-index="{{index}}"
+      bindtap="selectSect"
+    >{{item.name}}</view>
+  </scroll-view>
+
+  <scroll-view class="content-area scrollarea" scroll-y scroll-top="{{scrollTop}}" scroll-with-animation="{{false}}">
+    <view class="section">
+      <view class="section-title">{{activeName}}宵小坐标（分左右点击复制）</view>
+
+      <view class="slot-block" wx:for="{{sects[activeSect].slots}}" wx:key="label" wx:for-item="slot" wx:for-index="si">
+        <view class="slot-header" data-index="{{si}}" bindtap="toggleSlot">
+          <text class="slot-title">{{slot.label}}</text>
+          <text class="slot-arrow">{{expanded[si] ? '收起 ▲' : '展开 ▼'}}</text>
+        </view>
+
+        <view class="slot-body" wx:if="{{expanded[si]}}">
+          <view class="map-image-wrap">
+            <image wx:if="{{slot.image}}" class="map-image" src="{{slot.image}}" mode="widthFix" show-menu-by-longpress="{{true}}"></image>
+            <view wx:elif="{{slot.imageError}}" class="map-image-empty">{{slot.imageError}}</view>
+            <view wx:else class="map-image-empty">地图图片加载中…</view>
+          </view>
+
+          <view class="coord-grid">
+            <view class="coord-item" wx:for="{{slot.coords}}" wx:key="index" wx:for-item="coord">
+              <text class="coord-side coord-left" data-si="{{si}}" data-value="{{coord.x}}" bindtap="copySide">({{coord.x}}</text>
+              <text class="coord-sep">,</text>
+              <text class="coord-side coord-right" data-si="{{si}}" data-value="{{coord.y}}" bindtap="copySide">{{coord.y}})</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>
