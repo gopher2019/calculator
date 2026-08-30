@@ -47,4 +47,8 @@ Page({
   goToWeaponCalc() {
     wx.navigateTo({ url: '../weapon/weapon' });
   },
+
+  goToMine() {
+    wx.navigateTo({ url: '../mine/mine' });
+  },
 });

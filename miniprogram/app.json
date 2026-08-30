@@ -6,7 +6,8 @@
     "pages/logs/logs",
     "pages/gameRecord/gameRecord",
     "pages/sect/sect",
-    "pages/weapon/weapon"
+    "pages/weapon/weapon",
+    "pages/mine/mine"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",

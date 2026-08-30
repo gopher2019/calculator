@@ -51,6 +51,14 @@
         </view>
         <text class="tool-arrow">›</text>
       </view>
+      <view class="tool-card" bindtap="goToMine">
+        <view class="tool-icon">⛏️</view>
+        <view class="tool-info">
+          <text class="tool-name">挖矿坐标</text>
+          <text class="tool-desc">西湖、洱海等地图挖矿点位一览</text>
+        </view>
+        <text class="tool-arrow">›</text>
+      </view>
     </view>
   </view>
 
