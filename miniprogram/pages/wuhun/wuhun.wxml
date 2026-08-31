@@ -1,0 +1,70 @@
+<!--wuhun.wxml-->
+<scroll-view class="scrollarea" scroll-y>
+  <view class="page-container">
+
+    <view class="section">
+      <view class="section-title">武魂扩展属性计算</view>
+
+      <view class="input-row">
+        <text class="input-label">合成等级</text>
+        <picker class="picker" mode="selector" range="{{synthLevels}}" value="{{synthIndex}}" bindchange="onSynthChange">
+          <view class="picker-inner">
+            <text>{{synthLevels[synthIndex]}}</text>
+            <text class="picker-arrow">▾</text>
+          </view>
+        </picker>
+      </view>
+
+      <view class="input-row">
+        <text class="input-label">扩展属性等级</text>
+        <picker class="picker" mode="selector" range="{{extLevels}}" value="{{extIndex}}" bindchange="onExtChange">
+          <view class="picker-inner">
+            <text>{{extLevels[extIndex]}}</text>
+            <text class="picker-arrow">▾</text>
+          </view>
+        </picker>
+      </view>
+
+      <view class="input-row">
+        <text class="input-label">武魂成长率</text>
+        <input
+          class="input-field"
+          type="digit"
+          placeholder="600~900"
+          value="{{growth}}"
+          bindinput="onGrowthInput"
+        />
+      </view>
+
+      <view class="btn-group">
+        <button class="btn btn-primary btn-calc" bindtap="onCalculate">计算扩展属性</button>
+      </view>
+    </view>
+
+    <view class="section result-section" wx:if="{{showResult && result !== null}}">
+      <view class="section-title">计算结果</view>
+      <view class="result-card">
+        <view class="result-row">
+          <text class="result-label">属性值</text>
+          <text class="result-value">{{result.atk}}</text>
+        </view>
+        <view class="result-divider"></view>
+        <view class="result-row">
+          <text class="result-label">属性(减)抗值</text>
+          <text class="result-value">{{result.resist}}</text>
+        </view>
+        <view class="result-divider"></view>
+        <view class="result-row">
+          <text class="result-label">减抗下限值</text>
+          <text class="result-value">{{result.floor}}</text>
+        </view>
+        <view class="result-note">在合成等级7、扩展等级8的前提下，几个常用成长率对应的减抗下限值：成长率887 → 下限19，838 → 下限18，789 → 下限17。
+
+性价比参考（基于标准值观察）：减抗下限的标准值在6→7级提升了3点，因此下限升7级性价比比较高；而属性值与属性(减)抗值则在6→7级提升更大，升6-7级性价比比较高。
+
+说明：因官方未公开计算公式，本页计算结果仅供参考。</view>
+      </view>
+    </view>
+
+  </view>
+</scroll-view>

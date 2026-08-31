@@ -55,4 +55,8 @@ Page({
   goToXiaoxiao() {
     wx.navigateTo({ url: '../xiaoxiao/xiaoxiao' });
   },
+
+  goToWuHun() {
+    wx.navigateTo({ url: '../wuhun/wuhun' });
+  },
 });
