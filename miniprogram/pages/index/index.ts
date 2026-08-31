@@ -63,4 +63,8 @@ Page({
   goToTeam() {
     wx.navigateTo({ url: '../team/team' });
   },
+
+  goToExp() {
+    wx.navigateTo({ url: '../exp/exp' });
+  },
 });

@@ -83,6 +83,14 @@
         </view>
         <text class="tool-arrow">›</text>
       </view>
+      <view class="tool-card" bindtap="goToExp">
+        <view class="tool-icon">⭐</view>
+        <view class="tool-info">
+          <text class="tool-name">升级经验计算</text>
+          <text class="tool-desc">当前到目标等级所需经验</text>
+        </view>
+        <text class="tool-arrow">›</text>
+      </view>
     </view>
   </view>
 

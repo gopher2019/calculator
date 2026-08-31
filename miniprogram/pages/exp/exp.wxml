@@ -1,0 +1,102 @@
+<!--exp.wxml-->
+<scroll-view class="scrollarea" scroll-y>
+  <view class="page-container">
+
+    <view class="section">
+      <view class="section-title">天龙八部角色升级经验计算器</view>
+
+      <view class="tab-bar">
+        <view class="tab-item {{activeTab === 0 ? 'active' : ''}}" bindtap="onTabChange" data-index="0">升级计算</view>
+        <view class="tab-item {{activeTab === 1 ? 'active' : ''}}" bindtap="onTabChange" data-index="1">单级明细</view>
+        <view class="tab-item {{activeTab === 2 ? 'active' : ''}}" bindtap="onTabChange" data-index="2">分段汇总</view>
+      </view>
+
+      <!-- Tab1: 升级计算 -->
+      <block wx:if="{{activeTab === 0}}">
+        <view class="input-row">
+          <text class="input-label">当前等级</text>
+          <input
+            class="input-field"
+            type="number"
+            placeholder="1~119"
+            value="{{curLevel}}"
+            bindinput="onCurLevelInput"
+          />
+        </view>
+
+        <view class="input-row">
+          <text class="input-label">本级已获经验</text>
+          <input
+            class="input-field"
+            type="number"
+            placeholder="0"
+            value="{{curExp}}"
+            bindinput="onCurExpInput"
+          />
+        </view>
+
+        <view class="input-row">
+          <text class="input-label">目标等级</text>
+          <input
+            class="input-field"
+            type="number"
+            placeholder="2~120"
+            value="{{targetLevel}}"
+            bindinput="onTargetLevelInput"
+          />
+        </view>
+
+        <view class="quick-row">
+          <view class="quick-btn" bindtap="setTarget" data-level="68">卡68</view>
+          <view class="quick-btn" bindtap="setTarget" data-level="78">卡78</view>
+          <view class="quick-btn" bindtap="setTarget" data-level="88">卡88</view>
+          <view class="quick-btn" bindtap="setTarget" data-level="90">卡90</view>
+          <view class="quick-btn" bindtap="setTarget" data-level="102">卡102</view>
+          <view class="quick-btn" bindtap="setTarget" data-level="119">满级119</view>
+        </view>
+
+        <view class="btn-group">
+          <button class="btn btn-primary btn-calc" bindtap="onCalculate">计算升级所需经验</button>
+        </view>
+
+        <view class="result-card" wx:if="{{showResult && result !== null}}">
+          <view class="result-row">
+            <text class="result-label">当前{{result.curLevel}}级 → 目标{{result.targetLevel}}级 还需经验</text>
+            <text class="result-value">{{result.remainText}}</text>
+          </view>
+          <view class="result-divider"></view>
+          <view class="result-row">
+            <text class="result-label">本级距离升级还差经验</text>
+            <text class="result-value">{{result.curGapText}}</text>
+          </view>
+          <view class="result-note">公式：累加区间每一级升级所需经验，扣除当前已获得的本级经验，得到升级缺口总经验。</view>
+        </view>
+      </block>
+
+      <!-- Tab2: 单级明细 -->
+      <block wx:if="{{activeTab === 1}}">
+        <scroll-view class="detail-scroll" scroll-y>
+          <view class="detail-grid" wx:for="{{detailList}}" wx:key="lv">
+            <text class="detail-range">{{item.range}}</text>
+            <text class="detail-value">{{item.valueText}}</text>
+          </view>
+        </scroll-view>
+      </block>
+
+      <!-- Tab3: 分段汇总 -->
+      <block wx:if="{{activeTab === 2}}">
+        <view class="timeline-title">简要总结</view>
+        <view class="timeline">
+          <view class="timeline-item" wx:for="{{summaryList}}" wx:key="range">
+            <view class="timeline-dot"></view>
+            <view class="timeline-body">
+              <text class="timeline-range">{{item.range}}</text>
+              <text class="timeline-value">{{item.valueText}}</text>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+
+  </view>
+</scroll-view>

@@ -1,0 +1,264 @@
+/**exp.scss**/
+page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f6fa;
+}
+
+.scrollarea {
+  flex: 1;
+  overflow-y: hidden;
+  padding-bottom: 180rpx;
+}
+
+.page-container {
+  padding: 24rpx 32rpx;
+}
+
+/* ===== 区块 ===== */
+.section {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 28rpx 32rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 24rpx;
+  padding-bottom: 16rpx;
+  border-bottom: 2rpx solid #f0f0f5;
+}
+
+/* ===== 输入行 ===== */
+.input-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.input-label {
+  width: 200rpx;
+  flex-shrink: 0;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.input-field {
+  flex: 1;
+  height: 80rpx;
+  background: #f7f8fc;
+  border-radius: 12rpx;
+  padding: 0 24rpx;
+  font-size: 30rpx;
+  color: #1a1a2e;
+  box-sizing: border-box;
+  border: 2rpx solid transparent;
+}
+
+.input-field:focus {
+  border-color: #4a6cf7;
+  background: #fff;
+}
+
+/* ===== 快捷填充 ===== */
+.quick-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24rpx;
+}
+
+.quick-btn {
+  flex: 1;
+  margin: 0 8rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  text-align: center;
+  font-size: 26rpx;
+  color: #4a6cf7;
+  background: #eef2ff;
+  border-radius: 36rpx;
+}
+
+.quick-btn:active {
+  opacity: 0.7;
+}
+
+/* ===== Tab 切换 ===== */
+.tab-bar {
+  display: flex;
+  background: #f0f2f8;
+  border-radius: 12rpx;
+  padding: 6rpx;
+  margin-bottom: 28rpx;
+}
+
+.tab-item {
+  flex: 1;
+  text-align: center;
+  height: 64rpx;
+  line-height: 64rpx;
+  font-size: 28rpx;
+  color: #666;
+  border-radius: 10rpx;
+}
+
+.tab-item.active {
+  background: #fff;
+  color: #4a6cf7;
+  font-weight: 600;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.06);
+}
+
+/* ===== 单级明细 ===== */
+.detail-scroll {
+  max-height: 800rpx;
+  border: 2rpx solid #f0f0f5;
+  border-radius: 12rpx;
+}
+
+.detail-grid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18rpx 28rpx;
+  border-bottom: 2rpx solid #f5f5fa;
+}
+
+.detail-grid:last-child {
+  border-bottom: none;
+}
+
+.detail-range {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.detail-value {
+  font-size: 28rpx;
+  color: #1a1a2e;
+  font-weight: 600;
+}
+
+/* ===== 分段汇总时间轴 ===== */
+.timeline-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 20rpx;
+}
+
+.timeline {
+  padding-left: 12rpx;
+}
+
+.timeline-item {
+  position: relative;
+  padding: 0 0 36rpx 36rpx;
+  border-left: 4rpx solid #f0c0c0;
+}
+
+.timeline-item:last-child {
+  border-left-color: transparent;
+  padding-bottom: 0;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -14rpx;
+  top: 4rpx;
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  background: #e74c3c;
+  box-shadow: 0 0 0 4rpx #fce0e0;
+}
+
+.timeline-body {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.timeline-range {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.timeline-value {
+  font-size: 32rpx;
+  color: #e74c3c;
+  font-weight: 600;
+}
+
+/* ===== 按钮 ===== */
+.btn-group {
+  display: flex;
+  justify-content: center;
+  margin-top: 8rpx;
+}
+
+.btn {
+  height: 88rpx;
+  line-height: 88rpx;
+  border-radius: 44rpx;
+  font-size: 32rpx;
+  font-weight: 500;
+  text-align: center;
+  border: none;
+  padding: 0;
+}
+
+.btn-calc {
+  width: 60%;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #4a6cf7, #6c8cff);
+  color: #fff;
+}
+
+.btn-primary:active {
+  opacity: 0.85;
+}
+
+/* ===== 结果 ===== */
+.result-card {
+  padding: 12rpx 0;
+}
+
+.result-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 0;
+}
+
+.result-label {
+  font-size: 26rpx;
+  color: #666;
+  flex: 1;
+  padding-right: 16rpx;
+}
+
+.result-value {
+  font-size: 32rpx;
+  color: #1a1a2e;
+  font-weight: 600;
+}
+
+.result-divider {
+  height: 2rpx;
+  background: #f0f0f5;
+}
+
+.result-note {
+  margin-top: 20rpx;
+  font-size: 24rpx;
+  line-height: 1.6;
+  color: #999;
+}

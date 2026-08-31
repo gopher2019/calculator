@@ -10,7 +10,8 @@
     "pages/mine/mine",
     "pages/xiaoxiao/xiaoxiao",
     "pages/wuhun/wuhun",
-    "pages/team/team"
+    "pages/team/team",
+    "pages/exp/exp"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",
