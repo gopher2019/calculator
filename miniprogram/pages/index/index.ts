@@ -59,4 +59,8 @@ Page({
   goToWuHun() {
     wx.navigateTo({ url: '../wuhun/wuhun' });
   },
+
+  goToTeam() {
+    wx.navigateTo({ url: '../team/team' });
+  },
 });

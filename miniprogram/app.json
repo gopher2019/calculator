@@ -9,7 +9,8 @@
     "pages/weapon/weapon",
     "pages/mine/mine",
     "pages/xiaoxiao/xiaoxiao",
-    "pages/wuhun/wuhun"
+    "pages/wuhun/wuhun",
+    "pages/team/team"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",

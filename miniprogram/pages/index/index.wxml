@@ -75,6 +75,14 @@
         </view>
         <text class="tool-arrow">›</text>
       </view>
+      <view class="tool-card" bindtap="goToTeam">
+        <view class="tool-icon">👥</view>
+        <view class="tool-info">
+          <text class="tool-name">队伍等级计算</text>
+          <text class="tool-desc">输入队员等级，反推副本等级</text>
+        </view>
+        <text class="tool-arrow">›</text>
+      </view>
     </view>
   </view>
 

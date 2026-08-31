@@ -1,0 +1,36 @@
+<!--team.wxml-->
+<scroll-view class="scrollarea" scroll-y>
+  <view class="page-container">
+
+    <view class="section">
+      <view class="section-title">天龙八部队伍等级计算器</view>
+
+      <view class="input-row" wx:for="{{members}}" wx:key="index">
+        <text class="input-label">队员{{index + 1}}</text>
+        <input
+          class="input-field"
+          type="number"
+          placeholder="1~119"
+          value="{{item}}"
+          data-index="{{index}}"
+          bindinput="onMemberInput"
+        />
+      </view>
+
+      <view class="btn-group">
+        <button class="btn btn-primary btn-calc" bindtap="onCalculate">计算队伍等级</button>
+      </view>
+    </view>
+
+    <view class="section result-section" wx:if="{{showResult && result !== null}}">
+      <view class="section-title">队伍计算结果</view>
+      <view class="result-card">
+        <view class="result-row">
+          <text class="result-label">副本等级</text>
+          <text class="result-value">{{result.level}}</text>
+        </view>
+      </view>
+    </view>
+
+  </view>
+</scroll-view>
