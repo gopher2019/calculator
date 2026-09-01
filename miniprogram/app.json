@@ -11,7 +11,8 @@
     "pages/xiaoxiao/xiaoxiao",
     "pages/wuhun/wuhun",
     "pages/team/team",
-    "pages/exp/exp"
+    "pages/exp/exp",
+    "pages/handcraft/handcraft"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",

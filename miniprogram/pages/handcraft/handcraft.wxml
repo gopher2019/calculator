@@ -1,0 +1,79 @@
+<!--handcraft.wxml-->
+<view class="page">
+
+  <!-- 顶部信息 -->
+  <view class="topbar">
+    <view class="topbar-left">
+      <text class="emoji">🎨</text>
+      <text class="page-title">手工DIY</text>
+    </view>
+    <view class="remain-pill">
+      <text class="remain-num">{{remainCount}}</text>
+      <text class="remain-label">次剩余</text>
+    </view>
+  </view>
+
+  <!-- 使用说明 + 免责声明 -->
+  <view class="notice">
+    <view class="notice-title">使用说明</view>
+    <view class="notice-text">您每日有 1 次免费制作次数，鉴定不消耗次数（无限次）。先点击「开始制作」，再点击「鉴定」。获取更多制作次数，请观看下方广告 +5 次。</view>
+    <view class="notice-divider"></view>
+    <view class="notice-disclaimer">免责声明：此模拟器仅供娱乐，非官方产品！</view>
+  </view>
+
+  <!-- 主面板 -->
+  <view class="panel">
+
+    <!-- 操作行：制作 + 鉴定 同一排 -->
+    <view class="action-row">
+      <button
+        class="btn btn-make {{remainCount <= 0 || isMaking ? 'is-disabled' : ''}}"
+        disabled="{{remainCount <= 0 || isMaking}}"
+        bindtap="onMake">
+        {{isMaking ? '制作中…' : '开始制作'}}
+      </button>
+      <button
+        class="btn btn-identify {{phase !== 'made' ? 'is-disabled' : ''}}"
+        disabled="{{phase !== 'made'}}"
+        bindtap="onIdentify">
+        鉴定
+      </button>
+    </view>
+
+    <!-- 进度条 -->
+    <view class="progress-wrap" wx:if="{{showProgress}}">
+      <view class="progress-bar" style="width:{{progress}}%"></view>
+    </view>
+
+    <!-- 图片舞台：制作图与成品图同一位置切换 -->
+    <view class="stage">
+      <view class="stage-placeholder" wx:if="{{phase === 'idle'}}">
+        <text class="ph-emoji">🧶</text>
+        <text class="ph-text">点击「开始制作」生成你的手工</text>
+      </view>
+
+      <view class="stage-img" wx:if="{{phase === 'made'}}">
+        <image class="hand-img img-larger" src="{{madeImageCache}}" mode="aspectFit"></image>
+        <text class="img-tag tag-unident">未鉴定</text>
+      </view>
+
+      <view class="stage-img" wx:if="{{phase === 'identified'}}">
+        <image class="hand-img img-larger" src="{{resultImage}}" mode="aspectFit"></image>
+        <text class="img-tag tag-result">成品</text>
+      </view>
+    </view>
+
+  </view>
+
+  <!-- 广告面板 -->
+  <view class="panel ad-panel">
+    <button
+      class="btn btn-ad {{adRewardToday ? 'is-disabled' : (remainCount <= 0 ? 'is-highlight' : '')}}"
+      disabled="{{adRewardToday}}"
+      bindtap="onWatchAd">
+      {{adRewardToday ? '今日已领取奖励' : '观看广告 +5次机会'}}
+    </button>
+    <text class="ad-tip" wx:if="{{!adRewardToday}}">看完广告获得 5 次制作机会（每日限 1 次）</text>
+  </view>
+
+</view>

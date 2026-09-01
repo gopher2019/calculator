@@ -1,0 +1,9 @@
+{
+  "name": "handcraft_getRandomHandImg",
+  "version": "1.0.0",
+  "description": "手工DIY-随机返回成品图片",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

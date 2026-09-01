@@ -1,0 +1,9 @@
+{
+  "name": "handcraft_getUserInfo",
+  "version": "1.0.0",
+  "description": "手工DIY-获取用户当日次数",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}
