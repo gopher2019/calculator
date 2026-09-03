@@ -9,10 +9,11 @@ const _ = db.command;
 const COLLECTION = 'handcraft_record';
 
 function getToday() {
-  const d = new Date();
-  const y = d.getFullYear();
-  const m = String(d.getMonth() + 1).padStart(2, '0');
-  const day = String(d.getDate()).padStart(2, '0');
+  // 云函数默认时区为 UTC，需换算为北京时间（UTC+8）后再取日期，避免跨天边界错乱（否则每日 08:00 才重置）
+  const beijing = new Date(Date.now() + 8 * 60 * 60 * 1000);
+  const y = beijing.getUTCFullYear();
+  const m = String(beijing.getUTCMonth() + 1).padStart(2, '0');
+  const day = String(beijing.getUTCDate()).padStart(2, '0');
   return `${y}-${m}-${day}`;
 }
 

@@ -90,10 +90,10 @@
 }
 
 .notice-disclaimer {
-  font-size: 22rpx;
-  line-height: 1.7;
-  color: #ff7a44;
-  font-weight: 600;
+  font-size: 20rpx;
+  line-height: 1.6;
+  color: #c4c8d0;
+  font-weight: 400;
 }
 
 /* 操作行 */

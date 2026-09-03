@@ -7,11 +7,12 @@ const db = cloud.database();
 const COLLECTION = 'handcraft_record';
 
 // 获取服务器当天日期 YYYY-MM-DD（跨天判断一律以云端时间为准）
+// 注意：云函数默认时区为 UTC，必须换算为北京时间（UTC+8），否则每日 08:00 才按「跨天」重置
 function getToday() {
-  const d = new Date();
-  const y = d.getFullYear();
-  const m = String(d.getMonth() + 1).padStart(2, '0');
-  const day = String(d.getDate()).padStart(2, '0');
+  const beijing = new Date(Date.now() + 8 * 60 * 60 * 1000);
+  const y = beijing.getUTCFullYear();
+  const m = String(beijing.getUTCMonth() + 1).padStart(2, '0');
+  const day = String(beijing.getUTCDate()).padStart(2, '0');
   return `${y}-${m}-${day}`;
 }
 
