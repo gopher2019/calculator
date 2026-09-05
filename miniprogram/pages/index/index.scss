@@ -93,15 +93,15 @@ page {
 }
 
 .tool-card {
-  width: calc((100% - 40rpx) / 3);
+  width: calc((100% - 60rpx) / 4);
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   background: #fff;
-  border-radius: 16rpx;
-  padding: 28rpx 12rpx;
+  border-radius: 14rpx;
+  padding: 22rpx 8rpx;
   box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.18);
   transition: transform 0.15s;
 }
@@ -111,8 +111,8 @@ page {
 }
 
 .tool-icon {
-  font-size: 48rpx;
-  margin-bottom: 14rpx;
+  font-size: 38rpx;
+  margin-bottom: 10rpx;
 }
 
 .tool-info {
@@ -122,7 +122,7 @@ page {
 }
 
 .tool-name {
-  font-size: 26rpx;
+  font-size: 22rpx;
   font-weight: 600;
   color: #1a1a2e;
   text-align: center;
