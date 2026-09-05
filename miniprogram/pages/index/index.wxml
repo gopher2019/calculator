@@ -99,6 +99,14 @@
         </view>
         <text class="tool-arrow">›</text>
       </view>
+      <view class="tool-card" bindtap="goToActivityPoints">
+        <view class="tool-icon">🗺️</view>
+        <view class="tool-info">
+          <text class="tool-name">和尚反贼坐标</text>
+          <text class="tool-desc">刷反 / 刷和尚坐标点位一览</text>
+        </view>
+        <text class="tool-arrow">›</text>
+      </view>
     </view>
   </view>
 

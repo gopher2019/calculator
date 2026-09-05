@@ -1,0 +1,50 @@
+<!-- 活动点位攻略（刷反｜刷和尚） -->
+<view class="page">
+
+  <!-- 顶部黄色警告提示 -->
+  <view class="warn-card">
+    <text class="warn-text">⚠️温馨提示：下面所有坐标都是<text class="strong">历史高频刷新点位</text>，活动开启后系统会在这批坐标里随机刷新怪物，不是每个坐标必定刷出！活动刷怪位置每次都不一样，适合带队车头巡逻查找。</text>
+  </view>
+
+  <!-- Tab 切换：反贼 / 和尚（反贼在前） -->
+  <view class="tabs">
+    <view
+      class="tab {{index === activeTab ? 'active' : ''}}"
+      wx:for="{{tabs}}"
+      wx:key="name"
+      data-index="{{index}}"
+      bindtap="switchTab"
+    >{{item.name}}</view>
+  </view>
+
+  <!-- 当前活动：信息 + 地图坐标 -->
+  <view class="section">
+    <view class="h1">{{activeTabData.title}}</view>
+    <view class="intro">{{activeTabData.intro}}</view>
+    <view class="time">{{activeTabData.timeLabel}}</view>
+    <view class="time">{{activeTabData.mapLabel}}</view>
+
+    <view class="route">👉{{activeTabData.routeLabel}}：{{activeTabData.route}}</view>
+
+    <view class="map-card" wx:for="{{activeTabData.maps}}" wx:key="name" wx:for-item="map">
+      <view class="map-name">{{map.name}}</view>
+      <view class="map-desc">{{map.desc}}</view>
+      <view class="coord-grid">
+        <view class="coord-item" wx:for="{{map.coords}}" wx:key="index" wx:for-item="coord">
+          <text class="coord-side coord-left" data-value="{{coord.x}}" bindtap="copySide">({{coord.x}}</text>
+          <text class="coord-sep">,</text>
+          <text class="coord-side coord-right" data-value="{{coord.y}}" bindtap="copySide">{{coord.y}})</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 带队实用小技巧 -->
+  <view class="section">
+    <view class="h1">带队实用小技巧</view>
+    <view class="tip-item" wx:for="{{activeTabData.tips}}" wx:key="*this">· {{item}}</view>
+  </view>
+
+  <view class="footer-note">本攻略仅供带队玩家参考，游戏怪物刷新由服务器随机生成，不保证点位100%刷怪。</view>
+
+</view>

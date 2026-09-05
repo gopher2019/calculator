@@ -71,4 +71,8 @@ Page({
   goToHandcraft() {
     wx.navigateTo({ url: '../handcraft/handcraft' });
   },
+
+  goToActivityPoints() {
+    wx.navigateTo({ url: '../activitypoints/activitypoints' });
+  },
 });

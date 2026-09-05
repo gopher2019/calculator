@@ -1,0 +1,162 @@
+/* 活动点位攻略（刷反｜刷和尚） */
+.page {
+  padding: 20rpx;
+  background: #f5f6fa;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* 顶部警告卡片 */
+.warn-card {
+  background: #fff9cc;
+  padding: 20rpx;
+  border-radius: 12rpx;
+  margin-bottom: 20rpx;
+}
+
+.warn-text {
+  font-size: 26rpx;
+  color: #8a6d00;
+  line-height: 1.7;
+}
+
+.strong {
+  font-weight: 700;
+  color: #5c4400;
+}
+
+/* Tab 切换：反贼 / 和尚 */
+.tabs {
+  display: flex;
+  gap: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.tab {
+  flex: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 30rpx;
+  color: #666;
+  background: #fff;
+  border-radius: 40rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+  transition: all 0.2s;
+}
+
+.tab.active {
+  color: #fff;
+  background: linear-gradient(135deg, #4a6cf7, #6c8cff);
+  font-weight: 600;
+}
+
+/* 模块分区（卡片） */
+.section {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 28rpx 32rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+
+.h1 {
+  font-size: 38rpx;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 4rpx 0 16rpx;
+}
+
+.intro {
+  font-size: 26rpx;
+  color: #333;
+  line-height: 1.7;
+  margin-bottom: 10rpx;
+}
+
+.time {
+  font-size: 24rpx;
+  color: #999;
+  line-height: 1.7;
+}
+
+/* 地图卡片 */
+.map-card {
+  background: #f7f8fc;
+  margin: 20rpx 0;
+  padding: 24rpx;
+  border-radius: 12rpx;
+}
+
+.map-name {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 8rpx;
+}
+
+.map-desc {
+  font-size: 26rpx;
+  color: #444;
+  line-height: 1.7;
+  margin-bottom: 12rpx;
+}
+
+/* 坐标网格（参考宵小 / 挖矿，可点击复制） */
+.coord-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+.coord-item {
+  padding: 12rpx 20rpx;
+  background: #f7f8fc;
+  border: 2rpx solid transparent;
+  border-radius: 10rpx;
+  font-size: 26rpx;
+  color: #1a1a1e;
+  display: flex;
+  align-items: center;
+  transition: all 0.15s;
+}
+
+.coord-side {
+  padding: 0 6rpx;
+  border-radius: 6rpx;
+  transition: all 0.15s;
+}
+
+.coord-side:active {
+  background: #4a6cf7;
+  color: #fff;
+}
+
+.coord-sep {
+  color: #999;
+}
+
+/* 推荐跑图路线 */
+.route {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-top: 16rpx;
+  line-height: 1.7;
+}
+
+/* 带队技巧列表 */
+.tip-item {
+  font-size: 26rpx;
+  color: #333;
+  line-height: 1.8;
+}
+
+/* 底部备注 */
+.footer-note {
+  font-size: 22rpx;
+  color: #999;
+  line-height: 1.7;
+  margin-top: 10rpx;
+  padding: 0 8rpx 30rpx;
+}

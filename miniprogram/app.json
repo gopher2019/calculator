@@ -12,7 +12,8 @@
     "pages/wuhun/wuhun",
     "pages/team/team",
     "pages/exp/exp",
-    "pages/handcraft/handcraft"
+    "pages/handcraft/handcraft",
+    "pages/activitypoints/activitypoints"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",
