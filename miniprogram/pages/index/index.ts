@@ -75,4 +75,8 @@ Page({
   goToActivityPoints() {
     wx.navigateTo({ url: '../activitypoints/activitypoints' });
   },
+
+  goToAntifraud() {
+    wx.navigateTo({ url: '../antifraud/antifraud' });
+  },
 });

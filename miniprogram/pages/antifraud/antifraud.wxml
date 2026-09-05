@@ -1,0 +1,28 @@
+<!-- 天龙防骗指南（纯静态攻略页） -->
+<view class="page">
+
+  <view class="page-title">天龙防骗指南</view>
+
+  <!-- 顶部警示横幅 -->
+  <view class="warn-banner">⚠️ 天龙八部怀旧服全区通用防骗指南！所有骗局均为玩家真实踩坑汇总，<text class="hl-red">只要涉及私下交易、验证码、外平台、陌生软件，一律警惕！</text></view>
+
+  <!-- 15 条高频骗局 -->
+  <view class="scam-list">
+    <view class="scam-card" wx:for="{{scams}}" wx:key="id">
+      <view class="scam-title"><text class="scam-index">{{item.id}}.</text>{{item.title}}</view>
+      <view class="scam-body">{{item.pre}}<text class="hl-red">{{item.hl}}</text>{{item.post}}</view>
+    </view>
+  </view>
+
+  <!-- 核心防骗总结 -->
+  <view class="summary">
+    <view class="summary-title">核心防骗总结</view>
+    <view class="summary-item">✅ 三大铁律：<text class="hl-blue">不私下交易、不泄露验证码、不接收陌生文件</text></view>
+    <view class="summary-item">✅ 超高比例元宝、低价极品道具、免费送号，100% 是骗局</view>
+    <view class="summary-item">✅ 游戏内所有交易，只看<text class="hl-blue">物品真实属性 + 交易最终界面</text>，不相信口头承诺</view>
+  </view>
+
+  <!-- 底部免责备注 -->
+  <view class="footer-note">本攻略为玩家实战经验汇总，仅供游戏防骗参考，杜绝一切游戏诈骗行为，守护账号安全。</view>
+
+</view>

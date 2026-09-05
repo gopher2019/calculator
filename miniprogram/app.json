@@ -13,7 +13,8 @@
     "pages/team/team",
     "pages/exp/exp",
     "pages/handcraft/handcraft",
-    "pages/activitypoints/activitypoints"
+    "pages/activitypoints/activitypoints",
+    "pages/antifraud/antifraud"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",
