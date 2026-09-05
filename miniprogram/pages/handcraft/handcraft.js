@@ -2,9 +2,27 @@
 // 说明：所有次数判断、扣减、发奖均在云函数校验，前端只负责展示与交互
 // 云存储图片需用 wx.cloud.getTempFileURL 将 cloud:// fileID 换成 https 临时地址后才能被 <image> 正常展示
 
-// 未鉴定占位图片 fileID（制作完成后展示）
-const UNIDENT_FILEID =
-  'cloud://cloud1-d8ghq1ib583e14043.636c-cloud1-d8ghq1ib583e14043-1452712403/images/shougong/xianglian/85/weijianding.png';
+// 各类型「未鉴定」占位图 fileID（制作完成后展示）
+const UNIDENT_MAP = {
+  xianglian:
+    'cloud://cloud1-d8ghq1ib583e14043.636c-cloud1-d8ghq1ib583e14043-1452712403/images/shougong/xianglian/85/weijianding.png',
+  hufu:
+    'cloud://cloud1-d8ghq1ib583e14043.636c-cloud1-d8ghq1ib583e14043-1452712403/images/shougong/hufu/85/weijianding.png',
+};
+
+// 各类型「成品图」目录前缀与总数（鉴定时客户端随机取图，避免依赖云函数部署）
+const RESULT_MAP = {
+  xianglian: {
+    prefix:
+      'cloud://cloud1-d8ghq1ib583e14043.636c-cloud1-d8ghq1ib583e14043-1452712403/images/shougong/xianglian/85/',
+    total: 104,
+  },
+  hufu: {
+    prefix:
+      'cloud://cloud1-d8ghq1ib583e14043.636c-cloud1-d8ghq1ib583e14043-1452712403/images/shougong/hufu/85/',
+    total: 149,
+  },
+};
 
 // 激励视频广告单元 ID
 const AD_UNIT_ID = 'adunit-7b3a2bb5fc6e88bb';
@@ -19,6 +37,7 @@ Page({
     phase: 'idle',       // 展示阶段：idle / made / identified（制作图与成品图共用同一舞台）
     madeImageCache: '',  // 未鉴定图缓存（https 临时地址，复用避免重复换取）
     resultImage: '',     // 鉴定成品图（https 临时地址）
+    craftType: 'xianglian', // 制作类型：xianglian（项链）/ hufu（护符），共用次数
   },
 
   onLoad() {
@@ -88,10 +107,10 @@ Page({
       const res = await wx.cloud.callFunction({ name: 'handcraft_make' });
       const r = res.result;
       if (r && r.code === 0) {
-        // 未鉴定图固定不变，优先复用缓存，避免重复换取临时地址
+        // 未鉴定图严格按当前类型取（护符用自己的 weijianding，不复用项链），优先复用缓存
         let url = this.data.madeImageCache;
         if (!url) {
-          url = await this.getTempUrl(UNIDENT_FILEID);
+          url = await this.getTempUrl(UNIDENT_MAP[this.data.craftType]);
         }
         this.setData({
           remainCount: this.data.remainCount - 1,
@@ -125,7 +144,7 @@ Page({
     }, 100);
   },
 
-  // 鉴定（不消耗次数）
+  // 鉴定（不消耗次数）：按当前类型随机取对应目录下的成品图
   async onIdentify() {
     if (this.data.phase !== 'made') {
       wx.showToast({ title: '请先制作', icon: 'none' });
@@ -133,21 +152,30 @@ Page({
     }
     wx.showLoading({ title: '鉴定中' });
     try {
-      const res = await wx.cloud.callFunction({ name: 'handcraft_getRandomHandImg' });
-      const r = res.result;
-      if (r && r.code === 0) {
-        // 云函数返回 cloud:// fileID，先转成 https 临时地址再展示
-        const url = await this.getTempUrl(r.imgUrl);
-        // 同一舞台切换到成品图，未鉴定图仅隐藏（已缓存，再次制作时复用）
-        this.setData({ phase: 'identified', resultImage: url });
-      } else {
-        wx.showToast({ title: '鉴定失败', icon: 'none' });
-      }
+      const conf = RESULT_MAP[this.data.craftType];
+      const n = Math.floor(Math.random() * conf.total) + 1;
+      const fileID = `${conf.prefix}${n}.png`;
+      // cloud:// fileID 先转成 https 临时地址再展示
+      const url = await this.getTempUrl(fileID);
+      // 同一舞台切换到成品图，未鉴定图仅隐藏（已缓存，再次制作时复用）
+      this.setData({ phase: 'identified', resultImage: url });
     } catch (e) {
       wx.showToast({ title: '网络错误，请重试', icon: 'none' });
     } finally {
       wx.hideLoading();
     }
+  },
+
+  // 切换制作类型（项链 / 护符）：共用次数，仅图片源不同；切换时重置舞台
+  onTypeChange(e) {
+    const type = e.currentTarget.dataset.type;
+    if (type === this.data.craftType) return;
+    this.setData({
+      craftType: type,
+      phase: 'idle',
+      madeImageCache: '',
+      resultImage: '',
+    });
   },
 
   // 初始化激励视频广告（仅创建一次，复用实例，避免重复注册监听）

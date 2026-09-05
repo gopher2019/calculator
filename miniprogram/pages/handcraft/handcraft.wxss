@@ -96,6 +96,33 @@
   font-weight: 400;
 }
 
+/* 制作类型切换（项链 / 护符） */
+.type-switch {
+  display: flex;
+  background: #f0f2f8;
+  border-radius: 999rpx;
+  padding: 6rpx;
+  margin-bottom: 28rpx;
+}
+
+.type-item {
+  flex: 1;
+  height: 68rpx;
+  line-height: 68rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #6b7280;
+  border-radius: 999rpx;
+  transition: all 0.2s;
+}
+
+.type-item.active {
+  background: #fff;
+  color: #4a6cf7;
+  font-weight: 600;
+  box-shadow: 0 2rpx 8rpx rgba(74, 108, 247, 0.15);
+}
+
 /* 操作行 */
 .action-row {
   display: flex;

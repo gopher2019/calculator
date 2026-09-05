@@ -16,13 +16,25 @@
   <!-- 使用说明 + 免责声明 -->
   <view class="notice">
     <view class="notice-title">使用说明</view>
-    <view class="notice-text">您每日有 1 次免费制作次数，鉴定不消耗次数（无限次）。先点击「开始制作」，再点击「鉴定」。获取更多制作次数，请观看下方广告 +5 次。</view>
+    <view class="notice-text">您每日有 1 次免费制作次数[三级秘银]，鉴定不消耗次数（无限次）。可切换「项链 / 护符」，两者共用每日免费与广告次数。先点击「开始制作」，再点击「鉴定」。获取更多制作次数，请观看下方广告 +5 次。</view>
     <view class="notice-divider"></view>
     <view class="notice-disclaimer">免责声明：此模拟器仅供娱乐，非官方产品！</view>
   </view>
 
   <!-- 主面板 -->
   <view class="panel">
+
+    <!-- 制作类型切换：项链 / 护符（共用次数） -->
+    <view class="type-switch">
+      <view
+        class="type-item {{craftType === 'xianglian' ? 'active' : ''}}"
+        bindtap="onTypeChange"
+        data-type="xianglian">项链制作</view>
+      <view
+        class="type-item {{craftType === 'hufu' ? 'active' : ''}}"
+        bindtap="onTypeChange"
+        data-type="hufu">护符制作</view>
+    </view>
 
     <!-- 操作行：制作 + 鉴定 同一排 -->
     <view class="action-row">
