@@ -9,12 +9,12 @@
 </view>
 <view class="hero-seal">墨狐</view>
 
-<view class="container">
+<view class="container" style="padding-bottom: {{adReserve}}rpx;">
     <view class="tool-list">
       <view class="tool-card" bindtap="goToGameRecord">
         <view class="tool-icon">🏕️</view>
         <view class="tool-info">
-          <text class="tool-name">回归与挂机设置</text>
+          <text class="tool-name">回归与挂机</text>
           <text class="tool-desc">多账号卡回归计时、野外挂机时长管理</text>
         </view>
         <text class="tool-arrow">›</text>
@@ -115,7 +115,18 @@
         </view>
         <text class="tool-arrow">›</text>
       </view>
+      <view class="tool-card" bindtap="goToSaocao">
+        <view class="tool-icon">🎮</view>
+        <view class="tool-info">
+          <text class="tool-name">怀旧骚操作</text>
+          <text class="tool-desc">冷门实用操作技巧</text>
+        </view>
+        <text class="tool-arrow">›</text>
+      </view>
     </view>
   </view>
 
-  <view class="disclaimer">本工具仅玩家自制数据计算辅助工具，与游戏厂商无关联，数据仅供参考。</view>
+  <!-- 首页底部原生模板广告位 -->
+  <view class="ad-slot" hidden="{{adHidden}}" style="min-height: {{adReserve}}rpx;">
+    <ad unit-id="adunit-64dcef8b8b12f9bd" ad-type="card" ad-theme="light" bindload="onAdLoad" binderror="onAdError"></ad>
+  </view>

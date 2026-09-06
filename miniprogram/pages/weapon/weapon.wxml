@@ -1,5 +1,5 @@
 <!--weapon.wxml-->
-<scroll-view class="scrollarea" scroll-y>
+<scroll-view class="scrollarea" scroll-y style="padding-bottom: {{adReserve}}rpx;">
   <view class="page-container">
 
     <view class="page-intro">输入暗器五项原始属性与修炼等级，一键换算暗器星级系数。</view>
@@ -60,9 +60,12 @@
           <text class="result-value">{{result.coefficientStr}}</text>
         </view>
       </view>
-      <view class="result-note">暗器系数 = (原始属性总和 - 5) / (修炼等级 - 1)；系数 &lt;3 为4星，3≤系数&lt;3.5 为5星，≥3.5 为6星。</view>
+      <view class="result-note">系数小于3为4星，系数在3到3.5之间（含3）为5星，3.5及以上为6星。</view>
     </view>
   </view>
-
-  <view class="ad-footer"></view>
 </scroll-view>
+
+<!-- 底部悬浮原生模板广告位（固定底部，不随内容滚动） -->
+<view class="ad-footer" hidden="{{adHidden}}">
+  <ad class="ad-card" unit-id="adunit-50b221050a7794cf" ad-type="card" ad-theme="light" bindload="onAdLoad" binderror="onAdError"></ad>
+</view>

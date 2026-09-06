@@ -304,6 +304,10 @@ Page({
     activeImage: '',
     imageError: '',
     activeCoords: [] as Coord[],
+    // 底部悬浮广告位高度（rpx），加载后实测并动态适配，避免遮挡内容或留白
+    adReserve: 180,
+    // 广告加载失败时隐藏广告位，避免空占位
+    adHidden: false,
   },
 
   onLoad() {
@@ -368,5 +372,27 @@ Page({
       data: String(value),
       success: () => wx.showToast({ title: `已复制 ${value}`, icon: 'none' }),
     });
+  },
+
+  // 原生模板广告加载成功：多次实测、以最终稳定高度为准（广告先占位后收缩），避免预留过高留白
+  onAdLoad() {
+    const measure = () => {
+      wx.createSelectorQuery()
+        .in(this)
+        .select('.ad-card')
+        .boundingClientRect((rect: WechatMiniprogram.BoundingClientRectCallbackResult | undefined) => {
+          if (!rect || !rect.height) return;
+          const winWidth = wx.getSystemInfoSync().windowWidth;
+          const rpx = Math.ceil((rect.height * 750) / winWidth) + 24;
+          this.setData({ adReserve: rpx });
+        })
+        .exec();
+    };
+    [200, 500, 1000, 1800].forEach((delay) => setTimeout(measure, delay));
+  },
+
+  // 广告加载失败：隐藏广告位并收回预留空间，避免空占位
+  onAdError() {
+    this.setData({ adReserve: 0, adHidden: true });
   },
 });

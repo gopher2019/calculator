@@ -14,7 +14,8 @@
     "pages/exp/exp",
     "pages/handcraft/handcraft",
     "pages/activitypoints/activitypoints",
-    "pages/antifraud/antifraud"
+    "pages/antifraud/antifraud",
+    "pages/saocaozuo/saocaozuo"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",

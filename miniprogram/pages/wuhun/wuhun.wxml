@@ -1,5 +1,5 @@
 <!--wuhun.wxml-->
-<scroll-view class="scrollarea" scroll-y>
+<scroll-view class="scrollarea" scroll-y style="padding-bottom: {{adReserve}}rpx;">
   <view class="page-container">
 
     <view class="section">
@@ -68,3 +68,8 @@
 
   </view>
 </scroll-view>
+
+<!-- 底部悬浮原生模板广告位（固定底部，不随内容滚动） -->
+<view class="ad-footer" hidden="{{adHidden}}">
+  <ad class="ad-card" unit-id="adunit-dbf48892be253871" ad-type="card" ad-theme="light" bindload="onAdLoad" binderror="onAdError"></ad>
+</view>

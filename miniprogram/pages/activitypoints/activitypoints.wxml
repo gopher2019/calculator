@@ -1,5 +1,5 @@
 <!-- 活动点位攻略（刷反｜刷和尚） -->
-<view class="page">
+<view class="page" style="padding-bottom: {{adReserve}}rpx;">
 
   <!-- 顶部黄色警告提示 -->
   <view class="warn-card">
@@ -47,4 +47,9 @@
 
   <view class="footer-note">本攻略仅供带队玩家参考，游戏怪物刷新由服务器随机生成，不保证点位100%刷怪。</view>
 
+</view>
+
+<!-- 底部悬浮原生模板广告位（固定底部，不随内容滚动） -->
+<view class="ad-footer" hidden="{{adHidden}}">
+  <ad class="ad-card" unit-id="adunit-e1143b91e3ef7e10" ad-type="card" ad-theme="light" bindload="onAdLoad" binderror="onAdError"></ad>
 </view>

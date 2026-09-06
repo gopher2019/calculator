@@ -80,6 +80,8 @@ Page({
     // 收藏小程序轻引导
     showFavHint: false,
     favHintText: FAV_HINT_TEXT,
+    // 底部悬浮广告位真实高度（rpx），广告加载后实测并动态预留底部空间
+    adReserve: 0,
   },
 
   onLoad() {
@@ -112,6 +114,30 @@ Page({
   },
 
   noop() {},
+
+  // 底部悬浮广告加载成功：原生模板广告会先占位（偏高）再收缩到真实高度，
+  // 故多次实测、以最终稳定高度为准，避免预留过高导致广告上方留白
+  onAdLoad() {
+    const measure = () => {
+      wx.createSelectorQuery()
+        .in(this)
+        .select('.ad-slot')
+        .boundingClientRect((rect: WechatMiniprogram.BoundingClientRectCallbackResult | undefined) => {
+          if (!rect || !rect.height) return;
+          const winWidth = wx.getSystemInfoSync().windowWidth;
+          const rpx = Math.ceil((rect.height * 750) / winWidth);
+          this.setData({ adReserve: rpx });
+        })
+        .exec();
+    };
+    // 200ms 起的几个时点测量，最后一次（稳定态）覆盖早期偏高的占位高度
+    [200, 500, 1000, 1800].forEach((delay) => setTimeout(measure, delay));
+  },
+
+  // 广告加载失败：不预留空间，避免底部留白
+  onAdError() {
+    this.setData({ adReserve: 0 });
+  },
 
   // ── 收藏小程序轻引导 ──
   favMarkShown() {

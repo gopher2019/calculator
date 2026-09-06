@@ -12,6 +12,16 @@ page {
   overflow: hidden;
 }
 
+/* 底部悬浮原生模板广告位（固定底部，不随内容滚动） */
+.ad-slot {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 200;
+  padding: 0 20rpx;
+}
+
 .header {
   position: relative;
   overflow: hidden;

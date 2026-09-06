@@ -1,5 +1,11 @@
 <!-- 回归与挂机设置 · 账号列表（折叠） -->
 <view class="page">
+
+  <!-- 底部悬浮原生模板广告位（ad-type="card" 为原生模板广告，position:fixed 固定底部） -->
+  <view class="ad-slot">
+    <ad unit-id="adunit-94b65d033b4db3e8" ad-type="card" ad-theme="light" bindload="onAdLoad" binderror="onAdError"></ad>
+  </view>
+
   <view class="header">
     <view class="header-top">
       <view class="title-wrap">
@@ -122,7 +128,7 @@
     <view class="empty-text">还没有账号，点击下方按钮添加</view>
   </view>
 
-  <view class="footer">
+  <view class="footer" style="padding-bottom: {{adReserve}}rpx;">
     <button class="add-btn" bindtap="openAdd">+ 添加账号</button>
   </view>
 </view>

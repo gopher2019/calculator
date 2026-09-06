@@ -1,5 +1,5 @@
 <!-- 天龙防骗指南（纯静态攻略页） -->
-<view class="page">
+<view class="page" style="padding-bottom: {{adReserve}}rpx;">
 
   <view class="page-title">天龙防骗指南</view>
 
@@ -25,4 +25,9 @@
   <!-- 底部免责备注 -->
   <view class="footer-note">本攻略为玩家实战经验汇总，仅供游戏防骗参考，杜绝一切游戏诈骗行为，守护账号安全。</view>
 
+</view>
+
+<!-- 底部悬浮原生模板广告位（固定底部，不随内容滚动） -->
+<view class="ad-footer" hidden="{{adHidden}}">
+  <ad class="ad-card" unit-id="adunit-698162f3307fdd2c" ad-type="card" ad-theme="light" bindload="onAdLoad" binderror="onAdError"></ad>
 </view>

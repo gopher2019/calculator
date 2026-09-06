@@ -6,6 +6,18 @@
   box-sizing: border-box;
 }
 
+/* 底部悬浮原生模板广告位（固定底部，不随内容滚动） */
+.ad-footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 200;
+  padding: 0 20rpx;
+  padding-bottom: env(safe-area-inset-bottom, 0rpx);
+  background: #f5f6fa;
+}
+
 /* 顶部警告卡片 */
 .warn-card {
   background: #fff9cc;

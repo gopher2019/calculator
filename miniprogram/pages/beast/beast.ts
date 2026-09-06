@@ -27,6 +27,14 @@ Page({
     wuXingRateTable: [] as { level: number; rate: number; rateStr: string }[],
     lingXingRateTable: [] as { level: number; rate: number; rateStr: string }[],
     activeRateTab: 'wuxing' as 'wuxing' | 'lingxing',
+    // 顶部原生模板广告位真实高度（rpx），加载后实测并动态适配
+    adReserveTop: 0,
+    // 顶部广告加载失败时隐藏广告位，避免空占位
+    adHiddenTop: false,
+    // 等级倍率参考表上方广告位高度，加载后实测并动态适配
+    adReserveMid: 0,
+    // 中部广告加载失败时隐藏，避免空占位
+    adHiddenMid: false,
   },
 
   onLoad() {
@@ -99,5 +107,34 @@ Page({
   onSwitchRateTab(e: any) {
     const tab = e.currentTarget.dataset.tab;
     this.setData({ activeRateTab: tab });
+  },
+
+  // 原生模板广告加载成功：多次实测、以最终稳定高度为准（广告先占位后收缩），避免预留过高留白
+  onAdLoad(e: any) {
+    const slot = e.currentTarget.dataset.slot === 'mid' ? 'mid' : 'top';
+    const reserveKey = slot === 'mid' ? 'adReserveMid' : 'adReserveTop';
+    const measure = () => {
+      wx.createSelectorQuery()
+        .in(this)
+        .select('.ad-slot-' + slot)
+        .boundingClientRect((rect: WechatMiniprogram.BoundingClientRectCallbackResult | undefined) => {
+          if (!rect || !rect.height) return;
+          const winWidth = wx.getSystemInfoSync().windowWidth;
+          const rpx = Math.ceil((rect.height * 750) / winWidth);
+          this.setData({ [reserveKey]: rpx });
+        })
+        .exec();
+    };
+    [200, 500, 1000, 1800].forEach((delay) => setTimeout(measure, delay));
+  },
+
+  // 广告加载失败：隐藏对应广告位，避免空占位
+  onAdError(e: any) {
+    const slot = e.currentTarget.dataset.slot === 'mid' ? 'mid' : 'top';
+    if (slot === 'mid') {
+      this.setData({ adReserveMid: 0, adHiddenMid: true });
+    } else {
+      this.setData({ adReserveTop: 0, adHiddenTop: true });
+    }
   },
 });

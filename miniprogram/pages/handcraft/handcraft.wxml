@@ -21,6 +21,11 @@
     <view class="notice-disclaimer">免责声明：此模拟器仅供娱乐，非官方产品！</view>
   </view>
 
+  <!-- 原生模板广告位（使用说明下方） -->
+  <view class="ad-slot" hidden="{{adHidden}}" style="min-height: {{adReserve}}rpx;">
+    <ad unit-id="adunit-e58d155786f22de4" ad-type="card" ad-theme="light" bindload="onAdLoad" binderror="onAdError"></ad>
+  </view>
+
   <!-- 主面板 -->
   <view class="panel">
 

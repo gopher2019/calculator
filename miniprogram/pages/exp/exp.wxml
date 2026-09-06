@@ -11,6 +11,11 @@
         <view class="tab-item {{activeTab === 2 ? 'active' : ''}}" bindtap="onTabChange" data-index="2">分段汇总</view>
       </view>
 
+      <!-- 原生模板广告位（三个 tab 下方） -->
+      <view class="ad-slot" hidden="{{adHidden}}" style="min-height: {{adReserve}}rpx;">
+        <ad unit-id="adunit-a1cc85d88c046d6f" ad-type="card" ad-theme="light" bindload="onAdLoad" binderror="onAdError"></ad>
+      </view>
+
       <!-- Tab1: 升级计算 -->
       <block wx:if="{{activeTab === 0}}">
         <view class="input-row">

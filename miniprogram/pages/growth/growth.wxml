@@ -2,6 +2,11 @@
 <scroll-view class="scrollarea" scroll-y>
   <view class="page-container">
 
+    <!-- 顶部原生模板广告位 -->
+    <view class="ad-slot ad-slot-top" hidden="{{adHiddenTop}}" style="min-height: {{adReserveTop}}rpx;">
+      <ad unit-id="adunit-102913fa7de6b50d" ad-type="card" ad-theme="light" bindload="onAdLoad" binderror="onAdError" data-slot="top"></ad>
+    </view>
+
     <view class="notice-bar">
       <text class="notice-icon">!</text>
       <text class="notice-text">各项数值须在未出战、无套装、无兽灵状态下查看，计算结果略有误差仅供参考。成长率类别较准确，具体数值可能有波动，5级可携带计算偏差较大。</text>
@@ -79,6 +84,11 @@
           </view>
         </view>
       </view>
+    </view>
+
+    <!-- 原生模板广告位（成长率参考表上方；位于计算结果下方，以正常文档流渲染，不会遮挡计算结果） -->
+    <view class="ad-slot ad-slot-mid" hidden="{{adHiddenMid}}" style="min-height: {{adReserveMid}}rpx;">
+      <ad unit-id="adunit-102913fa7de6b50d" ad-type="card" ad-theme="light" bindload="onAdLoad" binderror="onAdError" data-slot="mid"></ad>
     </view>
 
     <view class="section ref-table-section">

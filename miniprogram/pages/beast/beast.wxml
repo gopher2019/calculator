@@ -2,6 +2,11 @@
 <scroll-view class="scrollarea" scroll-y>
   <view class="page-container">
 
+    <!-- 顶部原生模板广告位 -->
+    <view class="ad-slot ad-slot-top" hidden="{{adHiddenTop}}" style="min-height: {{adReserveTop}}rpx;">
+      <ad unit-id="adunit-ad9ee36f107e0d79" ad-type="card" ad-theme="light" bindload="onAdLoad" binderror="onAdError" data-slot="top"></ad>
+    </view>
+
     <view class="page-intro">怀旧天龙珍兽当前资质 / 裸资质一键换算，养宠更省心。</view>
 
     <view class="section">
@@ -116,6 +121,11 @@
           <text class="result-value gain">{{result.aptitudeGainStr}}</text>
         </view>
       </view>
+    </view>
+
+    <!-- 原生模板广告位（等级倍率参考表上方；位于计算结果下方，以正常文档流渲染，不会遮挡计算结果） -->
+    <view class="ad-slot ad-slot-mid" hidden="{{adHiddenMid}}" style="min-height: {{adReserveMid}}rpx;">
+      <ad unit-id="adunit-ad9ee36f107e0d79" ad-type="card" ad-theme="light" bindload="onAdLoad" binderror="onAdError" data-slot="mid"></ad>
     </view>
 
     <view class="section rate-table-section">

@@ -136,14 +136,13 @@ page {
   display: none;
 }
 
-.disclaimer {
-  position: relative;
-  z-index: 1;
-  padding: 32rpx 8rpx 48rpx;
-  font-size: 22rpx;
-  line-height: 1.6;
-  color: rgba(238, 238, 238, 0.66);
-  text-align: center;
-  letter-spacing: 1rpx;
-  text-shadow: 0 1rpx 6rpx rgba(0, 0, 0, 0.45);
+/* 首页底部原生模板广告位（固定悬浮底部，下滑时始终显示） */
+.ad-slot {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 200;
+  padding: 0 28rpx;
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
 }

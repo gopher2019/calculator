@@ -1,0 +1,26 @@
+<!-- 怀旧骚操作（纯静态攻略页） -->
+<view class="page" style="padding-bottom: {{adReserve}}rpx;">
+
+  <view class="tip-banner">⚠️温馨提示：部分操作属于游戏本地配置 / 手速操作，修改本地文件存在风险，请自行斟酌操作</view>
+
+  <view class="card" wx:for="{{cards}}" wx:key="title" wx:for-item="card">
+    <view class="card-title">{{card.title}}</view>
+    <view class="card-body">
+      <view class="line" wx:for="{{card.lines}}" wx:key="id" wx:for-item="line">
+        <block wx:for="{{line}}" wx:key="id" wx:for-item="seg">
+          <text wx:if="{{seg.type === 'text'}}" class="txt">{{seg.text}}</text>
+          <text wx:elif="{{seg.type === 'code'}}" class="code" data-copy="{{seg.text}}" bindtap="copyText">{{seg.text}}</text>
+          <text wx:else class="num">{{seg.text}}</text>
+        </block>
+      </view>
+    </view>
+  </view>
+
+  <view class="footer-note">本攻略为玩家实测操作分享，修改本地客户端文件请自行承担风险，官方如规则变更会失效。</view>
+
+</view>
+
+<!-- 底部悬浮原生模板广告位（固定底部，不随内容滚动） -->
+<view class="ad-footer" hidden="{{adHidden}}">
+  <ad class="ad-card" unit-id="adunit-46c0655aacad37a0" ad-type="card" ad-theme="light" bindload="onAdLoad" binderror="onAdError"></ad>
+</view>

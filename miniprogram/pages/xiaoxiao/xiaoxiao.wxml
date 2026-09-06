@@ -10,7 +10,7 @@
     >{{item.name}}</view>
   </scroll-view>
 
-  <scroll-view class="content-area scrollarea" scroll-y scroll-top="{{scrollTop}}" scroll-with-animation="{{false}}">
+  <scroll-view class="content-area scrollarea" scroll-y scroll-top="{{scrollTop}}" scroll-with-animation="{{false}}" style="padding-bottom: {{adReserve}}rpx;">
     <view class="section">
       <view class="section-title">{{activeName}}宵小坐标（分左右点击复制）</view>
 
@@ -38,4 +38,9 @@
       </view>
     </view>
   </scroll-view>
+</view>
+
+<!-- 底部悬浮原生模板广告位（固定底部，不随内容滚动） -->
+<view class="ad-footer" hidden="{{adHidden}}">
+  <ad class="ad-card" unit-id="adunit-301d6f832723096c" ad-type="card" ad-theme="light" bindload="onAdLoad" binderror="onAdError"></ad>
 </view>
