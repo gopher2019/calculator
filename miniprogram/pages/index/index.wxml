@@ -126,7 +126,7 @@
     </view>
   </view>
 
-  <!-- 首页底部原生模板广告位 -->
-  <view class="ad-slot" hidden="{{adHidden}}" style="min-height: {{adReserve}}rpx;">
-    <ad unit-id="adunit-64dcef8b8b12f9bd" ad-type="card" ad-theme="light" bindload="onAdLoad" binderror="onAdError"></ad>
+  <!-- 首页底部原生模板广告位（固定底部对齐，高度贴合内容，不随内容滚动） -->
+  <view class="ad-slot" hidden="{{adHidden}}">
+    <ad class="ad-card" unit-id="adunit-64dcef8b8b12f9bd" ad-type="card" ad-theme="light" bindload="onAdLoad" binderror="onAdError"></ad>
   </view>

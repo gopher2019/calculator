@@ -93,16 +93,23 @@ Page({
     const measure = () => {
       wx.createSelectorQuery()
         .in(this)
+        .select('.ad-card')
+        .boundingClientRect()
         .select('.ad-slot')
-        .boundingClientRect((rect: WechatMiniprogram.BoundingClientRectCallbackResult | undefined) => {
-          if (!rect || !rect.height) return;
+        .boundingClientRect()
+        .exec((res: any) => {
+          const cardRect = res && res[0];
+          const slotRect = res && res[1];
+          // 广告尚未渲染出真实高度时跳过，避免把「只有内边距」的空高度当作预留值，导致底部卡片被遮挡
+          if (!cardRect || !cardRect.height) return;
+          if (!slotRect || !slotRect.height) return;
           const winWidth = wx.getSystemInfoSync().windowWidth;
-          const rpx = Math.ceil((rect.height * 750) / winWidth);
+          // 以广告槽位总高（广告高度 + 下内边距 + 安全区）作为预留，与固定底部占位完全一致
+          const rpx = Math.ceil((slotRect.height * 750) / winWidth);
           this.setData({ adReserve: rpx });
-        })
-        .exec();
+        });
     };
-    [200, 500, 1000, 1800].forEach((delay) => setTimeout(measure, delay));
+    [200, 500, 1000, 1800, 3000].forEach((delay) => setTimeout(measure, delay));
   },
 
   // 广告加载失败：隐藏广告位，避免空占位
