@@ -40,23 +40,20 @@ const LING_XING_RATES: number[] = [
   1.3100, // 等级10: 131%
 ];
 
-// 第三列倍率表（保留备用，当前使用第二列灵性倍率）
-const COL3_RATES: number[] = [
+// 灵性超灵倍率表（仅 8/9/10 级区分超灵，1-7 级与普通灵性一致）
+const SUPER_LING_RATES: number[] = [
   0,      // 等级0，占位
-  1.0100, // 等级1: 101%
+  1.0100, // 等级1: 101%（与普通一致）
   1.0200, // 等级2: 102%
   1.0500, // 等级3: 105%
   1.0700, // 等级4: 107%
-  1.1200, // 等级5: 112%
-  1.1500, // 等级6: 115%
-  1.2000, // 等级7: 120%
-  1.2400, // 等级8: 124%
-  1.2800, // 等级9: 128%
-  1.3400, // 等级10: 134%
+  1.1100, // 等级5: 111%
+  1.1400, // 等级6: 114%
+  1.1800, // 等级7: 118%
+  1.2400, // 等级8: 124%（超灵+24.0%）
+  1.2800, // 等级9: 128%（超灵+28.0%）
+  1.3400, // 等级10: 134%（超灵）
 ];
-
-// 超灵倍率（灵性10级时，超灵为134%，非超灵为131%）
-const SUPER_LING_RATE = 1.3400;
 
 export interface BeastCalcInput {
   currentAptitude: number;    // 当前资质
@@ -94,12 +91,11 @@ export function getWuXingRate(level: number): number {
 /**
  * 获取灵性倍率
  * @param level 灵性等级 (0-10)
- * @param isSuperLing 是否超灵（仅 level=10 时生效，超灵为134%，普通为131%）
+ * @param isSuperLing 是否超灵（仅 level=8/9/10 时生效；8级124%、9级128%、10级134%，普通分别为122%/126%/131%）
  */
 export function getLingXingRate(level: number, isSuperLing: boolean = false): number {
   if (level < 1 || level > 10) return 1;
-  if (level === 10 && isSuperLing) return SUPER_LING_RATE;
-  return LING_XING_RATES[level];
+  return isSuperLing ? SUPER_LING_RATES[level] : LING_XING_RATES[level];
 }
 
 /**
@@ -167,12 +163,22 @@ export function getWuXingRateTable(): { level: number; rate: number; rateStr: st
 }
 
 /**
- * 获取灵性等级倍率表（用于展示）
+ * 获取灵性等级倍率表（用于展示，含普通与超灵两列）
  */
-export function getLingXingRateTable(): { level: number; rate: number; rateStr: string }[] {
-  return LING_XING_RATES.slice(1).map((rate, index) => ({
-    level: index + 1,
-    rate,
-    rateStr: formatRate(rate),
-  }));
+export function getLingXingRateTable(): {
+  level: number;
+  normalRateStr: string;
+  superRateStr: string;
+  differ: boolean;
+}[] {
+  return LING_XING_RATES.slice(1).map((rate, index) => {
+    const level = index + 1;
+    const superRate = SUPER_LING_RATES[level];
+    return {
+      level,
+      normalRateStr: formatRate(rate),
+      superRateStr: formatRate(superRate),
+      differ: superRate !== rate,
+    };
+  });
 }

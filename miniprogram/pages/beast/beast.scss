@@ -280,6 +280,32 @@ page {
   border-bottom: none;
 }
 
+/* 灵性倍率表：等级列 / 超灵列高亮 / 注释 */
+.rate-cell.col-level {
+  font-weight: 500;
+  color: #1a1a2e;
+}
+
+.rate-table-row.super-row {
+  background: #f0f3ff;
+}
+
+.rate-cell.super-cell {
+  color: #4a6cf7;
+  font-weight: 600;
+}
+
+.rate-cell.super-cell-same {
+  color: #c5c5cf;
+}
+
+.rate-table-note {
+  font-size: 22rpx;
+  color: #999;
+  padding: 14rpx 10rpx 2rpx;
+  line-height: 1.5;
+}
+
 /* ===== 开关 ===== */
 .switch-row {
   display: flex;

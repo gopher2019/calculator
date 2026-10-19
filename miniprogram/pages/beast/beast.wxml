@@ -36,18 +36,6 @@
           </view>
         </picker>
       </view>
-
-      <view class="input-group">
-        <view class="switch-row" bindtap="onToggleCurrentSuperLing">
-          <view class="switch-label">
-            <text>是否超灵</text>
-            <text class="switch-hint">（灵性10级时，超灵加成34%，普通31%）</text>
-          </view>
-          <view class="switch-track {{currentIsSuperLing ? 'active' : ''}}">
-            <view class="switch-thumb {{currentIsSuperLing ? 'active' : ''}}"></view>
-          </view>
-        </view>
-      </view>
     </view>
 
     <view class="section">
@@ -74,13 +62,13 @@
       </view>
 
       <view class="input-group">
-        <view class="switch-row" bindtap="onToggleTargetSuperLing">
+        <view class="switch-row" bindtap="onToggleSuperLing">
           <view class="switch-label">
             <text>是否超灵</text>
-            <text class="switch-hint">（灵性10级时，超灵加成34%，普通31%）</text>
+            <text class="switch-hint">（灵性8/9/10级生效：超灵比普通高2%）</text>
           </view>
-          <view class="switch-track {{targetIsSuperLing ? 'active' : ''}}">
-            <view class="switch-thumb {{targetIsSuperLing ? 'active' : ''}}"></view>
+          <view class="switch-track {{isSuperLing ? 'active' : ''}}">
+            <view class="switch-thumb {{isSuperLing ? 'active' : ''}}"></view>
           </view>
         </view>
       </view>
@@ -150,13 +138,16 @@
         </view>
         <view class="rate-table" wx:if="{{activeRateTab === 'lingxing'}}">
           <view class="rate-table-row rate-table-header-row">
-            <text class="rate-cell">等级</text>
-            <text class="rate-cell">倍率</text>
+            <text class="rate-cell col-level">等级</text>
+            <text class="rate-cell">普通倍率</text>
+            <text class="rate-cell">超灵倍率</text>
           </view>
-          <view class="rate-table-row" wx:for="{{lingXingRateTable}}" wx:key="level">
-            <text class="rate-cell">{{item.level}}级</text>
-            <text class="rate-cell">{{item.rateStr}}</text>
+          <view class="rate-table-row {{item.differ ? 'super-row' : ''}}" wx:for="{{lingXingRateTable}}" wx:key="level">
+            <text class="rate-cell col-level">{{item.level}}级</text>
+            <text class="rate-cell">{{item.normalRateStr}}</text>
+            <text class="rate-cell {{item.differ ? 'super-cell' : 'super-cell-same'}}">{{item.differ ? item.superRateStr : '—'}}</text>
           </view>
+          <view class="rate-table-note">注：超灵仅在灵性 8/9/10 级生效，其余等级与普通一致。</view>
         </view>
       </view>
     </view>

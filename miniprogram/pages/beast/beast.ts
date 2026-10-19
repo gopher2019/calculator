@@ -15,17 +15,16 @@ Page({
     currentAptitude: '',
     currentWuXing: 0,
     currentLingXing: 0,
-    currentIsSuperLing: false,
     targetWuXing: 10,
     targetLingXing: 10,
-    targetIsSuperLing: false,
+    isSuperLing: false,
     wuXingOptions: LEVEL_OPTIONS.map((v) => ({ label: v + '级', value: v })),
     lingXingOptions: LEVEL_OPTIONS.map((v) => ({ label: v + '级', value: v })),
     result: null as BeastCalcResult | null,
     showResult: false,
     showRateTable: false,
     wuXingRateTable: [] as { level: number; rate: number; rateStr: string }[],
-    lingXingRateTable: [] as { level: number; rate: number; rateStr: string }[],
+    lingXingRateTable: [] as { level: number; normalRateStr: string; superRateStr: string; differ: boolean }[],
     activeRateTab: 'wuxing' as 'wuxing' | 'lingxing',
     // 顶部原生模板广告位真实高度（rpx），加载后实测并动态适配
     adReserveTop: 0,
@@ -69,24 +68,21 @@ Page({
     this.setData({ targetLingXing: LEVEL_OPTIONS[index] });
   },
 
-  onToggleCurrentSuperLing() {
-    this.setData({ currentIsSuperLing: !this.data.currentIsSuperLing });
-  },
-
-  onToggleTargetSuperLing() {
-    this.setData({ targetIsSuperLing: !this.data.targetIsSuperLing });
+  onToggleSuperLing() {
+    this.setData({ isSuperLing: !this.data.isSuperLing });
   },
 
   onCalculate() {
-    const { currentAptitude, currentWuXing, currentLingXing, currentIsSuperLing, targetWuXing, targetLingXing, targetIsSuperLing } = this.data;
+    const { currentAptitude, currentWuXing, currentLingXing, targetWuXing, targetLingXing, isSuperLing } = this.data;
     const aptitude = parseFloat(currentAptitude);
     if (isNaN(aptitude) || aptitude <= 0) {
       wx.showToast({ title: '请输入有效的当前资质', icon: 'none' });
       return;
     }
     const result = calculateBeastAptitude({
-      currentAptitude: aptitude, currentWuXing, currentLingXing, currentIsSuperLing,
-      targetWuXing, targetLingXing, targetIsSuperLing,
+      currentAptitude: aptitude, currentWuXing, currentLingXing,
+      currentIsSuperLing: isSuperLing,
+      targetWuXing, targetLingXing, targetIsSuperLing: isSuperLing,
     });
     this.setData({ result, showResult: true });
     wx.pageScrollTo({ scrollTop: 9999, duration: 300 });
@@ -95,8 +91,8 @@ Page({
   onReset() {
     this.setData({
       currentAptitude: '', currentWuXing: 1, currentLingXing: 1,
-      currentIsSuperLing: false, targetWuXing: 10, targetLingXing: 10,
-      targetIsSuperLing: false, result: null, showResult: false,
+      targetWuXing: 10, targetLingXing: 10,
+      isSuperLing: false, result: null, showResult: false,
     });
   },
 
