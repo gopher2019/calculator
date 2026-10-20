@@ -5,16 +5,9 @@
 const SHARE_TITLE = '墨狐小算器 - 游戏数值计算小工具';
 
 // 返回分享配置对象，可直接通过 ...shareConfig 展开到任意 Page 的参数中
+// 注意：各页面已在自身 Page 参数中定义 onShareAppMessage（含逐页标题与描述），
+// 为避免 ...shareConfig 展开后覆盖页面自定义的分享标题，这里仅保留 onShareTimeline。
 export const shareConfig = {
-  onShareAppMessage() {
-    const pages = getCurrentPages() as { route: string }[];
-    const current = pages[pages.length - 1];
-    const path = current ? '/' + current.route : '/pages/index/index';
-    return {
-      title: SHARE_TITLE,
-      path,
-    };
-  },
   onShareTimeline() {
     return {
       title: SHARE_TITLE,

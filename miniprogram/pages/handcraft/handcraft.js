@@ -28,6 +28,14 @@ const RESULT_MAP = {
 const AD_UNIT_ID = 'adunit-7b3a2bb5fc6e88bb';
 
 Page({
+  onShareAppMessage() {
+    return {
+      title: '墨狐小算器｜手工DIY｜天龙怀旧服工具',
+      path: 'pages/handcraft/handcraft',
+      desc: '天龙八部怀旧服实用工具-墨狐小算器，包含攻略、点位、计算器，方便带队刷本、防骗、材料收购计算等。'
+    };
+  },
+
   data: {
     remainCount: 0,      // 今日剩余制作次数
     adRewardToday: false, // 今日是否已领取广告奖励

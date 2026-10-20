@@ -57,6 +57,14 @@ CARDS.forEach(function (c) {
 });
 
 Page({
+  onShareAppMessage() {
+    return {
+      title: '墨狐小算器｜怀旧骚操作｜天龙怀旧服工具',
+      path: 'pages/saocaozuo/saocaozuo',
+      desc: '天龙八部怀旧服实用工具-墨狐小算器，包含攻略、点位、计算器，方便带队刷本、防骗、材料收购计算等。'
+    };
+  },
+
   data: {
     cards: CARDS,
     // 底部悬浮广告位高度（rpx），加载后实测并动态适配，避免遮挡内容或留白

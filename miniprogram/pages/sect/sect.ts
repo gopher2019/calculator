@@ -16,6 +16,14 @@ const ELEM_COLOR: Record<string, string> = {
 };
 
 Page({
+  onShareAppMessage() {
+    return {
+      title: '墨狐小算器｜门派属性系数｜天龙怀旧服工具',
+      path: 'pages/sect/sect',
+      desc: '天龙八部怀旧服实用工具-墨狐小算器，包含攻略、点位、计算器，方便带队刷本、防骗、材料收购计算等。'
+    };
+  },
+
   ...shareConfig,
 
   data: {

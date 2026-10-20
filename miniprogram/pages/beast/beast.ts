@@ -9,6 +9,14 @@ import { shareConfig, enableShareMenu } from '../../utils/share';
 const LEVEL_OPTIONS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 Page({
+  onShareAppMessage() {
+    return {
+      title: '墨狐小算器｜珍兽资质计算｜天龙怀旧服工具',
+      path: 'pages/beast/beast',
+      desc: '天龙八部怀旧服实用工具-墨狐小算器，包含攻略、点位、计算器，方便带队刷本、防骗、材料收购计算等。'
+    };
+  },
+
   ...shareConfig,
 
   data: {
