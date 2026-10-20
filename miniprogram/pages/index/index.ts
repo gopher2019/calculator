@@ -72,6 +72,10 @@ Page({
     wx.navigateTo({ url: '../exp/exp' });
   },
 
+  goToMaterial() {
+    wx.navigateTo({ url: '../material/material' });
+  },
+
   goToHandcraft() {
     wx.navigateTo({ url: '../handcraft/handcraft' });
   },

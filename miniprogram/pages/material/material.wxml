@@ -1,0 +1,76 @@
+<view class="page-container">
+  <!-- 顶部广告位（随页面滚动，上滑即被隐藏） -->
+  <view class="ad-slot" hidden="{{adHidden}}">
+    <ad unit-id="adunit-ee44cf2f681ab347" ad-type="banner" ad-theme="light" bindload="onAdLoad" binderror="onAdError"></ad>
+  </view>
+  <view class="rate-tabs">
+    <view class="rate-tab {{activeTab==='yb'?'active':''}}" data-tab="yb" bindtap="onSwitchTab">元宝收购材料</view>
+    <view class="rate-tab {{activeTab==='gold'?'active':''}}" data-tab="gold" bindtap="onSwitchTab">金币收购材料</view>
+  </view>
+
+  <!-- 元宝收购材料 -->
+  <view class="section" wx:if="{{activeTab==='yb'}}">
+    <view class="input-group">
+      <text class="input-label">材料 yb 单价</text>
+      <input class="input-field" type="digit" value="{{ybPrice}}" data-field="ybPrice" bindinput="onInput" bindblur="onBlur" placeholder="请输入"/>
+    </view>
+    <view class="input-group">
+      <text class="input-label">材料数量</text>
+      <input class="input-field" type="digit" value="{{ybCount}}" data-field="ybCount" bindinput="onInput" bindblur="onBlur" placeholder="请输入"/>
+    </view>
+    <view class="switch-row">
+      <view class="switch-label">
+        <text>计算更多信息</text>
+        <text class="switch-hint">开启后可换算人民币与另一种货币</text>
+      </view>
+      <view class="switch-track {{moreInfo ? 'active' : ''}}" bindtap="onToggleMore">
+        <view class="switch-thumb {{moreInfo ? 'active' : ''}}"></view>
+      </view>
+    </view>
+    <view class="input-group" wx:if="{{moreInfo}}">
+      <text class="input-label">500YB兑换金币数</text>
+      <input class="input-field" type="digit" value="{{yb500}}" data-field="yb500" bindinput="onInput" bindblur="onBlur" placeholder="请输入"/>
+    </view>
+    <view class="input-group" wx:if="{{moreInfo}}">
+      <text class="input-label">1元购买YB数量</text>
+      <input class="input-field" type="digit" value="{{ybRate}}" data-field="ybRate" bindinput="onInput" bindblur="onBlur" placeholder="请输入"/>
+    </view>
+    <button class="btn btn-primary calc-btn" bindtap="onCalculate">一键计算数据</button>
+    <view class="result-section" wx:if="{{showResult}}">
+      <view class="result-line" wx:for="{{resultLines}}" wx:key="index">{{item}}</view>
+    </view>
+  </view>
+
+  <!-- 金币收购材料 -->
+  <view class="section" wx:if="{{activeTab==='gold'}}">
+    <view class="input-group">
+      <text class="input-label">材料金单价</text>
+      <input class="input-field" type="digit" value="{{goldPrice}}" data-field="goldPrice" bindinput="onInput" bindblur="onBlur" placeholder="请输入"/>
+    </view>
+    <view class="input-group">
+      <text class="input-label">材料数量</text>
+      <input class="input-field" type="digit" value="{{goldCount}}" data-field="goldCount" bindinput="onInput" bindblur="onBlur" placeholder="请输入"/>
+    </view>
+    <view class="switch-row">
+      <view class="switch-label">
+        <text>计算更多信息</text>
+        <text class="switch-hint">开启后可换算人民币与另一种货币</text>
+      </view>
+      <view class="switch-track {{moreInfo ? 'active' : ''}}" bindtap="onToggleMore">
+        <view class="switch-thumb {{moreInfo ? 'active' : ''}}"></view>
+      </view>
+    </view>
+    <view class="input-group" wx:if="{{moreInfo}}">
+      <text class="input-label">500YB兑换金币数</text>
+      <input class="input-field" type="digit" value="{{gold500}}" data-field="gold500" bindinput="onInput" bindblur="onBlur" placeholder="请输入"/>
+    </view>
+    <view class="input-group" wx:if="{{moreInfo}}">
+      <text class="input-label">1元购买YB数量</text>
+      <input class="input-field" type="digit" value="{{goldRate}}" data-field="goldRate" bindinput="onInput" bindblur="onBlur" placeholder="请输入"/>
+    </view>
+    <button class="btn btn-primary calc-btn" bindtap="onCalculate">一键计算数据</button>
+    <view class="result-section" wx:if="{{showResult}}">
+      <view class="result-line" wx:for="{{resultLines}}" wx:key="index">{{item}}</view>
+    </view>
+  </view>
+</view>

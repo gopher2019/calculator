@@ -91,6 +91,14 @@
         </view>
         <text class="tool-arrow">›</text>
       </view>
+      <view class="tool-card" bindtap="goToMaterial">
+        <view class="tool-icon">🛒</view>
+        <view class="tool-info">
+          <text class="tool-name">材料收购计算</text>
+          <text class="tool-desc">元宝/金币收购材料换算</text>
+        </view>
+        <text class="tool-arrow">›</text>
+      </view>
       <view class="tool-card" bindtap="goToHandcraft">
         <view class="tool-icon">🎨</view>
         <view class="tool-info">
