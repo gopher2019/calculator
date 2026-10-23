@@ -1,0 +1,31 @@
+<view class="page-container">
+  <!-- 顶部广告位（随页面滚动，下拉即被遮挡） -->
+  <view class="ad-slot" hidden="{{adHidden}}">
+    <ad unit-id="adunit-7439a9355e87250d" ad-type="banner" ad-theme="light" bindload="onAdLoad" binderror="onAdError"></ad>
+  </view>
+  <view class="page-title">怀旧赚钱经验</view>
+
+  <view class="rate-tabs">
+    <view class="rate-tab {{activeTab===0?'active':''}}" data-tab="0" bindtap="onSwitchTab">新区开荒</view>
+    <view class="rate-tab {{activeTab===1?'active':''}}" data-tab="1" bindtap="onSwitchTab">老区倒卖</view>
+  </view>
+
+  <block wx:if="{{activeTab===0}}">
+    <view class="section" wx:for="{{tab1}}" wx:key="title">
+      <view class="section-title">{{item.title}}</view>
+      <view class="point" wx:for="{{item.points}}" wx:for-item="p" wx:key="*this">· {{p}}</view>
+    </view>
+  </block>
+  <block wx:else>
+    <view class="section" wx:for="{{tab2}}" wx:key="title">
+      <view class="section-title">{{item.title}}</view>
+      <view class="point" wx:for="{{item.points}}" wx:for-item="p" wx:key="*this">· {{p}}</view>
+    </view>
+  </block>
+
+  <!-- 全局底部通用提示（两个 tab 都可见） -->
+  <view class="note-card">
+    <view class="note-title">通用提示</view>
+    <view class="point" wx:for="{{notes}}" wx:key="*this">· {{item}}</view>
+  </view>
+</view>

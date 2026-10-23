@@ -1,0 +1,78 @@
+.page-container {
+  padding: 24rpx 32rpx 60rpx;
+  background: #f5f6fa;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.page-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #1a1a2e;
+  text-align: center;
+  margin: 16rpx 0 24rpx;
+}
+
+/* 分段 Tab */
+.rate-tabs {
+  display: flex;
+  background: #eef0f7;
+  border-radius: 16rpx;
+  padding: 6rpx;
+  margin-bottom: 24rpx;
+}
+.rate-tab {
+  flex: 1;
+  text-align: center;
+  padding: 18rpx 0;
+  font-size: 30rpx;
+  color: #555;
+  border-radius: 12rpx;
+  transition: all 0.2s;
+}
+.rate-tab.active {
+  background: #4a6cf7;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* 内容卡片 */
+.section {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 28rpx 28rpx 24rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+}
+.section-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #4a6cf7;
+  margin-bottom: 16rpx;
+}
+.point {
+  font-size: 28rpx;
+  color: #333;
+  line-height: 1.7;
+  margin-bottom: 10rpx;
+}
+
+/* 底部通用提示（两 tab 共用） */
+.note-card {
+  background: #fff7e6;
+  border: 1rpx solid #ffe1a8;
+  border-radius: 16rpx;
+  padding: 24rpx 28rpx;
+  margin-top: 8rpx;
+}
+.note-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #c8841a;
+  margin-bottom: 14rpx;
+}
+
+/* 顶部广告位（内联，随页面滚动） */
+.ad-slot {
+  margin-bottom: 24rpx;
+}

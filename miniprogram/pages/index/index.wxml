@@ -131,6 +131,14 @@
         </view>
         <text class="tool-arrow">›</text>
       </view>
+      <view class="tool-card" bindtap="goToMoney">
+        <view class="tool-icon">💰</view>
+        <view class="tool-info">
+          <text class="tool-name">怀旧赚钱经验</text>
+          <text class="tool-desc">新区开荒 / 老区倒卖实战攻略</text>
+        </view>
+        <text class="tool-arrow">›</text>
+      </view>
     </view>
   </view>
 

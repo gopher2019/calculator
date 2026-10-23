@@ -100,6 +100,10 @@ Page({
     wx.navigateTo({ url: '../saocaozuo/saocaozuo' });
   },
 
+  goToMoney() {
+    wx.navigateTo({ url: '../money/money' });
+  },
+
   // 原生模板广告加载成功：多次实测、以最终稳定高度为准（广告先占位后收缩），避免预留过高留白
   onAdLoad() {
     const measure = () => {
