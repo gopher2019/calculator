@@ -188,3 +188,111 @@ page {
 .ad-slot {
   margin-bottom: 24rpx;
 }
+
+/* ===== 多物品卡片 ===== */
+.item-card {
+  background: #f7f8fc;
+  border-radius: 12rpx;
+  padding: 20rpx 24rpx;
+  margin-bottom: 20rpx;
+}
+.item-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12rpx;
+}
+.item-index {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #4a6cf7;
+}
+.item-del {
+  font-size: 32rpx;
+  color: #999;
+  padding: 0 8rpx;
+}
+.item-del:active {
+  color: #ff5a5f;
+}
+.input-row {
+  display: flex;
+}
+.input-row .input-group {
+  flex: 1;
+  margin-bottom: 12rpx;
+}
+.input-row .input-group + .input-group {
+  margin-left: 16rpx;
+}
+/* 物品行：标签与输入框同一行 */
+.input-group.inline {
+  display: flex;
+  align-items: center;
+}
+.input-group.inline .input-label {
+  margin-bottom: 0;
+  margin-right: 12rpx;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.input-group.inline .input-field {
+  width: auto;
+  flex: 1;
+}
+.item-sub {
+  font-size: 26rpx;
+  color: #4a6cf7;
+  margin-top: 4rpx;
+}
+.add-btn {
+  text-align: center;
+  font-size: 28rpx;
+  color: #4a6cf7;
+  background: #eef2ff;
+  border-radius: 12rpx;
+  padding: 20rpx 0;
+  margin-bottom: 24rpx;
+}
+.add-btn:active {
+  opacity: 0.8;
+}
+
+/* ===== 结果明细（逐项） ===== */
+.result-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12rpx 0;
+  font-size: 28rpx;
+  color: #333;
+  border-bottom: 1rpx solid #eef0f7;
+}
+.ri-sub {
+  color: #4a6cf7;
+  font-weight: 600;
+}
+
+/* 结果操作（复制 / 清空） */
+.result-actions {
+  display: flex;
+  margin-bottom: 12rpx;
+}
+.result-action {
+  flex: 1;
+  text-align: center;
+  font-size: 26rpx;
+  color: #4a6cf7;
+  background: #eef2ff;
+  border-radius: 10rpx;
+  padding: 14rpx 0;
+}
+.result-action + .result-action {
+  margin-left: 16rpx;
+}
+.result-action:active {
+  opacity: 0.8;
+}
+.result-item:active {
+  background: #eef2ff;
+}

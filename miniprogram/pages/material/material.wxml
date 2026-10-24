@@ -10,14 +10,25 @@
 
   <!-- 元宝收购材料 -->
   <view class="section" wx:if="{{activeTab==='yb'}}">
-    <view class="input-group">
-      <text class="input-label">材料 yb 单价</text>
-      <input class="input-field" type="digit" value="{{ybPrice}}" data-field="ybPrice" bindinput="onInput" bindblur="onBlur" placeholder="请输入"/>
+    <view class="item-card" wx:for="{{ybItems}}" wx:key="index" wx:for-item="it">
+      <view class="item-head">
+        <text class="item-index">物品{{index+1}}</text>
+        <text class="item-del" wx:if="{{ybItems.length>1}}" data-index="{{index}}" bindtap="removeItem">✕</text>
+      </view>
+      <view class="input-row">
+        <view class="input-group inline">
+          <text class="input-label">yb 单价</text>
+          <input class="input-field" type="digit" value="{{it.price}}" placeholder="单价" data-index="{{index}}" data-field="price" bindinput="onItemInput" bindblur="onItemBlur"/>
+        </view>
+        <view class="input-group inline">
+          <text class="input-label">数量</text>
+          <input class="input-field" type="digit" value="{{it.count}}" placeholder="数量" data-index="{{index}}" data-field="count" bindinput="onItemInput" bindblur="onItemBlur"/>
+        </view>
+      </view>
+      <view class="item-sub" wx:if="{{it.sub}}">小计：{{it.sub}} yb</view>
     </view>
-    <view class="input-group">
-      <text class="input-label">材料数量</text>
-      <input class="input-field" type="digit" value="{{ybCount}}" data-field="ybCount" bindinput="onInput" bindblur="onBlur" placeholder="请输入"/>
-    </view>
+    <view class="add-btn" bindtap="addItem">+ 添加物品</view>
+
     <view class="switch-row">
       <view class="switch-label">
         <text>计算更多信息</text>
@@ -37,20 +48,38 @@
     </view>
     <button class="btn btn-primary calc-btn" bindtap="onCalculate">一键计算数据</button>
     <view class="result-section" wx:if="{{showResult}}">
+      <view class="result-actions">
+        <view class="result-action" bindtap="onCopyResult">复制结果</view>
+        <view class="result-action" bindtap="onClearAll">清空全部</view>
+      </view>
+      <view class="result-item" wx:for="{{resultItems}}" wx:key="index" data-index="{{index}}" bindtap="onCopyItem">
+        <text class="ri-sub">小计：{{item.sub}}</text>
+      </view>
       <view class="result-line" wx:for="{{resultLines}}" wx:key="index">{{item}}</view>
     </view>
   </view>
 
   <!-- 金币收购材料 -->
   <view class="section" wx:if="{{activeTab==='gold'}}">
-    <view class="input-group">
-      <text class="input-label">材料金单价</text>
-      <input class="input-field" type="digit" value="{{goldPrice}}" data-field="goldPrice" bindinput="onInput" bindblur="onBlur" placeholder="请输入"/>
+    <view class="item-card" wx:for="{{goldItems}}" wx:key="index" wx:for-item="it">
+      <view class="item-head">
+        <text class="item-index">物品{{index+1}}</text>
+        <text class="item-del" wx:if="{{goldItems.length>1}}" data-index="{{index}}" bindtap="removeItem">✕</text>
+      </view>
+      <view class="input-row">
+        <view class="input-group inline">
+          <text class="input-label">金单价</text>
+          <input class="input-field" type="digit" value="{{it.price}}" placeholder="单价" data-index="{{index}}" data-field="price" bindinput="onItemInput" bindblur="onItemBlur"/>
+        </view>
+        <view class="input-group inline">
+          <text class="input-label">数量</text>
+          <input class="input-field" type="digit" value="{{it.count}}" placeholder="数量" data-index="{{index}}" data-field="count" bindinput="onItemInput" bindblur="onItemBlur"/>
+        </view>
+      </view>
+      <view class="item-sub" wx:if="{{it.sub}}">小计：{{it.sub}} j</view>
     </view>
-    <view class="input-group">
-      <text class="input-label">材料数量</text>
-      <input class="input-field" type="digit" value="{{goldCount}}" data-field="goldCount" bindinput="onInput" bindblur="onBlur" placeholder="请输入"/>
-    </view>
+    <view class="add-btn" bindtap="addItem">+ 添加物品</view>
+
     <view class="switch-row">
       <view class="switch-label">
         <text>计算更多信息</text>
@@ -70,6 +99,13 @@
     </view>
     <button class="btn btn-primary calc-btn" bindtap="onCalculate">一键计算数据</button>
     <view class="result-section" wx:if="{{showResult}}">
+      <view class="result-actions">
+        <view class="result-action" bindtap="onCopyResult">复制结果</view>
+        <view class="result-action" bindtap="onClearAll">清空全部</view>
+      </view>
+      <view class="result-item" wx:for="{{resultItems}}" wx:key="index" data-index="{{index}}" bindtap="onCopyItem">
+        <text class="ri-sub">小计：{{item.sub}}</text>
+      </view>
       <view class="result-line" wx:for="{{resultLines}}" wx:key="index">{{item}}</view>
     </view>
   </view>
