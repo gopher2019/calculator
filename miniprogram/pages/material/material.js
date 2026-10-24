@@ -120,7 +120,8 @@ Page({
 
   onAdLoad() {},
 
-  onAdError() {
+  onAdError(err) {
+    console.error('[顶部广告加载失败]', err); // 打印失败原因，便于排查（如广告位未审核/未投放/无填充）
     this.setData({ adHidden: true }); // 广告加载失败则隐藏悬浮条，避免遮挡内容
   },
 

@@ -17,7 +17,8 @@
     "pages/activitypoints/activitypoints",
     "pages/antifraud/antifraud",
     "pages/saocaozuo/saocaozuo",
-    "pages/money/money"
+    "pages/money/money",
+    "pages/feedback/feedback"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",

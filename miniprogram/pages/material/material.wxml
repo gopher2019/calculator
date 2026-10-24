@@ -1,7 +1,7 @@
 <view class="page-container">
-  <!-- 顶部广告位（随页面滚动，上滑即被隐藏） -->
+  <!-- 顶部广告位（随页面滚动，上滑即被遮挡） -->
   <view class="ad-slot" hidden="{{adHidden}}">
-    <ad unit-id="adunit-ee44cf2f681ab347" ad-type="banner" ad-theme="light" bindload="onAdLoad" binderror="onAdError"></ad>
+    <ad unit-id="adunit-ee44cf2f681ab347" ad-type="card" ad-theme="light" bindload="onAdLoad" binderror="onAdError"></ad>
   </view>
   <view class="rate-tabs">
     <view class="rate-tab {{activeTab==='yb'?'active':''}}" data-tab="yb" bindtap="onSwitchTab">元宝收购材料</view>

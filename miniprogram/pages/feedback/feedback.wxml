@@ -1,0 +1,41 @@
+<view class="page-container">
+  <view class="tip">你的反馈会帮助我们做得更好，欢迎提出遇到的问题或功能建议。</view>
+
+  <view class="section">
+    <view class="field-label">反馈类型</view>
+    <view class="type-tabs">
+      <view
+        class="type-tab {{type === item ? 'active' : ''}}"
+        wx:for="{{types}}"
+        wx:key="*this"
+        data-type="{{item}}"
+        bindtap="onTypeTap"
+      >{{item}}</view>
+    </view>
+
+    <view class="field-label">反馈内容</view>
+    <textarea
+      class="content-input"
+      maxlength="500"
+      value="{{content}}"
+      bindinput="onContentInput"
+      placeholder="请描述你遇到的问题或建议…"
+    ></textarea>
+    <view class="counter">{{content.length}}/500</view>
+
+    <view class="field-label">联系方式（选填）</view>
+    <input
+      class="contact-input"
+      value="{{contact}}"
+      bindinput="onContactInput"
+      placeholder="QQ / 微信 / 手机，方便我们回复"
+    ></input>
+
+    <button class="btn btn-primary submit-btn" loading="{{submitting}}" bindtap="onSubmit">提交反馈</button>
+  </view>
+
+  <!-- 底部原生模板广告位（随页面滚动，上滑即被遮挡） -->
+  <view class="ad-slot" hidden="{{adHidden}}">
+    <ad-custom unit-id="adunit-4f3aecabaf14e106" bindload="onAdLoad" binderror="onAdError" bindclose="onAdClose"></ad-custom>
+  </view>
+</view>

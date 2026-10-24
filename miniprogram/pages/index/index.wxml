@@ -139,6 +139,13 @@
         </view>
         <text class="tool-arrow">›</text>
       </view>
+      <view class="tool-card" bindtap="goToFeedback">
+        <view class="tool-icon">💬</view>
+        <view class="tool-info">
+          <text class="tool-name">留言反馈</text>
+          <text class="tool-desc">问题 / 建议直达开发者</text>
+        </view>
+      </view>
     </view>
   </view>
 
