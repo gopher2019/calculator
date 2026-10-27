@@ -28,7 +28,7 @@ Page({
 
   data: {
     activeTab: 0,
-    elemSects: [] as { name: string; attrs: AttrView[] }[],
+    elemSects: [] as { name: string; isNew?: boolean; attrs: AttrView[] }[],
     potentials: POTENTIALS,
     // 原生模板广告位真实高度（rpx），加载后实测并动态适配
     adReserve: 0,
@@ -41,6 +41,7 @@ Page({
     // 预处理冰火玄毒视图数据，避免 wxml 动态 key 兼容问题
     const elemSects = SECTS.map((s) => ({
       name: s.name,
+      isNew: s.isNew,
       attrs: ATTRIBUTES.map((a) => ({
         key: ELEM_COLOR[a.key],
         name: a.name,

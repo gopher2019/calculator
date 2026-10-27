@@ -23,7 +23,7 @@
     <!-- Tab1：门派属性攻击系数（冰火玄毒） -->
     <view class="tab-panel" wx:if="{{activeTab === 0}}">
       <view class="elem-card" wx:for="{{elemSects}}" wx:key="name">
-        <view class="elem-head">{{item.name}}</view>
+        <view class="elem-head">{{item.name}}<text class="new-badge" wx:if="{{item.isNew}}">新</text></view>
         <view class="elem-row">
           <view class="elem-item" wx:for="{{item.attrs}}" wx:for-item="attr" wx:key="name">
             <text class="elem-dot dot-{{attr.key}}"></text>
@@ -37,7 +37,7 @@
     <!-- Tab2：门派潜能成长（五维） -->
     <view class="tab-panel" wx:if="{{activeTab === 1}}">
       <view class="sect-card" wx:for="{{potentials}}" wx:key="name">
-        <view class="sect-card-head">{{item.name}}</view>
+        <view class="sect-card-head">{{item.name}}<text class="new-badge" wx:if="{{item.isNew}}">新</text></view>
         <view class="pot-row">
           <text class="pot-name">1力量</text>
           <text class="pot-val">{{item.str}} 外攻</text>

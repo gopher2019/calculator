@@ -76,6 +76,28 @@ page {
 }
 
 /* ===== Tab1：冰火玄毒 ===== */
+.elem-head {
+  display: flex;
+  align-items: center;
+}
+
+.sect-card-head {
+  display: flex;
+  align-items: center;
+}
+
+/* 新门派角标 */
+.new-badge {
+  margin-left: 12rpx;
+  padding: 2rpx 12rpx;
+  font-size: 20rpx;
+  font-weight: 600;
+  color: #fff;
+  background: #ff5630;
+  border-radius: 16rpx;
+  line-height: 1.4;
+}
+
 .elem-card {
   background: #fff;
   border-radius: 16rpx;

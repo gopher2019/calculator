@@ -1,8 +1,9 @@
 // 门派属性系数数据（集中存放，便于后期微调）
-// 门派顺序统一为需求指定的 13 大门派
+// 门派顺序按下方列表排列（原 14 门派 + 昆仑，共 15）
 
 export interface SectData {
   name: string;
+  isNew?: boolean; // 是否新门派（显示「新」角标）
   coeff: {
     bing: number; // 冰
     huo: number; // 火
@@ -13,6 +14,7 @@ export interface SectData {
 
 export interface PotentialData {
   name: string;
+  isNew?: boolean; // 是否新门派（显示「新」角标）
   str: number; // 1 力量 = 外攻
   int: number; // 1 灵气 = 内功
   con: number; // 1 体力 = 血上限
@@ -37,6 +39,7 @@ export const ATTRIBUTES: AttributeMeta[] = [
 
 // 门派冰火玄毒单属性伤害系数（顺序同需求指定）
 export const SECTS: SectData[] = [
+  { name: '昆仑', isNew: true, coeff: { bing: 1.25, huo: 1, xuan: 1.3, du: 1 } },
   { name: '武当', coeff: { bing: 1.25, huo: 1.2, xuan: 1.1, du: 1 } },
   { name: '峨眉', coeff: { bing: 1.2, huo: 1, xuan: 1.25, du: 1 } },
   { name: '逍遥', coeff: { bing: 1, huo: 1.3, xuan: 1, du: 1.25 } },
@@ -55,6 +58,7 @@ export const SECTS: SectData[] = [
 
 // 门派五维潜能成长（顺序同需求指定）
 export const POTENTIALS: PotentialData[] = [
+  { name: '昆仑', isNew: true, str: 4.44, int: 8.25, con: 53, fix: 35, agi: 8, dodge: 4, crit: 0.05 },
   { name: '武当', str: 4.4, int: 8.9, con: 44, fix: 32, agi: 8, dodge: 3, crit: 0.07 },
   { name: '峨眉', str: 4.4, int: 7.6, con: 50, fix: 40, agi: 8, dodge: 2, crit: 0.06 },
   { name: '逍遥', str: 4.4, int: 7.6, con: 50, fix: 36, agi: 7, dodge: 4, crit: 0.06 },
