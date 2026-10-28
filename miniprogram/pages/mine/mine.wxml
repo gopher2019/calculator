@@ -23,10 +23,17 @@
     <view class="section">
       <view class="section-title">{{activeName}}挖矿坐标（分左右点击复制）</view>
       <view class="coord-grid">
-        <view class="coord-item" wx:for="{{activeCoords}}" wx:key="index">
+        <view class="coord-item {{item.minedAt ? 'mined' : ''}}" wx:for="{{activeCoords}}" wx:key="index">
           <text class="coord-side coord-left" data-value="{{item.x}}" bindtap="copySide">({{item.x}}</text>
           <text class="coord-sep">,</text>
           <text class="coord-side coord-right" data-value="{{item.y}}" bindtap="copySide">{{item.y}})</text>
+          <view class="coord-action">
+            <block wx:if="{{item.minedAt}}">
+              <text class="coord-state">已挖·剩{{item.remainLabel}}</text>
+              <text class="coord-undo" data-index="{{index}}" bindtap="unmarkMine">撤销</text>
+            </block>
+            <view wx:else class="coord-btn" data-index="{{index}}" bindtap="markMine">已挖</view>
+          </view>
         </view>
       </view>
     </view>

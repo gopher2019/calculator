@@ -129,4 +129,41 @@ page {
   color: #999;
 }
 
+/* ===== 挖矿标记（已挖/倒计时） ===== */
+.coord-item.mined {
+  background: #fff4e6;
+  border-color: #ffd9a8;
+}
+.coord-action {
+  margin-left: 14rpx;
+  display: inline-flex;
+  align-items: center;
+  gap: 10rpx;
+}
+.coord-btn {
+  padding: 4rpx 18rpx;
+  font-size: 20rpx;
+  color: #fff;
+  background: #4a6cf7;
+  border-radius: 18rpx;
+  line-height: 1.6;
+}
+.coord-btn:active {
+  opacity: 0.85;
+}
+.coord-state {
+  font-size: 20rpx;
+  font-weight: 600;
+  color: #ff8c1a;
+  white-space: nowrap;
+}
+.coord-undo {
+  font-size: 20rpx;
+  color: #999;
+  padding: 2rpx 6rpx;
+}
+.coord-undo:active {
+  color: #666;
+}
+
 

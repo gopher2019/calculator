@@ -1,6 +1,9 @@
 // mine.ts
 import { shareConfig, enableShareMenu } from '../../utils/share';
 
+// 矿点倒计时刷新定时器（模块级，单页实例）
+let tickTimer: ReturnType<typeof setInterval> | null = null;
+
 interface Coord {
   x: number;
   y: number;
@@ -24,6 +27,52 @@ function parseCoords(raw: string): Coord[] {
     list.push({ x: parseInt(m[1], 10), y: parseInt(m[2], 10) });
   }
   return list;
+}
+
+interface MineCoord {
+  x: number;
+  y: number;
+  minedAt: number | null; // 标记已挖的时间戳；null 表示未挖/已刷新
+  remain: number; // 剩余秒数（>0 表示倒计时中）
+  remainLabel: string; // 格式化的 mm:ss
+}
+
+// 单个矿点被挖后刷新所需等待时间：100 分钟
+const MINE_RESET_MS = 100 * 60 * 1000;
+// 本地存储 key：记录每个矿点的“已挖”时间戳
+const MARK_STORE_KEY = 'mineMarks';
+
+function loadMarks(): Record<string, number> {
+  return wx.getStorageSync(MARK_STORE_KEY) || {};
+}
+
+function saveMarks(marks: Record<string, number>) {
+  wx.setStorageSync(MARK_STORE_KEY, marks);
+}
+
+function coordKey(mapName: string, x: number, y: number): string {
+  return `${mapName}|${x},${y}`;
+}
+
+function fmtRemain(sec: number): string {
+  if (sec <= 0) return '0';
+  const m = Math.floor(sec / 60);
+  const s = sec % 60;
+  return `${m}:${String(s).padStart(2, '0')}`;
+}
+
+// 依据存储的已挖时间戳，为某地图的坐标点计算“已挖/倒计时”状态
+function buildCoords(mapName: string, coords: Coord[], marks: Record<string, number>): MineCoord[] {
+  const now = Date.now();
+  return coords.map((c) => {
+    const ts = marks[coordKey(mapName, c.x, c.y)] || 0;
+    let remain = 0;
+    if (ts) {
+      remain = Math.ceil((ts + MINE_RESET_MS - now) / 1000);
+      if (remain <= 0) remain = 0; // 已刷新，tick 会清理存储
+    }
+    return { x: c.x, y: c.y, minedAt: ts ? ts : null, remain, remainLabel: fmtRemain(remain) };
+  });
 }
 
 const MAPS: MineMap[] = [
@@ -311,7 +360,9 @@ Page({
     activeFileID: '',
     activeImage: '',
     imageError: '',
-    activeCoords: [] as Coord[],
+    activeCoords: [] as MineCoord[],
+    // 已挖标记：{ "地图名|x,y": 时间戳 }，本地持久化
+    marks: {} as Record<string, number>,
     // 底部悬浮广告位高度（rpx），加载后实测并动态适配，避免遮挡内容或留白
     adReserve: 180,
     // 广告加载失败时隐藏广告位，避免空占位
@@ -320,12 +371,13 @@ Page({
 
   onLoad() {
     enableShareMenu();
+    const marks = loadMarks();
     const maps = MAPS.map((m) => ({
       ...m,
       coords: parseCoords(m.raw),
       localPath: '',
     }));
-    this.setData({ maps });
+    this.setData({ maps, marks });
     this.selectMap(0);
   },
 
@@ -338,7 +390,7 @@ Page({
       activeName: map.name,
       activeFileID: map.fileID,
       activeImage: map.localPath || '',
-      activeCoords: map.coords,
+      activeCoords: buildCoords(map.name, map.coords, this.data.marks),
     });
     // 已下载过则不再重复请求
     if (map.localPath) return;
@@ -380,6 +432,94 @@ Page({
       data: String(value),
       success: () => wx.showToast({ title: `已复制 ${value}`, icon: 'none' }),
     });
+  },
+
+  onShow() {
+    this.startTick();
+  },
+
+  onHide() {
+    this.stopTick();
+  },
+
+  onUnload() {
+    this.stopTick();
+  },
+
+  // 启动每秒倒计时刷新；页面隐藏/卸载时停止，避免后台空跑
+  startTick() {
+    this.stopTick();
+    this.tick();
+    tickTimer = setInterval(() => this.tick(), 1000);
+  },
+
+  stopTick() {
+    if (tickTimer) {
+      clearInterval(tickTimer);
+      tickTimer = null;
+    }
+  },
+
+  // 每秒刷新倒计时；归零则视为已刷新，清除“已挖”标记
+  tick() {
+    const coords = this.data.activeCoords;
+    const marks = this.data.marks;
+    let coordsChanged = false;
+    let marksChanged = false;
+    const now = Date.now();
+    const next = coords.map((c) => {
+      if (!c.minedAt) return c;
+      const remain = Math.ceil((c.minedAt + MINE_RESET_MS - now) / 1000);
+      if (remain <= 0) {
+        delete marks[coordKey(this.data.activeName, c.x, c.y)];
+        marksChanged = true;
+        coordsChanged = true;
+        return { ...c, minedAt: null, remain: 0, remainLabel: '0' };
+      }
+      if (remain !== c.remain) {
+        coordsChanged = true;
+        return { ...c, remain, remainLabel: fmtRemain(remain) };
+      }
+      return c;
+    });
+    if (marksChanged) {
+      saveMarks(marks);
+      this.setData({ marks });
+    }
+    if (coordsChanged) {
+      this.setData({ activeCoords: next });
+    }
+  },
+
+  // 标记某个矿点为已挖：记录时间并开始 100 分钟倒计时
+  markMine(e: any) {
+    const index = e.currentTarget.dataset.index as number;
+    const coords = this.data.activeCoords;
+    const c = coords[index];
+    if (!c || c.minedAt) return;
+    const key = coordKey(this.data.activeName, c.x, c.y);
+    const now = Date.now();
+    const marks = { ...this.data.marks, [key]: now };
+    const next = coords.slice();
+    next[index] = { ...c, minedAt: now, remain: 100 * 60, remainLabel: fmtRemain(100 * 60) };
+    this.setData({ marks, activeCoords: next });
+    saveMarks(marks);
+    wx.showToast({ title: '已记为已挖', icon: 'none' });
+  },
+
+  // 撤销“已挖”标记
+  unmarkMine(e: any) {
+    const index = e.currentTarget.dataset.index as number;
+    const coords = this.data.activeCoords;
+    const c = coords[index];
+    if (!c || !c.minedAt) return;
+    const key = coordKey(this.data.activeName, c.x, c.y);
+    const marks = { ...this.data.marks };
+    delete marks[key];
+    const next = coords.slice();
+    next[index] = { ...c, minedAt: null, remain: 0, remainLabel: '0' };
+    this.setData({ marks, activeCoords: next });
+    saveMarks(marks);
   },
 
   // 原生模板广告加载成功：多次实测、以最终稳定高度为准（广告先占位后收缩），避免预留过高留白
