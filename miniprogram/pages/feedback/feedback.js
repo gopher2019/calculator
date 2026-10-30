@@ -48,7 +48,7 @@ Page({
     this.setData({ contact: e.detail.value });
   },
 
-  onSubmit() {
+  async onSubmit() {
     const { type, content, contact, submitting } = this.data;
     const text = (content || '').trim();
     if (!text) {
@@ -58,6 +58,11 @@ Page({
     if (submitting) return;
     this.setData({ submitting: true });
     wx.showLoading({ title: '提交中' });
+
+    // 提交前确保已拿到 openid（按需懒加载，首次会触发隐私授权弹窗，用户同意后可继续）
+    if (app && typeof app.ensureLogin === 'function') {
+      await app.ensureLogin();
+    }
 
     const db = wx.cloud.database();
     const userInfo = (app.globalData && app.globalData.userInfo) || null;

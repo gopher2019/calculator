@@ -26,6 +26,9 @@ Page({
   },
 
   onShow() {
+    // 懒加载登录（仅在展示昵称时按需拉取 openid，不在启动阶段触发隐私授权）
+    const app = getApp() as any;
+    if (app && typeof app.ensureLogin === 'function') app.ensureLogin();
     this.refreshUser();
   },
 
