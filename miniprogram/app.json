@@ -18,7 +18,8 @@
     "pages/antifraud/antifraud",
     "pages/saocaozuo/saocaozuo",
     "pages/money/money",
-    "pages/feedback/feedback"
+    "pages/feedback/feedback",
+    "pages/myFeedback/myFeedback"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",

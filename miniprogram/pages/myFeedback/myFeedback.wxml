@@ -1,0 +1,34 @@
+<view class="page-container">
+  <view class="tip">这里展示你提交过的反馈与官方回复。若需我们主动联系你，提交时记得留下联系方式。</view>
+
+  <view wx:if="{{loading}}" class="empty">加载中…</view>
+
+  <view wx:elif="{{list.length === 0}}" class="empty">
+    <view class="empty-text">还没有反馈记录</view>
+    <view class="empty-btn" bindtap="goFeedback">去提交反馈</view>
+  </view>
+
+  <view wx:else class="fb-list">
+    <view class="fb-card" wx:for="{{list}}" wx:key="_id">
+      <view class="fb-head">
+        <text class="fb-type">{{item.type}}</text>
+        <text class="fb-time">{{item.createTime}}</text>
+      </view>
+      <view class="fb-content">{{item.content}}</view>
+      <view wx:if="{{item.contact}}" class="fb-contact">联系方式：{{item.contact}}</view>
+
+      <view class="fb-reply {{item.replied ? 'done' : 'pending'}}">
+        <block wx:if="{{item.replied}}">
+          <text class="fb-reply-label">官方回复：</text>
+          <text class="fb-reply-text">{{item.reply}}</text>
+        </block>
+        <text wx:else class="fb-reply-tip">待回复（需要联系请留下联系方式）</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部原生模板广告位（随页面滚动，上滑即被遮挡） -->
+  <view class="ad-slot" hidden="{{adHidden}}">
+    <ad-custom unit-id="adunit-4f3aecabaf14e106" bindload="onAdLoad" binderror="onAdError" bindclose="onAdClose"></ad-custom>
+  </view>
+</view>

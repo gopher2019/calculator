@@ -48,6 +48,11 @@ Page({
     this.setData({ contact: e.detail.value });
   },
 
+  // 跳转到“我的反馈”，查看历史提交与官方回复
+  goMyFeedback() {
+    wx.navigateTo({ url: '/pages/myFeedback/myFeedback' });
+  },
+
   async onSubmit() {
     const { type, content, contact, submitting } = this.data;
     const text = (content || '').trim();
@@ -74,6 +79,7 @@ Page({
         openid: userInfo ? userInfo.open_id : '',
         nickname: userInfo ? userInfo.nickname : '',
         status: 'pending',
+        reply: '', // 开发者在云后台填写的回复（站内回复用）
         createTime: formatTime(new Date()),
       },
       success: () => {

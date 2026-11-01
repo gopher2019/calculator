@@ -1,0 +1,99 @@
+.page-container {
+  padding: 24rpx 32rpx 60rpx;
+  background: #f5f6fa;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.tip {
+  font-size: 26rpx;
+  color: #888;
+  line-height: 1.6;
+  margin: 8rpx 0 24rpx;
+}
+
+.empty {
+  text-align: center;
+  color: #999;
+  font-size: 28rpx;
+  padding: 80rpx 0;
+}
+.empty-text {
+  margin-bottom: 24rpx;
+}
+.empty-btn {
+  display: inline-block;
+  padding: 14rpx 40rpx;
+  background: linear-gradient(135deg, #4a6cf7, #6c8cff);
+  color: #fff;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+}
+
+.fb-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+.fb-card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx 28rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+}
+.fb-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14rpx;
+}
+.fb-type {
+  font-size: 24rpx;
+  color: #4a6cf7;
+  background: #eef1ff;
+  padding: 4rpx 16rpx;
+  border-radius: 20rpx;
+}
+.fb-time {
+  font-size: 22rpx;
+  color: #aaa;
+}
+.fb-content {
+  font-size: 28rpx;
+  color: #1a1a2e;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+.fb-contact {
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  color: #888;
+}
+.fb-reply {
+  margin-top: 16rpx;
+  padding: 16rpx 20rpx;
+  border-radius: 12rpx;
+  font-size: 27rpx;
+  line-height: 1.6;
+}
+.fb-reply.done {
+  background: #eaf7ee;
+  color: #1f9d4d;
+}
+.fb-reply.pending {
+  background: #f5f6fa;
+  color: #999;
+}
+.fb-reply-label {
+  font-weight: 600;
+}
+.fb-reply-text {
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+/* 底部原生模板广告位（随页面滚动） */
+.ad-slot {
+  margin-top: 24rpx;
+}

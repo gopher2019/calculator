@@ -1,5 +1,6 @@
 <view class="page-container">
   <view class="tip">你的反馈会帮助我们做得更好，欢迎提出遇到的问题或功能建议。</view>
+  <view class="my-fb-link" bindtap="goMyFeedback">查看我的反馈 / 官方回复 ›</view>
 
   <view class="section">
     <view class="field-label">反馈类型</view>
@@ -30,6 +31,7 @@
       bindinput="onContactInput"
       placeholder="QQ / 微信 / 手机，方便我们回复"
     ></input>
+    <view class="field-hint">如需我们回复，请留下联系方式；也可在「我的反馈」中查看答复（无需联系方式也能收到站内回复）。</view>
 
     <button class="btn btn-primary submit-btn" loading="{{submitting}}" bindtap="onSubmit">提交反馈</button>
   </view>
