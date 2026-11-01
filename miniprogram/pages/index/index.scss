@@ -53,12 +53,31 @@ page {
   text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.5);
 }
 
-.hero-tag {
+/* ===== 昵称行内的小喇叭 + 滚动公告（字体/颜色与默认文案一致） ===== */
+.hero-speaker {
+  font-size: 22rpx;
+  margin-right: 8rpx;
+  flex-shrink: 0;
+}
+.hero-marquee {
+  width: 300rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  align-self: center;
+}
+.hero-marquee-track {
+  display: inline-block;
+  white-space: nowrap;
   font-size: 22rpx;
   font-family: "STKaiti", "KaiTi", "Kaiti SC", "楷体", serif;
   color: rgba(232, 198, 106, 0.72);
   letter-spacing: 1rpx;
   text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.5);
+  animation: heroMarquee 25s linear infinite;
+}
+@keyframes heroMarquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
 .hero-seal {

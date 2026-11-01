@@ -19,6 +19,9 @@ Page({
     adReserve: 0,
     // 广告加载失败时隐藏广告位，避免空占位
     adHidden: false,
+    // 顶部滚动公告（位于昵称行 hero-tag 位置）：所有文案拼接后连续轮播
+    // 未拿到公告时，默认滚动展示这句文案
+    noticeText: '怀旧天龙少侠的实用小工具',
   },
 
   onLoad() {
@@ -30,6 +33,54 @@ Page({
     const app = getApp() as any;
     if (app && typeof app.ensureLogin === 'function') app.ensureLogin();
     this.refreshUser();
+    this.loadNotice();
+  },
+
+  // 读取顶部公告：优先用 24 小时本地缓存，过期再从云数据库拉取全部
+  loadNotice() {
+    const KEY = 'noticeCache';
+    const CACHE_MS = 24 * 60 * 60 * 1000;
+    const cache = wx.getStorageSync(KEY);
+    const now = Date.now();
+    if (cache && cache.time && now - cache.time < CACHE_MS && Array.isArray(cache.data)) {
+      this.applyNotice(cache.data);
+      return;
+    }
+    const db = wx.cloud.database();
+    db.collection('notice')
+      .orderBy('sort', 'asc')
+      .get({
+        success: (res: any) => {
+          const list = (res.data || []).map((it: any) => ({
+            _id: it._id,
+            content: it.content || '',
+            sort: it.sort || 0,
+          }));
+          // 仅在有数据时才写缓存；空结果不缓存，避免“首次无数据→24h 空缓存”
+          if (list.length > 0) {
+            wx.setStorageSync(KEY, { time: Date.now(), data: list });
+          }
+          this.applyNotice(list);
+        },
+        fail: (err: any) => {
+          console.error('[公告加载失败]', err);
+          this.setData({ noticeList: [], noticeText: '' });
+        },
+      });
+  },
+
+  // 应用公告：把所有文案拼成一个完整文本，由 CSS 连续轮播，不再逐条计时切换
+  // 未拿到任何文案时，回退默认文案
+  applyNotice(list: any[]) {
+    if (!list || list.length === 0) {
+      this.setData({ noticeText: '怀旧天龙少侠的实用小工具' });
+      return;
+    }
+    const joined = list
+      .map((it: any) => it.content || '')
+      .filter((t: string) => t)
+      .join('　•　');
+    this.setData({ noticeText: joined || '怀旧天龙少侠的实用小工具' });
   },
 
   // 云登录为异步，未返回时短暂轮询读取昵称与 id

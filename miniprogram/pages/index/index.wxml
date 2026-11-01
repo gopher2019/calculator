@@ -5,7 +5,11 @@
   <view class="hero-name">{{nickname || '初来乍到'}}</view>
   <text class="hero-id" wx:if="{{userId}}">#{{userId}}</text>
   <text class="hero-sep">｜</text>
-  <text class="hero-tag">怀旧天龙少侠的实用小工具</text>
+  <!-- 小喇叭 + 滚动公告：拿到公告则拼接轮播，未拿到时显示默认文案 -->
+  <text class="hero-speaker">📢</text>
+  <view class="hero-marquee">
+    <view class="hero-marquee-track" wx:for="{{[noticeText]}}" wx:key="*this"><text>{{item}}　•　</text><text>{{item}}　•　</text></view>
+  </view>
 </view>
 <view class="hero-seal">墨狐</view>
 
