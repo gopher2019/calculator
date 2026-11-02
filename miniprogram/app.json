@@ -21,7 +21,8 @@
     "pages/feedback/feedback",
     "pages/myFeedback/myFeedback",
     "pages/equipbonus/equipbonus",
-    "pages/beastbonus/beastbonus"
+    "pages/beastbonus/beastbonus",
+    "pages/babyskill/babyskill"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",

@@ -52,11 +52,11 @@
     <view class="dialog-sub">适用条件与使用说明</view>
     <view class="dialog-section">
       <text class="num">01</text>
-      <text class="txt">适用天龙怀旧服。资料作者：江山YY。数据按实际宝宝推算统计，可能略有误差。</text>
+      <text class="txt">适用天龙怀旧服。数据按实际宝宝推算统计，可能略有误差。</text>
     </view>
     <view class="dialog-section">
       <text class="num">02</text>
-      <text class="txt">血上限、命中、会心 =&gt; 五维最高资质；体力、减伤 =&gt; 体力资质；增伤、抗性、抗控制、内外功 =&gt; 力量/灵气最高资质；闪避、会防 =&gt; 身法资质；力量、灵气、定力 =&gt; 对应资质。</text>
+      <text class="txt">血上限、命中、会心 -> 五维最高资质；体力、减伤 -> 体力资质；增伤、抗性、抗控制、内外功 -> 力量/灵气最高资质；闪避、会防 -> 身法资质；力量、灵气、定力 -> 对应资质。</text>
     </view>
     <view class="dialog-close" bindtap="closeHelp">关闭</view>
   </view>

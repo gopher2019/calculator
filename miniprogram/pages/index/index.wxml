@@ -83,6 +83,14 @@
         </view>
         <text class="tool-arrow">›</text>
       </view>
+      <view class="tool-card" bindtap="goToBabySkill">
+        <view class="tool-icon">🐾</view>
+        <view class="tool-info">
+          <text class="tool-name">宝宝技能概率</text>
+          <text class="tool-desc">被动/主动技能触发几率一览</text>
+        </view>
+        <text class="tool-arrow">›</text>
+      </view>
       <view class="tool-card" bindtap="goToXiaoxiao">
         <view class="tool-icon">⚔️</view>
         <view class="tool-info">
