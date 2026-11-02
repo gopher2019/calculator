@@ -1,0 +1,48 @@
+<!--equipbonus.wxml-->
+<view class="equip-page" style="padding-bottom: {{adReserve}}rpx;">
+  <view class="header">
+    <view class="title">装备强化加成</view>
+    <view class="help-btn" bindtap="openHelp">说明</view>
+  </view>
+
+  <view class="picker-wrap">
+    <text class="picker-label">装备位置</text>
+    <picker class="picker" mode="selector" range="{{options}}" value="{{selectedIndex}}" bindchange="onSelectEquip">
+      <view class="picker-inner">
+        <text class="picker-text">{{options[selectedIndex]}}</text>
+        <text class="picker-arrow">▾</text>
+      </view>
+    </picker>
+  </view>
+
+  <view class="card">
+    <view class="card-row" wx:for="{{rows}}" wx:key="label">
+      <text class="row-label">{{item.label}}</text>
+      <text class="row-sep">：</text>
+      <text class="row-value">{{item.value}}</text>
+    </view>
+  </view>
+</view>
+
+<!-- 底部悬浮原生模板广告位（固定底部，不随内容滚动） -->
+<view class="ad-footer" hidden="{{adHidden}}">
+  <ad class="ad-card" unit-id="adunit-32792de374ea364a" ad-type="card" ad-theme="light" bindload="onAdLoad" binderror="onAdError"></ad>
+</view>
+
+<!-- 说明弹窗（子弹窗浮层） -->
+<view class="mask" wx:if="{{showHelp}}" bindtap="closeHelp">
+  <view class="dialog" catchtap="noop">
+    <view class="dialog-title">墨狐小算 · 说明</view>
+    <view class="dialog-h">装备强化加成</view>
+    <view class="dialog-sub">适用条件与使用说明</view>
+    <view class="dialog-section">
+      <text class="num">01</text>
+      <text class="txt">适用：天龙怀旧服。符合本门派类型神器的强化、资质加成，受门派第五本心法第1个被动技能及武魂第1个技能的对应类型加成；二者按乘算。</text>
+    </view>
+    <view class="dialog-section">
+      <text class="num">02</text>
+      <text class="txt">所有装备的资质加成只计算无强化的基础资质。</text>
+    </view>
+    <view class="dialog-close" bindtap="closeHelp">关闭</view>
+  </view>
+</view>

@@ -63,6 +63,14 @@
         </view>
         <text class="tool-arrow">›</text>
       </view>
+      <view class="tool-card" bindtap="goToEquipBonus">
+        <view class="tool-icon">📿</view>
+        <view class="tool-info">
+          <text class="tool-name">装备强化加成</text>
+          <text class="tool-desc">神器/七情刃等强化资质收益一览</text>
+        </view>
+        <text class="tool-arrow">›</text>
+      </view>
       <view class="tool-card" bindtap="goToXiaoxiao">
         <view class="tool-icon">⚔️</view>
         <view class="tool-info">

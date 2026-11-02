@@ -19,7 +19,8 @@
     "pages/saocaozuo/saocaozuo",
     "pages/money/money",
     "pages/feedback/feedback",
-    "pages/myFeedback/myFeedback"
+    "pages/myFeedback/myFeedback",
+    "pages/equipbonus/equipbonus"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",
