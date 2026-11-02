@@ -5,11 +5,11 @@
   <view class="hero-name">{{nickname || '初来乍到'}}</view>
   <text class="hero-id" wx:if="{{userId}}">#{{userId}}</text>
   <text class="hero-sep">｜</text>
-  <!-- 小喇叭 + 上下滚动公告：多条逐行上翻循环，未拿到时显示默认文案 -->
+  <!-- 小喇叭 + 滚动公告：多条拼接后从右往左连续轮播，未拿到时显示默认文案 -->
   <text class="hero-speaker">📢</text>
-  <view class="hero-vmarquee">
-    <view class="hero-vmarquee-track {{noticeItems.length > 1 ? 'rolling' : ''}}" style="animation-duration: {{vDur}}s">
-      <view class="v-line" wx:for="{{noticeLoop}}" wx:key="index">{{item}}</view>
+  <view class="hero-marquee">
+    <view class="hero-marquee-track" style="animation-duration: {{noticeDur}}s">
+      <text class="hero-marquee-text">{{noticeText}}　•　</text><text class="hero-marquee-text">{{noticeText}}　•　</text>
     </view>
   </view>
 </view>

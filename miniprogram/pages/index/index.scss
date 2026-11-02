@@ -53,43 +53,36 @@ page {
   text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.5);
 }
 
-/* ===== 昵称行内的小喇叭 + 滚动公告（字体/颜色与默认文案一致） ===== */
+/* ===== 昵称行内的小喇叭 + 滚动公告（从右往左连续轮播） ===== */
 .hero-speaker {
   font-size: 22rpx;
   margin-right: 8rpx;
   flex-shrink: 0;
 }
-.hero-vmarquee {
+.hero-marquee {
   flex: 1;
   min-width: 0;
-  height: 40rpx;
   overflow: hidden;
+  white-space: nowrap;
   align-self: center;
 }
-.hero-vmarquee-track {
-  display: flex;
-  flex-direction: column;
-}
-.hero-vmarquee-track.rolling {
-  animation-name: heroVMarquee;
+.hero-marquee-track {
+  display: inline-block;
+  white-space: nowrap;
+  animation-name: heroMarquee;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 }
-.v-line {
-  height: 40rpx;
-  line-height: 40rpx;
+.hero-marquee-text {
   font-size: 22rpx;
   font-family: "STKaiti", "KaiTi", "Kaiti SC", "楷体", serif;
   color: rgba(232, 198, 106, 0.72);
   letter-spacing: 1rpx;
   text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.5);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
-@keyframes heroVMarquee {
-  from { transform: translateY(0); }
-  to { transform: translateY(-50%); }
+@keyframes heroMarquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
 .hero-seal {
