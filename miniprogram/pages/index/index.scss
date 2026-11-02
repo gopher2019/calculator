@@ -17,14 +17,23 @@ page {
   z-index: 0;
 }
 
-.hero-inner {
+.hero-bar {
   position: fixed;
   top: 22rpx;
   left: 40rpx;
+  right: 40rpx;
   z-index: 2;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12rpx;
+}
+.hero-inner {
   display: flex;
   flex-direction: row;
   align-items: baseline;
+  flex: 1;
+  min-width: 0;
 }
 
 .hero-sep {
@@ -86,10 +95,7 @@ page {
 }
 
 .hero-seal {
-  position: fixed;
-  right: 40rpx;
-  top: 22rpx;
-  z-index: 2;
+  flex-shrink: 0;
   padding: 8rpx 16rpx;
   font-size: 22rpx;
   letter-spacing: 4rpx;
@@ -137,6 +143,17 @@ page {
 .tool-icon {
   font-size: 38rpx;
   margin-bottom: 10rpx;
+}
+
+/* 兽魂附体：固定矢量蹲坐小狐狸（黑白简笔画，仅描边不填充），避免 emoji 渲染不一致 */
+.tool-icon-fox {
+  width: 56rpx;
+  height: 56rpx;
+  margin-bottom: 6rpx;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cpath%20fill='none'%20stroke='rgb(26,26,46)'%20stroke-width='3'%20stroke-linejoin='round'%20stroke-linecap='round'%20d='M19%209%20L25%2019%20Q32%2015%2039%2019%20L45%209%20Q46%2024%2044%2028%20Q43%2033%2041%2036%20Q45%2042%2050%2052%20Q52%2058%2044%2060%20L20%2060%20Q12%2058%2014%2052%20Q19%2042%2023%2036%20Q21%2033%2020%2028%20Q18%2024%2019%209%20Z'/%3E%3Cpath%20fill='none'%20stroke='rgb(26,26,46)'%20stroke-width='3'%20stroke-linecap='round'%20d='M44%2048%20Q60%2046%2057%2030%20Q56%2022%2049%2025'/%3E%3Cpath%20fill='none'%20stroke='rgb(26,26,46)'%20stroke-width='2.5'%20stroke-linecap='round'%20d='M27%2060%20L27%2050'/%3E%3Cpath%20fill='none'%20stroke='rgb(26,26,46)'%20stroke-width='2.5'%20stroke-linecap='round'%20d='M37%2060%20L37%2050'/%3E%3Ccircle%20cx='27'%20cy='25'%20r='1.8'%20fill='rgb(26,26,46)'/%3E%3Ccircle%20cx='37'%20cy='25'%20r='1.8'%20fill='rgb(26,26,46)'/%3E%3Cpath%20fill='rgb(26,26,46)'%20d='M30%2029%20L34%2029%20L32%2032%20Z'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .tool-info {

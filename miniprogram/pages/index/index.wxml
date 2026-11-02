@@ -1,19 +1,21 @@
 <!--index.wxml-->
 <image class="page-bg" src="/images/home-bg.png" mode="aspectFill"></image>
 
-<view class="hero-inner">
-  <view class="hero-name">{{nickname || '初来乍到'}}</view>
-  <text class="hero-id" wx:if="{{userId}}">#{{userId}}</text>
-  <text class="hero-sep">｜</text>
-  <!-- 小喇叭 + 滚动公告：多条拼接后从右往左连续轮播，未拿到时显示默认文案 -->
-  <text class="hero-speaker">📢</text>
-  <view class="hero-marquee">
-    <view class="hero-marquee-track" style="animation-duration: {{noticeDur}}s">
-      <text class="hero-marquee-text">{{noticeText}}　•　</text><text class="hero-marquee-text">{{noticeText}}　•　</text>
+<view class="hero-bar">
+  <view class="hero-inner">
+    <view class="hero-name">{{nickname || '初来乍到'}}</view>
+    <text class="hero-id" wx:if="{{userId}}">#{{userId}}</text>
+    <text class="hero-sep">｜</text>
+    <!-- 小喇叭 + 滚动公告：多条拼接后从右往左连续轮播，未拿到时显示默认文案 -->
+    <text class="hero-speaker">📢</text>
+    <view class="hero-marquee">
+      <view class="hero-marquee-track" style="animation-duration: {{noticeDur}}s">
+        <text class="hero-marquee-text">{{noticeText}}　•　</text><text class="hero-marquee-text">{{noticeText}}　•　</text>
+      </view>
     </view>
   </view>
+  <view class="hero-seal">墨狐</view>
 </view>
-<view class="hero-seal">墨狐</view>
 
 <view class="container" style="padding-bottom: {{adReserve}}rpx;">
     <view class="tool-list">
@@ -74,9 +76,9 @@
         <text class="tool-arrow">›</text>
       </view>
       <view class="tool-card" bindtap="goToBeastBonus">
-        <view class="tool-icon">🐺</view>
+        <view class="tool-icon tool-icon-fox"></view>
         <view class="tool-info">
-          <text class="tool-name">兽魂附体资质表</text>
+          <text class="tool-name">兽魂附体资质</text>
           <text class="tool-desc">兽魂附体各资质倍率一览</text>
         </view>
         <text class="tool-arrow">›</text>
