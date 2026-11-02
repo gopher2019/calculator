@@ -361,6 +361,9 @@ Page({
     activeImage: '',
     imageError: '',
     activeCoords: [] as MineCoord[],
+    // 搜索关键字与过滤后展示的坐标（仅当前选中地图内生效）
+    searchKey: '',
+    displayCoords: [] as any[],
     // 已挖标记：{ "地图名|x,y": 时间戳 }，本地持久化
     marks: {} as Record<string, number>,
     // 底部悬浮广告位高度（rpx），加载后实测并动态适配，避免遮挡内容或留白
@@ -385,13 +388,16 @@ Page({
     const index = typeof e === 'number' ? e : e.currentTarget.dataset.index as number;
     const map = this.data.maps[index];
     if (!map) return;
+    const activeCoords = buildCoords(map.name, map.coords, this.data.marks);
     this.setData({
       activeIndex: index,
       activeName: map.name,
       activeFileID: map.fileID,
       activeImage: map.localPath || '',
-      activeCoords: buildCoords(map.name, map.coords, this.data.marks),
+      activeCoords,
+      searchKey: '', // 切换地图时清空搜索，避免跨图残留
     });
+    this.computeDisplay(activeCoords);
     // 已下载过则不再重复请求
     if (map.localPath) return;
     // 免费环境存储为私有，前端无法直接换取临时地址，
@@ -488,6 +494,7 @@ Page({
     }
     if (coordsChanged) {
       this.setData({ activeCoords: next });
+      this.computeDisplay(next);
     }
   },
 
@@ -503,6 +510,7 @@ Page({
     const next = coords.slice();
     next[index] = { ...c, minedAt: now, remain: 100 * 60, remainLabel: fmtRemain(100 * 60) };
     this.setData({ marks, activeCoords: next });
+    this.computeDisplay(next);
     saveMarks(marks);
     wx.showToast({ title: '已记为已挖', icon: 'none' });
   },
@@ -519,7 +527,43 @@ Page({
     const next = coords.slice();
     next[index] = { ...c, minedAt: null, remain: 0, remainLabel: '0' };
     this.setData({ marks, activeCoords: next });
+    this.computeDisplay(next);
     saveMarks(marks);
+  },
+
+  // 依据搜索关键字过滤当前地图坐标（仅在当前选中地图内生效）
+  // 匹配 x、y 或 “x,y” 子串；过滤后保留原始 idx 以便点击/标记定位回原数组
+  computeDisplay(list?: any[]) {
+    const coords = list || this.data.activeCoords;
+    const key = (this.data.searchKey || '').replace(/[^\d,]/g, '');
+    let display: any[];
+    if (!key) {
+      display = coords.map((c: any, i: number) => ({ ...c, idx: i }));
+    } else {
+      display = coords
+        .map((c: any, i: number) => ({ ...c, idx: i }))
+        .filter((c: any) => {
+          const x = String(c.x);
+          const y = String(c.y);
+          const withComma = `${c.x},${c.y}`;
+          // 分别在 x、y 内匹配，避免把 x 与 y 拼接后跨边界误命中（如 109 与 259 拼成 109259 误含 92）
+          return x.includes(key) || y.includes(key) || withComma.includes(key);
+        });
+    }
+    this.setData({ displayCoords: display });
+  },
+
+  // 搜索输入：实时过滤当前地图坐标
+  onSearchInput(e: any) {
+    const value = e.detail.value as string;
+    this.setData({ searchKey: value });
+    this.computeDisplay();
+  },
+
+  // 清空搜索
+  clearSearch() {
+    this.setData({ searchKey: '' });
+    this.computeDisplay();
   },
 
   // 原生模板广告加载成功：多次实测、以最终稳定高度为准（广告先占位后收缩），避免预留过高留白

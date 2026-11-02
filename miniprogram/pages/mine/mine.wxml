@@ -21,21 +21,33 @@
     </view>
 
     <view class="section">
+      <view class="search-bar">
+        <text class="search-icon">🔍</text>
+        <input
+          class="search-input"
+          placeholder="搜索本图坐标，如 217 或 217,129"
+          value="{{searchKey}}"
+          bindinput="onSearchInput"
+          confirm-type="search"
+        ></input>
+        <text wx:if="{{searchKey}}" class="search-clear" bindtap="clearSearch">✕</text>
+      </view>
       <view class="section-title">{{activeName}}挖矿坐标（分左右点击复制）</view>
       <view class="coord-grid">
-        <view class="coord-item {{item.minedAt ? 'mined' : ''}}" wx:for="{{activeCoords}}" wx:key="index">
+        <view class="coord-item {{item.minedAt ? 'mined' : ''}}" wx:for="{{displayCoords}}" wx:key="idx">
           <text class="coord-side coord-left" data-value="{{item.x}}" bindtap="copySide">({{item.x}}</text>
           <text class="coord-sep">,</text>
           <text class="coord-side coord-right" data-value="{{item.y}}" bindtap="copySide">{{item.y}})</text>
           <view class="coord-action">
             <block wx:if="{{item.minedAt}}">
               <text class="coord-state">已挖·剩{{item.remainLabel}}</text>
-              <text class="coord-undo" data-index="{{index}}" bindtap="unmarkMine">撤销</text>
+              <text class="coord-undo" data-index="{{item.idx}}" bindtap="unmarkMine">撤销</text>
             </block>
-            <view wx:else class="coord-btn" data-index="{{index}}" bindtap="markMine">已挖</view>
+            <view wx:else class="coord-btn" data-index="{{item.idx}}" bindtap="markMine">已挖</view>
           </view>
         </view>
       </view>
+      <view wx:if="{{searchKey && displayCoords.length === 0}}" class="coord-empty">未找到匹配的坐标</view>
     </view>
 
   </view>
