@@ -19,9 +19,13 @@ Page({
     adReserve: 0,
     // 广告加载失败时隐藏广告位，避免空占位
     adHidden: false,
-    // 顶部滚动公告（位于昵称行 hero-tag 位置）：所有文案拼接后连续轮播
-    // 未拿到公告时，默认滚动展示这句文案
-    noticeText: '怀旧天龙少侠的实用小工具',
+    // 顶部滚动公告（位于昵称行 hero-tag 位置）：上下滚动 ticker
+    // 未拿到公告时，默认展示这句文案
+    noticeItems: ['怀旧天龙少侠的实用小工具'],
+    // 用于无缝循环的复制数组（整列再追加一次）
+    noticeLoop: ['怀旧天龙少侠的实用小工具', '怀旧天龙少侠的实用小工具'],
+    // 垂直滚动时长（秒），按条数动态调整；单条不滚动
+    vDur: 8,
   },
 
   onLoad() {
@@ -64,23 +68,29 @@ Page({
         },
         fail: (err: any) => {
           console.error('[公告加载失败]', err);
-          this.setData({ noticeList: [], noticeText: '' });
+          this.setData({
+            noticeItems: ['怀旧天龙少侠的实用小工具'],
+            noticeLoop: ['怀旧天龙少侠的实用小工具', '怀旧天龙少侠的实用小工具'],
+          });
         },
       });
   },
 
-  // 应用公告：把所有文案拼成一个完整文本，由 CSS 连续轮播，不再逐条计时切换
+  // 应用公告：每条公告作为一行，由 CSS 上下连续滚动（无缝循环）
   // 未拿到任何文案时，回退默认文案
   applyNotice(list: any[]) {
+    let items: string[];
     if (!list || list.length === 0) {
-      this.setData({ noticeText: '怀旧天龙少侠的实用小工具' });
-      return;
+      items = ['怀旧天龙少侠的实用小工具'];
+    } else {
+      items = list
+        .map((it: any) => it.content || '')
+        .filter((t: string) => t);
+      if (items.length === 0) items = ['怀旧天龙少侠的实用小工具'];
     }
-    const joined = list
-      .map((it: any) => it.content || '')
-      .filter((t: string) => t)
-      .join('　•　');
-    this.setData({ noticeText: joined || '怀旧天龙少侠的实用小工具' });
+    const loop = items.concat(items);
+    // 多条时每条停留约 4s；单条静态不滚动
+    this.setData({ noticeItems: items, noticeLoop: loop, vDur: Math.max(8, items.length * 4) });
   },
 
   // 云登录为异步，未返回时短暂轮询读取昵称与 id
@@ -164,6 +174,10 @@ Page({
 
   goToEquipBonus() {
     wx.navigateTo({ url: '../equipbonus/equipbonus' });
+  },
+
+  goToBeastBonus() {
+    wx.navigateTo({ url: '../beastbonus/beastbonus' });
   },
 
   // 原生模板广告加载成功：多次实测、以最终稳定高度为准（广告先占位后收缩），避免预留过高留白

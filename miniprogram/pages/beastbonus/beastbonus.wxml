@@ -1,0 +1,63 @@
+<!--beastbonus.wxml-->
+<view class="equip-page" style="padding-bottom: {{adReserve}}rpx;">
+  <view class="header">
+    <view class="title">兽魂附体资质表</view>
+    <view class="help-btn" bindtap="openHelp">说明</view>
+  </view>
+
+  <view class="filter-row">
+    <picker class="filter-picker half" mode="selector" range="{{rateOptions}}" value="{{rateIndex}}" bindchange="onRateChange">
+      <view class="filter-box">
+        <text class="filter-label">倍率</text>
+        <text class="filter-value">{{rateOptions[rateIndex]}}</text>
+        <view class="filter-arrow"></view>
+      </view>
+    </picker>
+    <picker class="filter-picker half" mode="selector" range="{{levelOptions}}" value="{{levelIndex}}" bindchange="onLevelChange">
+      <view class="filter-box">
+        <text class="filter-label">等级</text>
+        <text class="filter-value">{{levelOptions[levelIndex]}}</text>
+        <view class="filter-arrow"></view>
+      </view>
+    </picker>
+  </view>
+  <picker class="filter-picker full" mode="selector" range="{{catOptions}}" value="{{catIndex}}" bindchange="onCatChange">
+    <view class="filter-box">
+      <text class="filter-label">资质项目</text>
+      <text class="filter-value">{{catOptions[catIndex]}}</text>
+      <view class="filter-arrow"></view>
+    </view>
+  </picker>
+
+  <view class="card">
+    <view class="card-caption">{{combo.cat}}　{{combo.lv}}级</view>
+    <view class="card-row" wx:for="{{rows}}" wx:key="label">
+      <text class="row-label">{{item.label}}</text>
+      <text class="row-sep">：</text>
+      <text class="row-value">{{item.value}}</text>
+    </view>
+  </view>
+</view>
+
+<!-- 底部悬浮原生模板广告位（固定底部，不随内容滚动） -->
+<view class="ad-footer" hidden="{{adHidden}}">
+  <ad class="ad-card" unit-id="adunit-50ff7f2379bc8e8d" ad-type="card" ad-theme="light" bindload="onAdLoad" binderror="onAdError"></ad>
+</view>
+
+<!-- 说明弹窗（子弹窗浮层） -->
+<view class="mask" wx:if="{{showHelp}}" bindtap="closeHelp">
+  <view class="dialog" catchtap="noop">
+    <view class="dialog-title">墨狐小算 · 说明</view>
+    <view class="dialog-h">兽魂附体资质表</view>
+    <view class="dialog-sub">适用条件与使用说明</view>
+    <view class="dialog-section">
+      <text class="num">01</text>
+      <text class="txt">适用天龙怀旧服。资料作者：江山YY。数据按实际宝宝推算统计，可能略有误差。</text>
+    </view>
+    <view class="dialog-section">
+      <text class="num">02</text>
+      <text class="txt">血上限、命中、会心 =&gt; 五维最高资质；体力、减伤 =&gt; 体力资质；增伤、抗性、抗控制、内外功 =&gt; 力量/灵气最高资质；闪避、会防 =&gt; 身法资质；力量、灵气、定力 =&gt; 对应资质。</text>
+    </view>
+    <view class="dialog-close" bindtap="closeHelp">关闭</view>
+  </view>
+</view>

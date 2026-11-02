@@ -20,7 +20,8 @@
     "pages/money/money",
     "pages/feedback/feedback",
     "pages/myFeedback/myFeedback",
-    "pages/equipbonus/equipbonus"
+    "pages/equipbonus/equipbonus",
+    "pages/beastbonus/beastbonus"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",
