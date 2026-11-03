@@ -34,6 +34,56 @@ function parseCoords(raw: string): Coord[] {
 
 const SECTS: Sect[] = [
   {
+    name: '昆仑',
+    slots: [
+      {
+        label: '整点',
+        fileID: 'cloud://cloud1-d8ghq1ib583e14043.636c-cloud1-d8ghq1ib583e14043-1452712403/images/xiaoxiao/kunlun.png',
+        raw: [
+          '(77,41)',
+          '(82,76)',
+          '(45,138)',
+          '(60,148)',
+          '(65,151)',
+          '(88,155) (93,174) (114,182) (103,191) (140,191)',
+          '(147,196) (161,183) (159,170) (171,131) (186,122)',
+          '(173,116) (160,109) (174,60) (195,60) (197,42)',
+          '(212,44) (181,37) (129,37) (115,33) (102,51)',
+          '(28,169) (40,185) (106,180) (151,187) (192,112)',
+        ].join('\n'),
+        coords: [],
+        image: '',
+      },
+      {
+        label: '15分',
+        // 仅提供 kunlun.png，15分地图暂复用同一张（如有 kunlun15.png 可替换此 fileID）
+        fileID: 'cloud://cloud1-d8ghq1ib583e14043.636c-cloud1-d8ghq1ib583e14043-1452712403/images/xiaoxiao/kunlun.png',
+        raw: [
+          '(89,24)',
+          '(64,39)',
+          '(81,59)',
+          '(41,185) (105,179)',
+          '(152,187) (191,112) (213,59)',
+          '(159,31) (115,33)',
+        ].join('\n'),
+        coords: [],
+        image: '',
+      },
+      {
+        label: '30分',
+        // 仅提供 kunlun.png，30分地图暂复用同一张（如有 kunlun30.png 可替换此 fileID）
+        fileID: 'cloud://cloud1-d8ghq1ib583e14043.636c-cloud1-d8ghq1ib583e14043-1452712403/images/xiaoxiao/kunlun.png',
+        raw: [
+          '(113,69)',
+          '(136,87)',
+          '(152,77) (51,111) (27,153)',
+        ].join('\n'),
+        coords: [],
+        image: '',
+      },
+    ],
+  },
+  {
     name: '慕容',
     slots: [
       {
