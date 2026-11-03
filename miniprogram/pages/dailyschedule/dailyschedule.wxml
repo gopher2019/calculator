@@ -1,0 +1,102 @@
+<!--dailyschedule.wxml-->
+<view class="page">
+  <view class="header">
+    <view class="header-left">
+      <text class="title">活动时间表</text>
+      <text class="clock">{{clock}}</text>
+    </view>
+    <view class="help-btn" bindtap="openHelp">说明</view>
+  </view>
+
+  <view class="tab-bar">
+    <view class="tab {{tabIndex === 0 ? 'active' : ''}}" data-index="0" bindtap="onTabChange">每日活动</view>
+    <view class="tab {{tabIndex === 1 ? 'active' : ''}}" data-index="1" bindtap="onTabChange">每周专属</view>
+  </view>
+
+  <view class="week-bar" wx:if="{{tabIndex === 1}}">
+    <view wx:for="{{weekdayOptions}}" wx:key="index" class="week-item {{weekdayIndex === index ? 'active' : ''}}" data-index="{{index}}" bindtap="onWeekChange">{{item}}</view>
+  </view>
+
+  <scroll-view class="list-scroll" scroll-y scroll-with-animation scroll-into-view="{{scrollIntoId}}" style="padding-bottom: {{adReserve}}rpx;">
+    <block wx:if="{{tabIndex === 0}}">
+      <view class="timeline">
+        <view class="tl-item {{item.eventName === '全天可进行' ? 'sticky' : ''}}" id="act-{{item.id}}" wx:for="{{filtered}}" wx:key="id">
+          <view class="tl-rail">
+            <view class="tl-dot {{item.status}}"></view>
+          </view>
+          <view class="card {{item.status}}" data-index="{{index}}" bindtap="openDetail">
+            <view class="card-top">
+              <text class="card-time">{{item.startTime}}</text>
+              <view class="card-name-wrap">
+                <text class="card-name">{{item.eventName}}</text>
+                <text class="tag-soon" wx:if="{{item.status === 'upcoming'}}">即将</text>
+                <text class="tag-type {{item.typeClass}}">{{item.type}}</text>
+              </view>
+            </view>
+            <view class="card-desc" wx:if="{{item.desc}}">
+              <text class="card-desc-text">{{item.desc}}</text><text class="card-end" wx:if="{{item.endTime}}"> · 至 {{item.endTime}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{filtered.length === 0}}" class="empty">没有匹配的活动</view>
+    </block>
+    <block wx:else>
+      <view class="week-list">
+        <view class="wk-card {{item.status}}" id="wk-{{index}}" wx:for="{{weeklyItems}}" wx:key="index" data-index="{{index}}" bindtap="openWeeklyDetail">
+          <text class="wk-time">{{item.startTime}}</text>
+          <view class="wk-body">
+            <view class="wk-name-row">
+              <text class="wk-name">{{item.name}}</text>
+              <text class="wk-tag ongoing" wx:if="{{item.status === 'ongoing'}}">进行中</text>
+              <text class="wk-tag upcoming" wx:if="{{item.status === 'upcoming'}}">即将</text>
+            </view>
+            <text class="wk-range">{{item.timeRange}}</text>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{weeklyItems.length === 0}}" class="empty">暂无活动</view>
+    </block>
+  </scroll-view>
+</view>
+
+<!-- 活动详情弹窗 -->
+<view class="mask" wx:if="{{showDetail}}" bindtap="closeDetail">
+  <view class="dialog" catchtap="noop">
+    <view class="dialog-title">活动详情</view>
+    <view class="detail-name">{{detail.eventName}}</view>
+    <view class="detail-row"><text class="detail-label">开始时间</text><text class="detail-value">{{detail.startTime}}</text></view>
+    <view class="detail-row" wx:if="{{detail.endTime}}"><text class="detail-label">结束时间</text><text class="detail-value">{{detail.endTime}}</text></view>
+    <view class="detail-row"><text class="detail-label">活动类型</text><text class="detail-value">{{detail.type}}</text></view>
+    <view class="detail-label detail-desc-label">活动描述</view>
+    <view class="detail-desc">{{detail.desc}}</view>
+    <view class="dialog-close" bindtap="closeDetail">关闭</view>
+  </view>
+</view>
+
+<!-- 说明弹窗 -->
+<view class="mask" wx:if="{{showHelp}}" bindtap="closeHelp">
+  <view class="dialog" catchtap="noop">
+    <view class="dialog-title">墨狐小算 · 说明</view>
+    <view class="dialog-h">每日活动时间表</view>
+    <view class="dialog-sub">使用说明</view>
+    <view class="dialog-section">
+      <text class="num">01</text>
+      <text class="txt">列举每日（不含周常）各时段活动，按开始时间排序，方便安排游戏节奏。</text>
+    </view>
+    <view class="dialog-section">
+      <text class="num">02</text>
+      <text class="txt">卡片高亮：绿色=进行中，橙色=30分钟内即将开始（标“即将”），灰色=已结束。</text>
+    </view>
+    <view class="dialog-section">
+      <text class="num">03</text>
+      <text class="txt">未填结束时间的活动，默认按开始后30分钟计入“已结束”；全天活动（00:00）视为全天进行中。</text>
+    </view>
+    <view class="dialog-close" bindtap="closeHelp">关闭</view>
+  </view>
+</view>
+
+<!-- 底部悬浮广告位（固定底部，不随内容滚动；高度自适应并通过 padding-bottom 预留，避免遮挡内容） -->
+<view class="ad-footer" hidden="{{adHidden}}">
+  <ad class="ad-card" unit-id="{{adUnitId}}" ad-type="banner" ad-theme="light" bindload="onAdLoad" binderror="onAdError"></ad>
+</view>

@@ -91,6 +91,14 @@
         </view>
         <text class="tool-arrow">›</text>
       </view>
+      <view class="tool-card" bindtap="goToDailySchedule">
+        <view class="tool-icon">📅</view>
+        <view class="tool-info">
+          <text class="tool-name">活动时间表</text>
+          <text class="tool-desc">每日活动时段与高亮提醒</text>
+        </view>
+        <text class="tool-arrow">›</text>
+      </view>
       <view class="tool-card" bindtap="goToXiaoxiao">
         <view class="tool-icon">⚔️</view>
         <view class="tool-info">

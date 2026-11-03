@@ -1,0 +1,516 @@
+/**dailyschedule.wxss**/
+page {
+  background: linear-gradient(180deg, #f7f1e3 0%, #efe5d2 100%);
+  min-height: 100vh;
+}
+.page {
+  padding: 24rpx 28rpx 0;
+  box-sizing: border-box;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== 顶部标题 + 说明 ===== */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16rpx 8rpx 24rpx;
+  flex-shrink: 0;
+}
+.title {
+  font-family: "STKaiti", "KaiTi", "Kaiti SC", "楷体", serif;
+  font-size: 44rpx;
+  font-weight: 700;
+  color: #3a2f25;
+  letter-spacing: 4rpx;
+}
+.help-btn {
+  font-size: 26rpx;
+  color: #8a5a2b;
+  border: 2rpx solid #b98e4e;
+  border-radius: 30rpx;
+  padding: 8rpx 28rpx;
+  background: rgba(185, 142, 78, 0.1);
+}
+.help-btn:active {
+  opacity: 0.7;
+}
+.header-left {
+  display: flex;
+  align-items: center;
+}
+.clock {
+  margin-left: 18rpx;
+  padding: 6rpx 16rpx;
+  font-size: 32rpx;
+  font-weight: 800;
+  color: #fff;
+  background: #9c2b2b;
+  border-radius: 999rpx;
+  box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.16);
+  font-family: "STKaiti", "KaiTi", "楷体", serif;
+  letter-spacing: 1rpx;
+}
+/* 实时指示小圆点 */
+.clock::before {
+  content: '';
+  display: inline-block;
+  width: 12rpx;
+  height: 12rpx;
+  margin-right: 10rpx;
+  border-radius: 50%;
+  background: #4be08a;
+  vertical-align: middle;
+  box-shadow: 0 0 0 0 rgba(75, 224, 138, 0.7);
+  animation: clockPulse 1.4s infinite;
+}
+@keyframes clockPulse {
+  0% { box-shadow: 0 0 0 0 rgba(75, 224, 138, 0.7); }
+  70% { box-shadow: 0 0 0 10rpx rgba(75, 224, 138, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(75, 224, 138, 0); }
+}
+
+/* ===== 时间轴列表 ===== */
+.list-scroll {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+}
+.timeline {
+  position: relative;
+  padding: 8rpx 0;
+}
+.tl-item {
+  display: flex;
+  align-items: stretch;
+}
+.tl-item.sticky {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: linear-gradient(180deg, #f7f1e3 0%, #efe5d2 100%);
+  padding-bottom: 8rpx;
+}
+.tl-item.sticky .tl-rail {
+  display: none;
+}
+.tl-rail {
+  position: relative;
+  width: 48rpx;
+  flex-shrink: 0;
+}
+.tl-rail::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 23rpx;
+  width: 2rpx;
+  background: #d8c9a8;
+}
+.tl-dot {
+  position: relative;
+  z-index: 1;
+  width: 18rpx;
+  height: 18rpx;
+  border-radius: 50%;
+  background: #c9b58e;
+  margin: 32rpx auto 0;
+}
+.tl-dot.ongoing {
+  background: #2f7d4f;
+  box-shadow: 0 0 0 6rpx rgba(47, 125, 79, 0.15);
+}
+.tl-dot.upcoming {
+  background: #e08a2b;
+  box-shadow: 0 0 0 6rpx rgba(224, 138, 43, 0.15);
+}
+.tl-dot.ended {
+  background: #bbb;
+}
+.tl-dot.normal {
+  background: #c9b58e;
+}
+
+.card {
+  flex: 1;
+  background: #fffdf8;
+  border: 2rpx solid #e2d4b6;
+  border-radius: 14rpx;
+  padding: 18rpx 20rpx;
+  margin: 14rpx 0 14rpx 8rpx;
+  box-sizing: border-box;
+}
+.card.ongoing {
+  background: rgba(47, 125, 79, 0.12);
+  border-color: #bfe0c8;
+}
+.card.upcoming {
+  background: rgba(224, 138, 43, 0.12);
+  border-color: #f0cfa0;
+}
+.card.ended {
+  background: #f2ede3;
+}
+.card-top {
+  display: flex;
+  align-items: center;
+}
+.card-time {
+  flex-shrink: 0;
+  min-width: 120rpx;
+  padding: 8rpx 12rpx;
+  margin-right: 16rpx;
+  font-size: 42rpx;
+  line-height: 1;
+  font-weight: 800;
+  text-align: center;
+  letter-spacing: 1rpx;
+  border-radius: 12rpx;
+  color: #fff;
+  background: #9c2b2b;
+  box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.14);
+  font-family: "STKaiti", "KaiTi", "楷体", serif;
+}
+/* 时间做成彩色药丸，随状态变色，更显眼 */
+.card.ongoing .card-time {
+  background: #1f7a3f;
+}
+.card.upcoming .card-time {
+  background: #d4720f;
+}
+.card.ended .card-time {
+  background: #d9d2c6;
+  color: #8a8175;
+  box-shadow: none;
+}
+.card-name-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.card-name {
+  font-size: 30rpx;
+  color: #2f261d;
+  font-weight: 600;
+}
+.card.ended .card-name,
+.card.ended .card-time,
+.card.ended .card-desc-text {
+  color: #a9a294;
+}
+.card-desc {
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  color: #6e6253;
+  line-height: 1.6;
+}
+.card.ended .card-desc {
+  color: #b3a899;
+}
+.card-end {
+  color: #9c6b2f;
+}
+.tag-soon {
+  font-size: 20rpx;
+  padding: 2rpx 12rpx;
+  border-radius: 20rpx;
+  background: #e08a2b;
+  color: #fff;
+  margin-left: 12rpx;
+}
+.tag-type {
+  font-size: 20rpx;
+  padding: 2rpx 12rpx;
+  border-radius: 20rpx;
+  margin-left: 12rpx;
+}
+.tag-type.boss {
+  background: #f3d9d9;
+  color: #a23b3b;
+}
+.tag-type.copy {
+  background: #d9e6f3;
+  color: #2b5aa2;
+}
+.tag-type.field {
+  background: #dff0d9;
+  color: #3b7a2b;
+}
+.tag-type.other {
+  background: #eee;
+  color: #888;
+}
+.empty {
+  text-align: center;
+  color: #9c8e78;
+  font-size: 26rpx;
+  padding: 60rpx 0;
+}
+
+/* ===== 弹窗（详情 / 说明） ===== */
+.mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(40, 30, 20, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  padding: 60rpx;
+}
+.dialog {
+  width: 100%;
+  background: #fbf6ea;
+  border: 2rpx solid #d9c9a8;
+  border-radius: 20rpx;
+  padding: 40rpx 36rpx 32rpx;
+  box-shadow: 0 10rpx 40rpx rgba(0, 0, 0, 0.25);
+}
+.dialog-title {
+  text-align: center;
+  font-family: "STKaiti", "KaiTi", "楷体", serif;
+  font-size: 30rpx;
+  color: #9c2b2b;
+  letter-spacing: 2rpx;
+  margin-bottom: 18rpx;
+}
+.dialog-h {
+  text-align: center;
+  font-family: "STKaiti", "KaiTi", "楷体", serif;
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #3a2f25;
+  margin-bottom: 8rpx;
+}
+.dialog-sub {
+  text-align: center;
+  font-size: 26rpx;
+  color: #8a7355;
+  margin-bottom: 24rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 2rpx solid #e8ddc6;
+}
+.dialog-section {
+  display: flex;
+  margin-bottom: 18rpx;
+}
+.dialog-section .num {
+  flex-shrink: 0;
+  width: 56rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  text-align: center;
+  border-radius: 50%;
+  background: #9c2b2b;
+  color: #fff;
+  font-size: 24rpx;
+  margin-right: 16rpx;
+}
+.dialog-section .txt {
+  flex: 1;
+  font-size: 28rpx;
+  color: #4a3d2e;
+  line-height: 1.7;
+}
+.dialog-close {
+  margin-top: 16rpx;
+  text-align: center;
+  background: #9c2b2b;
+  color: #fff;
+  border-radius: 40rpx;
+  padding: 18rpx 0;
+  font-size: 30rpx;
+  letter-spacing: 4rpx;
+}
+.dialog-close:active {
+  opacity: 0.85;
+}
+
+/* ===== 详情弹窗专属 ===== */
+.detail-name {
+  text-align: center;
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #3a2f25;
+  margin-bottom: 20rpx;
+}
+.detail-row {
+  display: flex;
+  padding: 10rpx 0;
+  font-size: 28rpx;
+}
+.detail-label {
+  color: #8a7355;
+  width: 140rpx;
+  flex-shrink: 0;
+}
+.detail-value {
+  color: #2f261d;
+  flex: 1;
+}
+.detail-desc-label {
+  margin-top: 8rpx;
+}
+.detail-desc {
+  font-size: 28rpx;
+  color: #4a3d2e;
+  line-height: 1.7;
+  background: #f3ebd9;
+  border-radius: 12rpx;
+  padding: 18rpx;
+}
+
+/* ===== 底部悬浮原生模板广告位 ===== */
+.ad-footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 200;
+  padding: 0 20rpx;
+  background: #efe5d2;
+}
+
+/* ===== 顶部 Tab 切换 ===== */
+.tab-bar {
+  display: flex;
+  border-bottom: 2rpx solid #e7dcc6;
+  flex-shrink: 0;
+  margin: 4rpx 0 16rpx;
+}
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 16rpx 0;
+  font-size: 30rpx;
+  color: #8a7a63;
+  font-family: "STKaiti", "KaiTi", "楷体", serif;
+  letter-spacing: 2rpx;
+  position: relative;
+}
+.tab.active {
+  color: #9c2b2b;
+  font-weight: 800;
+}
+.tab.active::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 64rpx;
+  height: 6rpx;
+  border-radius: 3rpx;
+  background: #9c2b2b;
+}
+
+/* ===== 每周专属：星期选择 ===== */
+.week-bar {
+  display: flex;
+  gap: 10rpx;
+  margin-bottom: 16rpx;
+  flex-shrink: 0;
+}
+.week-item {
+  flex: 1;
+  text-align: center;
+  padding: 12rpx 0;
+  font-size: 25rpx;
+  color: #6b4f2a;
+  background: #fffdf8;
+  border: 2rpx solid #e0d2b4;
+  border-radius: 12rpx;
+}
+.week-item.active {
+  background: #9c2b2b;
+  color: #fff;
+  border-color: #9c2b2b;
+  font-weight: 700;
+}
+
+/* ===== 每周专属：活动列表 ===== */
+.week-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+.wk-card {
+  display: flex;
+  align-items: stretch;
+  background: #fff;
+  border: 2rpx solid #efe6d4;
+  border-radius: 16rpx;
+  padding: 20rpx 22rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
+}
+.wk-card.ongoing {
+  background: #eef7f0;
+  border-color: #bfe0c8;
+}
+.wk-card.upcoming {
+  background: #fbeeee;
+  border-color: #e7b7b7;
+}
+.wk-time {
+  flex-shrink: 0;
+  width: 108rpx;
+  font-size: 40rpx;
+  font-weight: 800;
+  color: #9c2b2b;
+  font-family: "STKaiti", "KaiTi", "楷体", serif;
+  text-align: center;
+  align-self: center;
+}
+.wk-card.ended .wk-time {
+  color: #b3a899;
+}
+.wk-body {
+  flex: 1;
+  margin-left: 18rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.wk-name-row {
+  display: flex;
+  align-items: center;
+}
+.wk-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #2f261d;
+}
+.wk-card.ended .wk-name {
+  color: #a9a294;
+}
+.wk-tag {
+  margin-left: 14rpx;
+  font-size: 22rpx;
+  padding: 2rpx 12rpx;
+  border-radius: 999rpx;
+  font-weight: 700;
+}
+.wk-tag.ongoing {
+  color: #1f7a3f;
+  background: rgba(31, 122, 63, 0.14);
+}
+.wk-tag.upcoming {
+  color: #c0392b;
+  background: rgba(192, 57, 43, 0.14);
+}
+.wk-range {
+  display: block;
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  color: #8a7a63;
+}
+.wk-card.ended .wk-range {
+  color: #b3a899;
+}
